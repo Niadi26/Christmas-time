@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    list-style: none;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.logo_svg {
+    background-image: url("assets/svg/logo.svg");
+}
+
+.nav {
+    max-width: 720px;
+}
+
+.main {
+    scroll-behavior: smooth;
+}
