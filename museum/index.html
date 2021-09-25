@@ -64,8 +64,8 @@
                             <div class="welcome_slider_cub"></div>
                         </div>
                         <div class="welcome_slider_el">
-                            <div class="welcome_slider_arr"></div>
-                            <div class="welcome_slider_arr"></div>
+                            <button class="welcome_slider_arr"></button>
+                            <button class="welcome_slider_arr"></button>
                         </div>
                     </div>
             </div>
@@ -149,11 +149,11 @@
                     <div class="video_main">
                         <video src="" poster="assets/video/poster0.jpg" controls></video>
                         <div class="video_control">
-                            <div class="video_control_el"></div>
+                            <button class="video_control_el"></button>
                             <input type="range" class="video_control_pr">
-                            <div class="video_control_el"></div>
+                            <button class="video_control_el"></button>
                             <input type="range" class="video_control_sound">
-                            <div class="video_control_el"></div>
+                            <button class="video_control_el"></button>
                         </div>
                     </div>
                     <div class="video_submain">
@@ -163,13 +163,13 @@
                     </div>
                 </div>
                 <div class="video_slider"> GHHGHHGKDGHSK
-                    <div class="video_slider_vect"></div>
+                    <button class="video_slider_vect"></button>
                     <div class="video_slider_el"></div>
                     <div class="video_slider_el"></div>
                     <div class="video_slider_el"></div>
                     <div class="video_slider_el"></div>
                     <div class="video_slider_el"></div>
-                    <div class="video_slider_vect"></div>
+                    <button class="video_slider_vect"></button>
                 </div>
             </div>
         </section>
@@ -244,11 +244,11 @@
                 <div class="contacts_content">
                     <div class="contacts_info">
                         <h4 class="contacts_title">Palais Royal <br> Musee du Louvre</h4> 
-                        <p class="contacts_txt">
-                            address: 75001 Paris, France <br>
-                            phone: +33(0) 1 40 20 50 50 <br>
-                            mail: info@louvre.fr
-                        </p>
+                        <div class="contacts_el">
+                            <p class="contacts_txt"> address: 75001 Paris, France </p> 
+                            <a href="tel:+33(0)140205050" target="blanc" class="contacts_txt"> phone: +33(0) 1 40 20 50 50 </a>
+                            <a href="mailto:info@louvre.fr" target="blanc" class="contacts_txt">mail: info@louvre.fr</a>
+                        </div>
                     </div>
                     <img src="assets/img/map.jpg" alt="" class="contacts_img" height="620">
                 </div>
@@ -256,7 +256,7 @@
         </section>
     </main>
     <footer class="footer">
-        <div class="container footer_flex">
+        <div class="container footer_container">
             <a class="logo" href="#">
                 <div class="logo_svg"></div>
                 <div class="logo_txt">Louvre</div>
@@ -286,18 +286,25 @@
                 </ul>
             </nav>
             <div class="fotter_social">
-                <a href="https://www.youtube.com/user/louvre" class="footer_link_yt" target="blank"></a>
-                <a href="https://www.instagram.com/museelouvre/" class="footer_link_inst" target="blank"></a>
-                <a href="https://www.facebook.com/museedulouvre" class="footer_link_fb" target="blank"></a>
-                <a href="http://twitter.com/museelouvre" class="footer_link_tw" target="blank"></a>
-                <a href="https://www.pinterest.fr/museedulouvre/" class="footer_link_pin" target="blank"></a>
+                <a href="https://www.youtube.com/user/louvre" class=" footer_link footer_link_yt" target="blank"></a>
+                <a href="https://www.instagram.com/museelouvre/" class=" footer_link footer_link_inst" target="blank"></a>
+                <a href="https://www.facebook.com/museedulouvre" class=" footer_link footer_link_fb" target="blank"></a>
+                <a href="http://twitter.com/museelouvre" class=" footer_link footer_link_tw" target="blank"></a>
+                <a href="https://www.pinterest.fr/museedulouvre/" class=" footer_link footer_link_pin" target="blank"></a>
             </div>
         </div>
         <div class="footer_line"></div>
-        <div class="container footer_flex">
-            <p class="rsschool_txt">© 2021</p>
-            <p class="rsschool_txt">The Rolling Scopes School</p>
-            <p class="rsschool_txt">Make by Niadi26</p>
+        <div class="container">
+            <ul class="footer_container">
+                <li class="rsschool_txt rsschool_el">© 2021</li>
+                <li class="rsschool_el">
+                    <a href="https://rs.school" target="blank" class="rsschool_txt"> The Rolling Scopes School </a> 
+                </li>
+                <li class="rsschool_el">
+                    <a href="https://github.com/Niadi26" target="blank" class="rsschool_txt"> Make by Niadi26 </a>
+                </li>
+            </ul>
+            
         </div>
     </footer>
     <script src="script.js"></script>
