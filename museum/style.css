@@ -60,12 +60,12 @@ a{
     color: #FFFFFF;
 }
 
-.nav {
+.nav_header {
    /* max-width: 720px; ???*/
     margin-top: 59px;
 }
 
-.nav_list{
+.nav_list_header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -92,6 +92,7 @@ a{
 .title{
     margin: 0;
     font-family: Forum;
+    font-weight: 200;
     font-size: 80px;
     line-height: 90px;
     letter-spacing: 5px;
@@ -255,7 +256,7 @@ span {
     margin-top: 75px;
 }
 
-.video_main{
+.video_main {
 /*видео не сделано*/
 }
 
@@ -388,3 +389,74 @@ span {
 .contacts_img {
     margin-top: 75px;
 }
+
+.footer_flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_line {
+    height: 3px;
+    background-color: #666666;
+}
+
+.rsschool_txt {
+    margin: 50px 0;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+}
+
+.nav_footer {
+    display: flex;
+    margin: 87px 0 50px 0;
+ }
+ 
+ .nav_list_footer{
+     display: flex;
+     flex-flow: column wrap;
+     row-gap: 25px;
+     margin-left: 150px;
+ }
+
+ .fotter_social {
+     display: flex;
+     align-items: flex-end;
+     column-gap: 25px;
+     margin: 162px 0 55px 0;
+     max-width: 340px;
+ }
+
+ .footer_link_yt {
+     width: 48px;
+     height: 48px;
+    background-image: url('assets/svg/Youtube.png');
+ }
+
+ .footer_link_inst {
+    width: 48px;
+    height: 48px;
+    background-image: url('assets/svg/Instagram.png');
+ }
+
+ .footer_link_fb {
+    width: 48px;
+    height: 48px;
+    background-image: url('assets/svg/Facebook.png');
+ }
+
+ .footer_link_tw {
+    width: 48px;
+    height: 48px;
+    background-image: url('assets/svg/Twitter.png');
+ }
+
+ .footer_link_pin {
+    width: 48px;
+    height: 48px;
+    background-image: url('assets/svg/Pinterest.png');
+ }
