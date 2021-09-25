@@ -50,6 +50,7 @@ a:active {
 
 .logo {
     display: flex;
+    height: 31px;
     margin-top: 59px;
 }
 
@@ -57,9 +58,14 @@ a:active {
     background-image: url("assets/svg/logo.svg");
     width: 49px;
     height: 26px;
+    transition: 0.5s;
 }
 
-.logo_txt{
+.logo:hover .logo_svg {
+    filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
+}
+
+.logo_txt {
     padding-left: 25px;
     font-family: Forum;
     line-height: 32px;
@@ -67,6 +73,11 @@ a:active {
     letter-spacing: 5px;
     text-transform: uppercase;
     color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.logo:hover .logo_txt {
+    color: #9D8665;
 }
 
 .nav_header {
@@ -393,7 +404,7 @@ span {
 }
 
 .tickets_amound_title {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     font-family: Roboto;
     font-style: normal;
     font-weight: 700;
@@ -402,8 +413,43 @@ span {
     color: #000000;
 }
 
+.amound_title {
+    padding-left: 60px;
+}
+
+.total_title {
+    margin-top: 50px;
+    letter-spacing: 1.65px;
+}
+
 .tickets_amound_input {
-    margin-bottom: 15px;
+    width: 160px;
+    height: 50px;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+}
+
+.tickets_amound_btn{
+    padding: 3px 11px;
+    background-color: #ffff;
+    border: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 32px;
+    line-height: 37px;
+    text-align: center;
+    color: #000000;
+}
+
+.tickets_amound_numb{
+    background-color: #ffff;
+    border: none;
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    color: #000000;
 }
 
 .tickets_txt {
@@ -413,7 +459,7 @@ span {
     font-size: 22px;
     line-height: 26px;
     color: #000000;
-    margin-bottom: 15px;
+    margin: 15px 0 15px 0;
 }
 
 .tickets_btn {
@@ -531,46 +577,46 @@ span {
 
  .footer_link_yt {
     background: url('assets/svg/yt.svg') 50% no-repeat;
+    transition: 1s;
  }
 
  .footer_link_yt:hover {
-    transition: 1s;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
  .footer_link_inst {
+    transition: 1s;
     background: url('assets/svg/inst.svg') 50% no-repeat;
  }
 
  .footer_link_inst:hover {
-    transition: 1s;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
  .footer_link_fb {
+    transition: 1s;
     background: url('assets/svg/fb.svg') 50% no-repeat;
  }
 
  .footer_link_fb:hover {
-    transition: 1s;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
  .footer_link_tw {
+    transition: 1s;
     background: url('assets/svg/twi.svg') 50% no-repeat;
  }
 
  .footer_link_tw:hover {
-    transition: 1s;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
  .footer_link_pin {
+    transition: 1s;
     background: url('assets/svg/pin.svg') 50% no-repeat;
  }
 
  .footer_link_pin:hover {
-    transition: 1s;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
