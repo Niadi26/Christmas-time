@@ -11,6 +11,7 @@ body {
 
 button {
     border: 0;
+    background: none;
 }
 
 input {
@@ -273,12 +274,13 @@ h1 {
     transition: 0.5s;
 }
 
-.cub:hover {
-    cursor: pointer;
-}
-
 .cub.active {
     background: #D2B183;
+}
+
+.cub:hover {
+    cursor: pointer;
+    background: #9D8665;
 }
 
 .arrow {
@@ -311,7 +313,7 @@ h1 {
     flex-direction: column;
     width: 29%;
     margin: 75px 0 0 0;
-    /*вылазят за пределы контейнера, разобраться*/
+    overflow: hidden;
 }
   
 .visiting_card_el:first-child {
@@ -407,12 +409,92 @@ span {
 }
 
 .video_main {
-/*видео не сделано*/
+    width: 100%;
 }
 
 .video_control{
-    height: 85px;
+    margin-top: -5px;
+    height: 35px;
+    padding: 25px;
     background-color: #030303;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.video_control_play {
+    width: 31px;
+    height: 31px;
+    background-image: url('assets/svg/play.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+}
+
+.video_control_play:hover {
+    filter: invert(54%) sepia(48%) saturate(0%) hue-rotate(243deg) brightness(101%) contrast(95%);
+}
+
+.video_control_pr {
+    height: 8px;
+    width: 930px;
+    background: linear-gradient(to right, #710707 40%, #fff 40%, #fff 100%);
+    outline: none;
+    -webkit-appearance: none;
+    transition: background 450ms ease-in;
+  }
+
+.video_control_pr::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #FFFFFF;
+  }
+
+.video_control_sound {
+    width: 39px;
+    height: 31px;
+    background-image: url('assets/svg/volume.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+}
+
+.video_control_sound:hover {
+    filter: invert(54%) sepia(48%) saturate(0%) hue-rotate(243deg) brightness(101%) contrast(95%);
+}
+
+.video_control_laug {
+    height: 8px;
+    width: 155px;
+    background: linear-gradient(to right, #710707 40%, #fff 40%, #fff 100%);
+    outline: none;
+    -webkit-appearance: none;
+    transition: background 450ms ease-in;
+}
+
+.video_control_laug::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #FFFFFF;
+  }
+
+.video_control_wh{
+    width: 31px;
+    height: 31px;
+    background-image: url('assets/svg/Frame.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+}
+
+.video_control_wh:hover {
+    filter: invert(54%) sepia(48%) saturate(0%) hue-rotate(243deg) brightness(101%) contrast(95%);
 }
 
 .video_submain{
@@ -422,11 +504,53 @@ span {
     justify-content: space-between;
 }
 
+.vid_none {
+    display: none;
+}
+
 .video_slider{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 20px;
     width: 200px;
     margin: 0 auto;
     margin-top: 40px;
-    background-color: black;
+    background-color: #FFFFFF;
+}
+
+.video_slider_vect {
+    width: 15px;
+    height: 15px;
+    padding: 15px;
+    transition: 0.5s;
+}
+
+.video_slider_vect:hover{
+    filter: invert(9%) sepia(38%) saturate(6800%) hue-rotate(349deg) brightness(40%) contrast(107%);
+}
+
+.video_left {
+    background: url('assets/svg/Vector\ left.svg') center no-repeat;
+}
+
+.video_right {
+    background: url('assets/svg/Vector\ right.svg') center no-repeat;
+}
+.video_slider_el {
+    width: 12px;
+    height: 12px;
+    background: #999999;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.video_active {
+    background: #333333;
+}
+
+.video_slider_el:hover {
+    background: #710707;
 }
 
 .gallery {
@@ -473,8 +597,8 @@ span {
 .tickets_type {
     display: flex;
     flex-direction: column;
+    margin-left: -7%;
 }
-/*сделать по красоте*/
 
 .tickets_type_title {
     margin-left: -35px;
@@ -704,12 +828,8 @@ span {
     height: 48px;
     border: 1px solid #666666;
     box-sizing: border-box;
-    filter: drop-shadow(0px 0px 0px #666666);
     border-radius: 50px;
- }
-
- .footer_link:hover {
-    border: 1px solid #9D8665;
+    transition: 0.5s;
  }
 
  .footer_link:active {
@@ -718,46 +838,27 @@ span {
 
  .footer_link_yt {
     background: url('assets/svg/yt.svg') 50% no-repeat;
-    transition: 1s;
- }
-
- .footer_link_yt:hover {
-    filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
  .footer_link_inst {
-    transition: 1s;
     background: url('assets/svg/inst.svg') 50% no-repeat;
  }
 
- .footer_link_inst:hover {
-    filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
- }
-
  .footer_link_fb {
-    transition: 1s;
     background: url('assets/svg/fb.svg') 50% no-repeat;
  }
 
- .footer_link_fb:hover {
-    filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
- }
 
  .footer_link_tw {
-    transition: 1s;
     background: url('assets/svg/twi.svg') 50% no-repeat;
  }
 
- .footer_link_tw:hover {
-    filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
- }
-
  .footer_link_pin {
-    transition: 1s;
     background: url('assets/svg/pin.svg') 50% no-repeat;
  }
 
- .footer_link_pin:hover {
+ .footer_link:hover {
+    border: 1px solid #9D8665;
     filter: invert(47%) sepia(46%) saturate(259%) hue-rotate(356deg) brightness(100%) contrast(88%);
  }
 
