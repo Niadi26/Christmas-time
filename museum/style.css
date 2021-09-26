@@ -13,6 +13,10 @@ button {
     border: 0;
 }
 
+input {
+    outline: none;
+}
+
 h1,
 h2,
 h3,
@@ -429,16 +433,35 @@ span {
     height: 2200px;
     overflow: hidden;
 }
-/* сделать по красоте!*/
+
 .gallery_content {
+    position: relative;
+    overflow: hidden;
     margin-top: 50px;
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row nowrap;
+}
+
+.gallery_content::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0));
+}
+
+.gallery_column{
+    margin-right: 34px;
+}
+
+.column_padd {
+    padding-top: 60px;
 }
 
 .gallery_img{
-    margin: 24px 0 0 36px;
-    width: 30%;
+    padding-bottom: 24px;
 }
 
 .tickets_content {
@@ -542,6 +565,7 @@ span {
     height: 50px;
     border: 3px solid #000000;
     box-sizing: border-box;
+    transform: 0.5s;
 }
 
 .tickets_amound_btn{
@@ -554,6 +578,7 @@ span {
     line-height: 37px;
     text-align: center;
     color: #000000;
+    transform: 0.5s;
 }
 
 .tickets_amound_numb{
@@ -565,6 +590,7 @@ span {
     line-height: 26px;
     text-align: center;
     color: #000000;
+    transition: 0.5s;
 }
 
 .tickets_txt {
