@@ -70,3 +70,21 @@ progress.addEventListener('input', function() {
   const value = this.value;
   this.style.background = `linear-gradient(to right, #710707 0%, #710707 ${value}%, #fff ${value}%, white 100%)`
 })
+
+const ticketShow = document.querySelector('.tickets_btn');
+        ticketHide = document.querySelector('.exit');
+        ticketBox = document.querySelector('.my_form');
+
+
+const showTickets = () => {
+    ticketBox.classList.remove('buy');
+    ticketBox.classList.add('buy_active');
+}
+
+const hideTickets = () => {
+    ticketBox.classList.remove('buy_active');
+    ticketBox.classList.add('buy');
+}
+
+ticketShow.addEventListener('click', showTickets);
+ticketHide.addEventListener('click', hideTickets);
