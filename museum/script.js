@@ -73,6 +73,7 @@ progress.addEventListener('input', function() {
 
 const ticketShow = document.querySelector('.tickets_btn');
         ticketHide = document.querySelector('.exit');
+        //ticketOwerlay = document.querySelector('.my_form');
         ticketBox = document.querySelector('.my_form');
 
 
@@ -88,3 +89,17 @@ const hideTickets = () => {
 
 ticketShow.addEventListener('click', showTickets);
 ticketHide.addEventListener('click', hideTickets);
+//ticketOwerlay.addEventListener('click', hideTickets);
+
+
+const burgerOpen = document.querySelector('.burger_open');
+        burgerSlice = document.querySelector('.slice');
+        burgerMenu = document.querySelector('.burger_menu');
+
+const showBurger = () => {
+    burgerOpen.classList.toggle('close');
+    burgerSlice.classList.toggle('hide');
+    burgerMenu.classList.toggle('burger_menu_open');
+}
+
+burgerOpen.addEventListener('click', showBurger);
