@@ -50,113 +50,6 @@
             </button>
         </div>
     </header>
-    <section class="my_form buy">
-        <div class="buy_booking_form">    
-            <form action="#" class="buy_container" id="buy_form">
-                <button class="exit_button exit"></button>
-                <div class="buy_el">
-                    <div class="buy_logo"> </div>
-                    <h2 class="title booking_title">Booking tickets</h2>
-                    <p class="buy_booking_subtitle">Tour to Louvre</p>
-                    <div class="strip buy_strip"></div>
-                    <div class="buy_form">
-                        <div class="buy_form_cont">
-                            <input type="date" class="date_area" value="Date">
-                            <input type="time" class="time_area" value="Time">
-                        </div>
-                        <input type="text" class="name_area" value="Name">
-                        <input type="email" class="email_area" value="E-mail">
-                        <input type="tel" class="tel_area" value="Phone">
-                        <select name="theme" required="required" class="ticket_type_area" value="Ticket Type">
-                            <option class="form_option">Permanent exhibition</option>
-                            <option class="form_option">Temporary exhibition</option>
-                            <option class="form_option">Combined Admission</option>
-                        </select>
-                    </div>
-                    <div class="buy_entry_ticket">
-                        <p class="buy_txt_ticket">Entry ticket</p>
-                        <div class="strip strip_entry"></div>
-                        <div class="entry_ticket_cont">
-                            <div class="entry_ticket_el">
-                                <p class="entry_ticket_subtitle">Basic 18+ (20 €)</p>
-                                <div class="entry_ticket_input">
-                                    <button type="" class="entry_ticket_btn" onclick="this.nextElementSibling.stepDown()">-</button>
-                                    <input type="number" min="0" max="20" value="1" readonly class="entry_ticket_numb">
-                                    <button type="" class="entry_ticket_btn" onclick="this.previousElementSibling.stepUp()">+</button>
-                                </div>
-                            </div>
-                            <div class="entry_ticket_el">
-                                <p class="entry_ticket_subtitle">Senior 65+ (10 €)</p>
-                                <div class="entry_ticket_input">
-                                    <button type="" class="entry_ticket_btn" onclick="this.nextElementSibling.stepDown()">-</button>
-                                    <input type="number" min="0" max="20" value="1" readonly class="entry_ticket_numb">
-                                    <button type="" class="entry_ticket_btn" onclick="this.previousElementSibling.stepUp()">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="buy_el2">
-                    <div class="buy_owerviev_el_info">
-                        <div class="owerviev_info">
-                            <h4 class="owerviev_title">Overview</h4>
-                            <p class="owerviev_subtitle">Tour to Louvre</p>
-                            <p class="owerviev_txt">Friday, August 19</p>
-                            <p class="owerviev_txt">16 : 30</p>
-                            <p class="owerviev_txt">Temporary exhibition</p>
-                        </div>
-                        <img src="assets/img/buy.jpg" alt="" class="owerviev_img">
-                    </div>
-                    <div class="buy_owerviev_el_total">
-                        <div class="owerviev_cost">
-                            <p class="owerviev_cost_numb">2</p>
-                            <p class="owerviev_cost_type">Basic (20 €)</p>
-                            <p class="owerviev_cost_type owerviev_cost_sum">40 €</p>
-                        </div>
-                        <div class="owerviev_cost">
-                            <p class="owerviev_cost_numb">2</p>
-                            <p class="owerviev_cost_type">Senior (10 €)</p>
-                            <p class="owerviev_cost_type owerviev_cost_sum">20 €</p>
-                        </div>
-                        <div class="strip strip_cost"></div>
-                        <div class="owerviev_cost">
-                            <p class="owerviev_cost_type total">Total:</p>
-                            <p class=" owerviev_cost_type owerviev_cost_sum total">60 €</p>
-                        </div>
-                    </div>
-                    <div class="buy_owerviev_el_card">
-                        <div class="owerviev_card">
-                            <div class="owerviev_card_txt">Card number</div>
-                            <input type="number" name="card_number" required="required" class="card_number_area">
-                            <div class="owerviev_card_txt">Expiration date</div>
-                            <input type="month" name="date_month" required="required" class="card_month_area">
-                            <input type="" name="date_year" required="required" class="card_year_area">
-                            <div class="owerviev_card_txt">Cardholder name</div>
-                            <input type="text" name="card_name" required="required" class="card_name_area">
-                            <div class="owerviev_card_img">
-                                <img src="assets/svg/Visa.svg" alt="" class="card_img_el" width="55px" height="16px">
-                                <img src="assets/svg/Mastercard.svg" alt="" class="card_img_el" width="55px" height="32px">
-                            </div>
-                        </div>
-                        <div class="owerviev_card second_card">
-                            <div class="card_black"></div>
-                            <div class="owerviev_card_txt second_txt">CVC/CVV</div>
-                            <input type="password" name="card_CVC" minlength="3" maxlength="3" required="required" class="card_CVC_area">
-                            <p class="owerviev_card_txt litlle_card_txt"> 
-                                The last <br>
-                                3 or 4 digits <br>
-                                on back <br>
-                                of the card
-                            </p>
-                        </div>
-                    </div>
-                    <div class="buy_owerviev_el">
-                        <button class="buy_owerviev_btn" form="buy_form">Book</button>
-                    </div>
-                </div>
-            </form>
-        </div>    
-    </section>
     <main class="main">
         <section class="section welcome">
             <div class="container welcome_container">
@@ -369,6 +262,113 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section class="my_form buy">
+            <div class="buy_booking_form">    
+                <form action="#" class="buy_container" id="buy_form">
+                    <button class="exit_button exit"></button>
+                    <div class="buy_el">
+                        <div class="buy_logo"> </div>
+                        <h2 class="title booking_title">Booking tickets</h2>
+                        <p class="buy_booking_subtitle">Tour to Louvre</p>
+                        <div class="strip buy_strip"></div>
+                        <div class="buy_form">
+                            <div class="buy_form_cont">
+                                <input type="date" class="date_area" value="Date">
+                                <input type="time" class="time_area" value="Time">
+                            </div>
+                            <input type="text" class="name_area" value="Name">
+                            <input type="email" class="email_area" value="E-mail">
+                            <input type="tel" class="tel_area" value="Phone">
+                            <select name="theme" required="required" class="ticket_type_area" value="Ticket Type">
+                                <option class="form_option">Permanent exhibition</option>
+                                <option class="form_option">Temporary exhibition</option>
+                                <option class="form_option">Combined Admission</option>
+                            </select>
+                        </div>
+                        <div class="buy_entry_ticket">
+                            <p class="buy_txt_ticket">Entry ticket</p>
+                            <div class="strip strip_entry"></div>
+                            <div class="entry_ticket_cont">
+                                <div class="entry_ticket_el">
+                                    <p class="entry_ticket_subtitle">Basic 18+ (20 €)</p>
+                                    <div class="entry_ticket_input">
+                                        <button type="" class="entry_ticket_btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                        <input type="number" min="0" max="20" value="1" readonly class="entry_ticket_numb">
+                                        <button type="" class="entry_ticket_btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                                    </div>
+                                </div>
+                                <div class="entry_ticket_el">
+                                    <p class="entry_ticket_subtitle">Senior 65+ (10 €)</p>
+                                    <div class="entry_ticket_input">
+                                        <button type="" class="entry_ticket_btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                                        <input type="number" min="0" max="20" value="1" readonly class="entry_ticket_numb">
+                                        <button type="" class="entry_ticket_btn" onclick="this.previousElementSibling.stepUp()">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buy_el2">
+                        <div class="buy_owerviev_el_info">
+                            <div class="owerviev_info">
+                                <h4 class="owerviev_title">Overview</h4>
+                                <p class="owerviev_subtitle">Tour to Louvre</p>
+                                <p class="owerviev_txt">Friday, August 19</p>
+                                <p class="owerviev_txt">16 : 30</p>
+                                <p class="owerviev_txt">Temporary exhibition</p>
+                            </div>
+                            <img src="assets/img/buy.jpg" alt="" class="owerviev_img">
+                        </div>
+                        <div class="buy_owerviev_el_total">
+                            <div class="owerviev_cost">
+                                <p class="owerviev_cost_numb">2</p>
+                                <p class="owerviev_cost_type">Basic (20 €)</p>
+                                <p class="owerviev_cost_type owerviev_cost_sum">40 €</p>
+                            </div>
+                            <div class="owerviev_cost">
+                                <p class="owerviev_cost_numb">2</p>
+                                <p class="owerviev_cost_type">Senior (10 €)</p>
+                                <p class="owerviev_cost_type owerviev_cost_sum">20 €</p>
+                            </div>
+                            <div class="strip strip_cost"></div>
+                            <div class="owerviev_cost">
+                                <p class="owerviev_cost_type total">Total:</p>
+                                <p class=" owerviev_cost_type owerviev_cost_sum total">60 €</p>
+                            </div>
+                        </div>
+                        <div class="buy_owerviev_el_card">
+                            <div class="owerviev_card">
+                                <div class="owerviev_card_txt">Card number</div>
+                                <input type="number" name="card_number" required="required" class="card_number_area">
+                                <div class="owerviev_card_txt">Expiration date</div>
+                                <input type="month" name="date_month" required="required" class="card_month_area">
+                                <input type="" name="date_year" required="required" class="card_year_area">
+                                <div class="owerviev_card_txt">Cardholder name</div>
+                                <input type="text" name="card_name" required="required" class="card_name_area">
+                                <div class="owerviev_card_img">
+                                    <img src="assets/svg/Visa.svg" alt="" class="card_img_el" width="55px" height="16px">
+                                    <img src="assets/svg/Mastercard.svg" alt="" class="card_img_el" width="55px" height="32px">
+                                </div>
+                            </div>
+                            <div class="owerviev_card second_card">
+                                <div class="card_black"></div>
+                                <div class="owerviev_card_txt second_txt">CVC/CVV</div>
+                                <input type="password" name="card_CVC" minlength="3" maxlength="3" required="required" class="card_CVC_area">
+                                <p class="owerviev_card_txt litlle_card_txt"> 
+                                    The last <br>
+                                    3 or 4 digits <br>
+                                    on back <br>
+                                    of the card
+                                </p>
+                            </div>
+                        </div>
+                        <div class="buy_owerviev_el">
+                            <button class="buy_owerviev_btn" form="buy_form">Book</button>
+                        </div>
+                    </div>
+                </form>
+            </div>    
         </section>
         <section class="tickets section light-section" id="tickets">
             <div class="container">

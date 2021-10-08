@@ -1,5 +1,40 @@
-const pred = document.querySelector('.left');
-    next = document.querySelector('.right');
+
+const ticketShow = document.querySelector('.tickets_btn');
+    ticketHide = document.querySelector('.exit');
+    ticketOwerlay = document.querySelector('.buy_active');
+    ticketBox = document.querySelector('.my_form');
+
+
+const showTickets = () => {
+ticketBox.classList.remove('buy');
+ticketBox.classList.add('buy_active');
+}
+
+const hideTickets = () => {
+ticketBox.classList.remove('buy_active');
+ticketBox.classList.add('buy');
+}
+
+ticketShow.addEventListener('click', showTickets);
+ticketHide.addEventListener('click', hideTickets);
+ticketOwerlay.addEventListener('click', hideTickets);
+
+//Вызов бургер-меню
+const burgerOpen = document.querySelector('.burger_open');
+    burgerBtnViev = document.querySelector('.slice');
+    burgerMenu = document.querySelector('.burger_menu');
+
+const showBurger = () => {
+burgerOpen.classList.toggle('close');
+burgerBtnViev.classList.toggle('hide');
+burgerMenu.classList.toggle('burger_menu_open');
+}
+
+burgerOpen.addEventListener('click', showBurger);
+
+//слайдер в секции Велком
+const leftArrWelcome = document.querySelector('.left');
+    rightArrWelcome = document.querySelector('.right');
     slides = document.querySelectorAll('.slide');
     cubes = document.querySelectorAll('.cub');
     numbs = document.querySelectorAll('.item');
@@ -27,79 +62,46 @@ const activeCub = n => {
     cubes[n].classList.add('active');
 }
 
-const makeActive = ind => {
+const makeActiveWelcome = ind => {
     activeCub(ind);
     activeSlide(ind);
     activeNumb(ind);
 }
 
-const nextSlide = () => {
+const nextSlideWelcome = () => {
     if (index == slides.length - 1) {
         index = 0;
-        makeActive(index);
+        makeActiveWelcome(index);
     } else {
         index++;
-        makeActive(index);
+        makeActiveWelcome(index);
     }
 }
 
-const predSlide = () => {
+const predSlideWelcome = () => {
     if (index == 0) {
         index = slides.length - 1;
-        makeActive (index);
+        makeActiveWelcome (index);
     } else {
         index--;
-        makeActive (index);
+        makeActiveWelcome (index);
     }
 }
 
-next.addEventListener('click', nextSlide);
-pred.addEventListener('click', predSlide);
+rightArrWelcome.addEventListener('click', nextSlideWelcome);
+leftArrWelcome.addEventListener('click', predSlideWelcome);
 
 cubes.forEach((item, indexCub) => {
     item.addEventListener('click', () => {
     index = indexCub;
-    makeActive(index);
+    makeActiveWelcome(index);
     });
 })
 
-
+//Прогресс-бар в секции видео
 const progress = document.querySelector('.video_control_pr');
   
 progress.addEventListener('input', function() {
   const value = this.value;
   this.style.background = `linear-gradient(to right, #710707 0%, #710707 ${value}%, #fff ${value}%, white 100%)`
 })
-
-const ticketShow = document.querySelector('.tickets_btn');
-        ticketHide = document.querySelector('.exit');
-        //ticketOwerlay = document.querySelector('.my_form');
-        ticketBox = document.querySelector('.my_form');
-
-
-const showTickets = () => {
-    ticketBox.classList.remove('buy');
-    ticketBox.classList.add('buy_active');
-}
-
-const hideTickets = () => {
-    ticketBox.classList.remove('buy_active');
-    ticketBox.classList.add('buy');
-}
-
-ticketShow.addEventListener('click', showTickets);
-ticketHide.addEventListener('click', hideTickets);
-//ticketOwerlay.addEventListener('click', hideTickets);
-
-
-const burgerOpen = document.querySelector('.burger_open');
-        burgerSlice = document.querySelector('.slice');
-        burgerMenu = document.querySelector('.burger_menu');
-
-const showBurger = () => {
-    burgerOpen.classList.toggle('close');
-    burgerSlice.classList.toggle('hide');
-    burgerMenu.classList.toggle('burger_menu_open');
-}
-
-burgerOpen.addEventListener('click', showBurger);
