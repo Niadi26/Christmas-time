@@ -205,23 +205,33 @@
                          masterpieces such as Mona Lisa or Hammurabi's Code</p>
                 </div>
                 <div class="video_content">
-                    <div class="video_main">                  
-                        <video src="assets/video/video0.mp4" poster="assets/video/poster0-1.jpg" class="video_main"></video>  
+                    <div class="video_main"> 
+                        <video id="video_player" src="assets/video/video0.mp4" poster="assets/video/poster0-1.jpg" class="video_main_z"></video>
                         <div class="video_play_btn"></div>
                         <div class="video_control">
-                                <button class="video_control_play"></button>
-                                <input type="range" class="video_control_pr">
-                                <button class="video_control_sound"></button>
-                                <input type="range" class="video_control_laug">
-                                <button class="video_control_wh"></button>
+                                <button id="play" class="video_control_play"></button>
+                                <button id="pause" class="video_control_play hide"></button>
+                                <input id="progress" type="range" class="video_control_pr" value="0" min="0" max="100">
+                                <button id="sound" class="video_control_sound"></button>
+                                <button id="not-sound" class="video_control_sound hide"></button>
+                                <input id="volume" type="range" min="0" max="100" class="video_control_laug">
+                                <button id="full" class="video_control_wh"></button>
+                                <button id="not-full" class="video_control_wh hide"></button>
                         </div>
                     </div>
-
                     <div class="video_submain">
-                        <video src="assets/video/video1.mp4" poster="assets/video/poster3.jpg" class="video_submain_item"></video>
+                        <iframe width="452" height="254" src="https://www.youtube.com/embed/Vi5D6FKhRmo" loading="lazy"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="452" height="254" src="https://www.youtube.com/embed/NOhDysLnTvY" loading="lazy"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="452" height="254" src="https://www.youtube.com/embed/aWmJ5DgyWPI" loading="lazy"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="hide" width="452" height="254" src="https://www.youtube.com/embed/2OR0OCr6uRE" loading="lazy"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- <video src="assets/video/video1.mp4" poster="assets/video/poster3.jpg" class="video_submain_item"></video>
                         <video src="assets/video/video2.mp4" poster="assets/video/poster1.jpg" class="video_submain_item"></video>
                         <video src="assets/video/video3.mp4" poster="assets/video/poster2.jpg" class="video_submain_item"></video>
-                        <video src="assets/video/video3.mp4" poster="assets/video/poster4.jpg" class="video_submain_item vid_none"></video>
+                        <video src="assets/video/video3.mp4" poster="assets/video/poster4.jpg" class="video_submain_item hide"></video>-->
                     </div>
                 </div>
                 <div class="video_slider">
