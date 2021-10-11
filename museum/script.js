@@ -391,14 +391,29 @@ const map = new mapboxgl.Map({
     map.addControl(new mapboxgl.NavigationControl());
 
 const recalculateTotal = () => {
-   const basicCount = document.getElementById('basicCount');
-   const seniorCount = document.getElementById('seniorCount');
-   console.log(Number(basicCount.value) + Number(seniorCount.value));
+    const basicCount = +document.getElementById('basicCount').value;
+    const seniorCount = +document.getElementById('seniorCount').value;
+    const price = +document.getElementById('calculationForm')
+        .querySelector('input:checked').value;
+
+    const result = price * basicCount + price * seniorCount / 2;
+
+    const totalPrice = document.getElementById('total_price_id');
+    totalPrice.innerHTML = `Total: ${result} €`;
+
 }
 
+recalculateTotal();
 const ticketsCountContainer = document.getElementById('ticketsCountContainer');
-ticketsCountContainer.addEventListener('click', function(e){
+ticketsCountContainer.addEventListener('click', e => {
     if (e.target && e.target.tagName === 'BUTTON') {
+        recalculateTotal();
+    }
+});
+
+const calculationForm = document.getElementById('calculationForm');
+calculationForm.addEventListener('click', e => {
+    if (e.target && e.target.tagName === 'INPUT') {
         recalculateTotal();
     }
 });
@@ -442,4 +457,6 @@ function checkSlide (e) {
 }
 window.addEventListener('scroll', debounse(checkSlide));
 
-//console.log('Дневник с фронта. У нас следующие потерянные войны: 1. Плавная анимация в велком (-4балла), 2. Видео-слайдер, не хватило сил (-20баллов),')
+console.log('Дневник с фронта. У нас следующие потерянные войны: 1. Плавная анимация в велком (-4балла),  2.при обновлении страницы сохраняется выбранное ранее количество билетов Basic и Senior, выбранный тип билета, общая цена за них (-2балла)')
+console.log('Дневник с фронта. У нас следующие несделанные войны: 3. Видео-слайдер, не хватило сил (-20баллов); 4.Калькулятор продажи билетов в форме продажи билетов -14; 5.Валидация формы -16; 6.Любой собственный дополнительный функционал -10');
+console.log('Итого:90 баллов :(')

@@ -296,9 +296,9 @@
                                 <input type="date" class="date_area" value="Date">
                                 <input type="time" class="time_area" value="Time">
                             </div>
-                            <input type="text" class="name_area" value="Name">
+                            <input type="text" class="name_area" value="Name" minlength="3" maxlength="33">
                             <input type="email" class="email_area" value="E-mail">
-                            <input type="tel" class="tel_area" value="Phone">
+                            <input type="tel" class="tel_area" value="Phone" maxlength="10">
                             <select name="theme" required="required" class="ticket_type_area" value="Ticket Type">
                                 <option class="form_option">Permanent exhibition</option>
                                 <option class="form_option">Temporary exhibition</option>
@@ -395,7 +395,7 @@
                 <div class="strip"></div>
                 <div class="tickets_content">
                     <img src="assets/img/buy tickets.jpg" alt="" class="tickets_img">
-                    <div class="tickets_type">
+                    <div id="calculationForm" class="tickets_type" >
                         <h4 class="tickets_type_title">Ticket Type</h4>
                         <label class="tickets_type_input">Permanent exhibition
                             <input type="radio" checked="checked" name="ticketType" value="20">
@@ -409,6 +409,7 @@
                             <input type="radio" name="ticketType" value="40">
                             <span class="checkmark"></span>
                         </label>
+                   
                     </div>
                     <div class="tickets_amound">
                         <h4 class="tickets_amound_title amound_title">Amount</h4>
@@ -426,7 +427,7 @@
                                 <button type="button" class="tickets_amound_btn" onclick="this.previousElementSibling.stepUp()">+</button>
                             </div>
                         </div>    
-                        <h4 class="tickets_amound_title total_title">Total € 200</h4>
+                        <h4 id="total_price_id" class="tickets_amound_title total_title"></h4>
                         <button class="tickets_btn btn">Buy Now</button>
                     </div>
                 </div>
