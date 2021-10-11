@@ -202,52 +202,54 @@ function muteV() {
     not_sound.classList.remove('hide');
 }
 
-function volumeV() {
+function volumeVideo() {
     video.volume = 1;
     sound.classList.toggle('hide');
     not_sound.classList.toggle('hide');
 }
 
 sound.addEventListener('click', muteV);
-not_sound.addEventListener('click', volumeV);
+not_sound.addEventListener('click', volumeVideo);
 
 function fullV () {
     videoDiv.requestFullscreen();
-    full.classList.add('.hide');
-    not_full.classList.remove('.hide');
+    full.classList.add('hide');
+    not_full.classList.remove('hide');
 }
 
 function fullOutV () {
-    videoDiv.canselFullscreen();
-    full.classList.remove('.hide');
-    not_full.classList.add('.hide');
+    document.exitFullscreen();
+    full.classList.remove('hide');
+    not_full.classList.add('hide');
 }
 
 full.addEventListener('click', fullV);
 not_full.addEventListener('click', fullOutV);
 
-//работа с клавиатурой
-document.documentElement.addEventListener("keyup", function(e) {
-    event.preventDefault();
-    let ev = e || window.event;
-    console.log(ev.keyCode);
-    if(ev.keyCode == 32) {
-        if(video.paused) { playV(); }
-        else { pauseV(); }
-    } 
-    else if (ev.keyCode == 77) {
-        if (video.volume == 0) {volumeV();}
-        else {muteV()}
-    } 
-    else if(ev.keyCode == 70) {
-        if(videoDiv.fullscreenEnabled) {fullOutV();}                            //НЕ ВЫХОДИТ 
-        else {fullV()}
-    } 
- //   else if(ev.keyCode == 188) {
- //       for(let speed = 1; speed >= 0; speed - 0.2) {
- //       video.playbackRate = speed  
-  //      }
+const KEY_CODES = {
+    F: 70,
+    M: 77,
+    SPACE: 32,
+};
 
+document.documentElement.addEventListener("keydown", function(e) {
+    e.preventDefault();
+
+    switch(e.keyCode) {
+        case KEY_CODES.SPACE: {
+            video.paused ? playV() : pauseV();
+            break;
+        }
+        case KEY_CODES.M: {
+            video.volume == 0 ? volumeVideo() : muteV();
+            break;
+        }
+        case KEY_CODES.F: {
+            document.fullscreenElement ? fullOutV() : fullV();
+            break;
+        }
+        default:
+    }
 });
 
 //Прогресс-бар в секции видео
@@ -388,14 +390,41 @@ const map = new mapboxgl.Map({
 
     map.addControl(new mapboxgl.NavigationControl());
 
-// калькулятор
+const recalculateTotal = () => {
+    const basicCount = +document.getElementById('basicCount').value;
+    const seniorCount = +document.getElementById('seniorCount').value;
+    const price = +document.getElementById('calculationForm')
+        .querySelector('input:checked').value;
+
+    const result = price * basicCount + price * seniorCount / 2;
+
+    const totalPrice = document.getElementById('total_price_id');
+    totalPrice.innerHTML = `Total: ${result} €`;
+
+}
+
+recalculateTotal();
+const ticketsCountContainer = document.getElementById('ticketsCountContainer');
+ticketsCountContainer.addEventListener('click', e => {
+    if (e.target && e.target.tagName === 'BUTTON') {
+        recalculateTotal();
+    }
+});
+
+const calculationForm = document.getElementById('calculationForm');
+calculationForm.addEventListener('click', e => {
+    if (e.target && e.target.tagName === 'INPUT') {
+        recalculateTotal();
+    }
+});
+
 function checkbox () {
     let prise = document.querySelectorAll('input[name="ticketType"]:checked');
     prise.onclick = function(e){
-    if (e.is(':checked')){
-        console.log(e.value);
+        if (e.is(':checked')){
+            console.log(e.value);
+        }
     }
-}
 }
 
 // Анимация выплывания
@@ -428,4 +457,6 @@ function checkSlide (e) {
 }
 window.addEventListener('scroll', debounse(checkSlide));
 
-//console.log('Дневник с фронта. У нас следующие потерянные войны: 1. Плавная анимация в велком (-4балла), 2. Видео-слайдер, не хватило сил (-20баллов),')
+console.log('Дневник с фронта. У нас следующие потерянные войны: 1. Плавная анимация в велком (-4балла),  2.при обновлении страницы сохраняется выбранное ранее количество билетов Basic и Senior, выбранный тип билета, общая цена за них (-2балла)')
+console.log('Дневник с фронта. У нас следующие несделанные войны: 3. Видео-слайдер, не хватило сил (-20баллов); 4.Калькулятор продажи билетов в форме продажи билетов -14; 5.Валидация формы -16; 6.Любой собственный дополнительный функционал -10');
+console.log('Итого:90 баллов :(')
