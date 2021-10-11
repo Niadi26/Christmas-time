@@ -834,10 +834,33 @@ a:active {
 span {
     color: #9D8665;
 }
+.explore_container{
+  position: relative;
+  height: 700px;
+  width: 720px;
+  box-sizing: border-box;
+  margin-left: 60px;
+}
+
+.img_comp {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.img_slider {
+    position: absolute;
+    left: 50%;
+    z-index: 50;
+    cursor: ew-resize;
+    width: 39px;
+    height: 100%;
+    background-image: url('assets/svg/explore\ slider.svg');
+}
 
 .explore_img {
     display: block;
-    margin-left: 60px;
     width: 720px;
     height: 100%;
     object-fit: contain;
@@ -955,7 +978,8 @@ span {
     column-gap: 50px;
 }
 .video_control:fullscreen {
-    z-index: 1000;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .video_control_play {
@@ -1296,6 +1320,14 @@ span {
     width: 100%;
     object-fit: contain;
     padding-bottom: 24px;
+    transition: 2s;
+    opacity: 0;
+    transform: translateY(30%) scale(0.9);
+}
+
+.gallery_active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 @media (max-width: 1044px) {
@@ -1604,6 +1636,11 @@ span {
     
 }
 
+.contacts_map {
+    width: 66%;
+    height: 620px;
+}
+
 .contacts_title {
     margin-bottom: 50px;
     font-family: Roboto;
@@ -1633,9 +1670,8 @@ span {
         margin-top: 13px;
         font-size: 20px;
     } 
-    .contacts_img {
+    .contacts_map {
         display: block;
-        max-width: 694px;
         max-height: 454px;
         object-fit: contain; 
     }
@@ -1651,10 +1687,10 @@ span {
         margin-top: 15px;
         font-size: 18px;
     } 
-    .contacts_img {
+    .contacts_map {
         margin-top: 40px;
-        max-width: 100%;
-        max-height: 100%;
+        width: 100%;
+        max-height: 470px;
     }    
 }
 
@@ -1667,6 +1703,9 @@ span {
             margin-top: 13px;
             font-size: 16px;
     } 
+    .contacts_map {
+    max-height: 248px;
+    }
 }
 
 .footer_container {
@@ -1870,7 +1909,7 @@ span {
 .buy_booking_form {
     max-width: 1440px;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 5%;
     padding: 30px;
     position: relative;
     background: #FFFFFF;
