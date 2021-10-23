@@ -115,7 +115,10 @@ const weatherHumidity = document.querySelector('.humidity');
 const windSpeed = document.querySelector('.wind');
 const weatherErr = document.querySelector('.weather-error');
 
-async function getWeather(x = 'Minsk') {  
+let x = userCity.value;
+async function getWeather(x) {  
+    if(x == undefined) {x = 'Minsk'};                                             //!!!!!!!!!!!!!!!!!!!!!!
+    console.log(x);
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${x}&lang=en&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
     const response = await fetch(url);
     const air = await response.json(); 
@@ -132,7 +135,7 @@ async function getWeather(x = 'Minsk') {
   }
   getWeather();
 
-  userCity.addEventListener('change', getWeather(userCity.value));
+  userCity.addEventListener('change', getWeather(x));
   
   //цитатки
   const author = document.querySelector('.author');
@@ -162,19 +165,85 @@ const nextAudio = document.querySelector('.play-next');
 const play = document.querySelector('.play');
 let isPlay = false;
 
+import playList from './playList.js';
+console.log(playList);
+
+playList.forEach((el, index) => {
+const li = document.createElement('li');
+const playListContainer = document.querySelector('.play-list')
+li.classList.add('play-item');
+li.textContent = playList[index].title;
+playListContainer.append(li);
+})
+
+const liList = document.querySelectorAll('li');
+console.log(liList)
+
+let playNum = 0;
 function playAudio() {
-    audio.src = "./assets/sounds/River Flows In You.mp3";
+    audio.src = playList[playNum].src;
     if (!isPlay) {
+        liList.forEach((el)=>{
+            el.classList.remove('.item-active');})
+        liList[playNum].classList.add('.item-active');
         audio.currentTime = 0;
         audio.play();
         isPlay = true;
-        play.classList.add('pause')
+        play.classList.add('pause');
     }
     else {
         audio.pause();
         isPlay = false;
-        play.classList.remove('pause')
+        play.classList.remove('pause');
+        liList.forEach((el)=>{
+            el.classList.remove('.item-active');})
     }
 }
 
+function playnextAudio () {
+    if(playNum === playList.length - 1) {
+        playNum = 0;
+        audio.src = playList[playNum].src;
+    }
+    else{
+        playNum ++;
+        audio.src = playList[playNum].src;
+    }
+    audio.currentTime = 0;
+    audio.play();
+    isPlay = true;
+    play.classList.add('pause');
+    liList.forEach((el)=>{
+        el.classList.remove('.item-active');})
+    liList[playNum].classList.add('.item-active');    
+}
+
+function playprevAudio () {              
+    if(playNum === 0) {
+        playNum = playList.length - 1;
+        audio.src = playList[playList.length - 1].src;
+    }
+    else{
+        playNum--;
+        audio.src = playList[playNum].src;
+    }
+    audio.currentTime = 0;
+    audio.play();
+    isPlay = true;
+    play.classList.add('pause');
+    liList.forEach((el)=>{
+        el.classList.remove('.item-active');})
+    liList[playNum].classList.add('.item-active');   
+}
+
+function autoNextSong () {    
+    console.log(playList[playNum].duration)                                 //!!!!!!!!
+    if (playList[playNum].currentTime == playList[playNum].duration) {
+        playnextAudio ();
+    }
+}
+autoNextSong ()
+
 play.addEventListener('click', playAudio);
+prevAudio.addEventListener('click', playprevAudio);
+nextAudio.addEventListener('click', playnextAudio);
