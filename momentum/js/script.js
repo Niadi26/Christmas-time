@@ -1,4 +1,43 @@
 
+import playList from './playList.js';
+
+//перевод
+
+const LANGUAGES = {
+    RU: 'RU',
+    EN: 'EN',
+};
+
+const TRANSLATIONS = {
+    [LANGUAGES.EN]:{
+        DATE: 'en-En',
+        NIGHT: 'Good night,',
+        MORNING: 'Good morning,',
+        AFTERNOON: 'Good afternoon,',
+        EVENING: 'Good evening,',
+    },
+    [LANGUAGES.RU]:{
+        DATE: 'ru-Ru',
+        NIGHT: 'Прекрасная ночь,',
+        MORNING: 'Доброго утра,',
+        AFTERNOON: 'Надеюсь у тебя хороший день,',
+        EVENING: 'Славного вечера,',
+    },
+};
+
+function setLang(event) {
+    if(event.target && event.target.tagName === 'INPUT'){
+       currentLanguage = event.target.value;
+    }
+}
+
+const checkLANG = document.getElementById('LANG');
+const checkEN = document.getElementById('EN');
+const checkRU = document.getElementById('RU');
+let currentLanguage = LANGUAGES.EN;
+checkLANG.addEventListener('click', setLang);
+
+// info
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
@@ -8,16 +47,16 @@ const dateOptions = {weekday: 'long', month: 'long', day: 'numeric',}
 let timeOfDay;
 function getTimeOfDay(x) {
     if (x < 6) {
-        timeOfDay = 'night';
+        timeOfDay = TRANSLATIONS[currentLanguage].NIGHT;
     }
     else if (x > 6 && x < 12) {
-        timeOfDay = 'morning';
+        timeOfDay = TRANSLATIONS[currentLanguage].MORNING;
     }
     else if (x > 12 &&  x < 18) {
-        timeOfDay = 'afternoon';
+        timeOfDay = TRANSLATIONS[currentLanguage].AFTERNOON;
     }
     else {
-        timeOfDay = 'evening';
+        timeOfDay = TRANSLATIONS[currentLanguage].EVENING;
     }
     return  timeOfDay;
 }
@@ -26,8 +65,8 @@ getTimeOfDay(new Date().getHours());
 
 function showTime() {
     time.textContent = new Date().toLocaleTimeString();
-    date.textContent = new Date().toLocaleDateString('en-En', dateOptions);
-    greeting.textContent = `Good ${timeOfDay},`;
+    date.textContent = new Date().toLocaleDateString(`${TRANSLATIONS[currentLanguage].DATE}`, dateOptions);
+    greeting.textContent = getTimeOfDay(new Date().getHours());
     setTimeout(showTime, 1000);
 }
 showTime();
@@ -69,13 +108,32 @@ function getRandomNum (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
+let timeOfBG;
+function getTimeOfBG(x) {
+    if (x < 6) {
+        timeOfBG = 'night';
+    }
+    else if (x > 6 && x < 12) {
+        timeOfBG = 'morning';
+    }
+    else if (x > 12 &&  x < 18) {
+        timeOfBG = 'afternoon';
+    }
+    else {
+        timeOfBG = 'evening';
+    }
+    return  timeOfBG;
+}
+getTimeOfBG(new Date().getHours());
+
 function getBg() {
     randomNum = getRandomNum(1,20);
     if (randomNum < 10) {
         randomNum = '0' + randomNum;
     }
     const img = new Image();
-    img.src = `https://raw.githubusercontent.com/Niadi26/stage1-tasks/assets/images/${timeOfDay}/${randomNum}.jpg`;
+    img.src = `https://raw.githubusercontent.com/Niadi26/stage1-tasks/assets/images/${timeOfBG}/${randomNum}.jpg`;
     img.onload = () => {  
     body.style.backgroundImage = `url('${img.src}')`;
     }
@@ -115,22 +173,30 @@ const weatherHumidity = document.querySelector('.humidity');
 const windSpeed = document.querySelector('.wind');
 const weatherErr = document.querySelector('.weather-error');
 
-async function getWeather(x = 'Minsk') {  
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${x}&lang=en&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
+async function getWeather(city) {
+    const currentCity = city || 'Minsk';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&lang=en&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
     const response = await fetch(url);
     const air = await response.json(); 
     if (air.cod == 404) {
         weatherErr.textContent = "Please, write correct city";
+        temperature.textContent = ``;
+        weatherDescription.textContent = ``;
+        weatherHumidity.textContent = ``;
+        windSpeed.textContent = ``;
     } else {
+        weatherErr.textContent = "";
         temperature.textContent = `${Math.round(air.main.temp)}°C`;
         weatherDescription.textContent = `${air.weather[0].description}`;
-        weatherHumidity.textContent = `${Math.round(air.main.humidity)}%`;
-        windSpeed.textContent = `${Math.round(air.wind.speed)}m/s`;
+        weatherHumidity.textContent = `Humidity: ${Math.round(air.main.humidity)}%`;
+        windSpeed.textContent = `Wind speed: ${Math.round(air.wind.speed)}m/s`;
     
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${air.weather[0].id}`);
     }
   }
+
+  console.log('test', typeof localStorage.getItem('cityUser'))
   getWeather(localStorage.getItem('cityUser'));
   userCity.addEventListener('change', (e) => {
     getWeather(e.target.value);
@@ -164,8 +230,6 @@ const nextAudio = document.querySelector('.play-next');
 const play = document.querySelector('.play');
 let isPlay = false;
 
-import playList from './playList.js';
-console.log(playList);
 
 playList.forEach((el, index) => {
 const li = document.createElement('li');
@@ -187,8 +251,8 @@ function playAudio() {
     audio.src = playList[playNum].src;
     if (!isPlay) {
         liList.forEach((el)=>{
-            el.classList.remove('.item-active');})
-        liList[playNum].classList.add('.item-active');
+            el.classList.remove('item-active');})
+        liList[playNum].classList.add('item-active');
         audio.currentTime = 0;
         audio.play();
         isPlay = true;
@@ -199,16 +263,16 @@ function playAudio() {
         isPlay = false;
         play.classList.remove('pause');
         liList.forEach((el)=>{
-            el.classList.remove('.item-active');})
+            el.classList.remove('item-active');
+        });
     }
 }
 
 function playnextAudio () {
-    if(playNum === playList.length - 1) {
+    if (playNum === playList.length - 1) {
         playNum = 0;
         audio.src = playList[playNum].src;
-    }
-    else{
+    } else {
         playNum ++;
         audio.src = playList[playNum].src;
     }
@@ -219,8 +283,8 @@ function playnextAudio () {
     isPlay = true;
     play.classList.add('pause');
     liList.forEach((el)=>{
-        el.classList.remove('.item-active');})
-    liList[playNum].classList.add('.item-active');    
+        el.classList.remove('item-active');})
+    liList[playNum].classList.add('item-active');    
 }
 
 function playprevAudio () {              
@@ -239,8 +303,8 @@ function playprevAudio () {
     isPlay = true;
     play.classList.add('pause');
     liList.forEach((el)=>{
-        el.classList.remove('.item-active');})
-    liList[playNum].classList.add('.item-active');   
+        el.classList.remove('item-active');})
+    liList[playNum].classList.add('item-active');   
 }
 
 audio.addEventListener('ended', playnextAudio);
@@ -323,3 +387,4 @@ function showMenu () {
 }
 
 settingsBTN.addEventListener('click', showMenu);
+
