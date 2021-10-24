@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+      </div>
+      <div class="progress-container">
+        <div class="audio-name"></div>
+        <input id="pro" type="range" class="progress" value="0" min="0" max="100"> 
+        <div class="audio-time">
+        <span class="now"></span>
+        <span class="all"></span>
+        </div>
+      </div>
+      <div class="laught-container">
+        <button id="volume" class="volume player-icon"></button>
+        <input id="laught" type="range" class="laught" value="50" min="0" max="100">
+      </div>  
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input id="city" type="text" class="city" placeholder="Minsk"/>
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input id="name" type="text" class="name" placeholder="[Enter your name]"/>
+    </div>
+  </main>
+  <section class="quote-container">
+    <button class="change-quote"></button>
+    <div>
+      <div class="quote"></div>
+      <div class="author"></div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-info">2021</div>
+    <a href="https://rs.school" class="footer-info">RS school</a>
+    <a href="https://github.com/Niadi26" class="footer-info">gitHab</a>
+    <button class="settings"></button>
+    <div class="menu-settings">
+      <div class="item-settings">
+        <p class="ittem-title">Languadge:</p>
+        <label for="lang" class="check-info"><input type="radio" name="lang" class="check-lang">English</label>
+        <label for="lang" class="check-info"><input type="radio" name="lang" class="check-lang">Russan</label>
+      </div>
+      <div class="item-settings">
+        <p class="ittem-title">Photo from:</p>
+        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">gitHab</label>
+        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">Unsplash API</label>
+        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">Flickr API</label>
+      </div>
+      <div class="item-settings">
+        <p class="ittem-title">Wanna hide?</p>
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Player</label>
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Weather</label>
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Time</label>
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Date</label> 
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Greeting</label>
+        <label for="" class="check-info"><input type="checkbox" class="hige-item">Quote</label>
+      </div>
+    </div>
+  </footer>
+  <script src="js/script.js" type="module"></script>
+</body>
+</html>
