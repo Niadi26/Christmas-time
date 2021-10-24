@@ -115,27 +115,26 @@ const weatherHumidity = document.querySelector('.humidity');
 const windSpeed = document.querySelector('.wind');
 const weatherErr = document.querySelector('.weather-error');
 
-let x = userCity.value;
-async function getWeather(x) {  
-    if(x == undefined) {x = 'Minsk'};                                             //!!!!!!!!!!!!!!!!!!!!!!
-    console.log(x);
+async function getWeather(x = 'Minsk') {  
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${x}&lang=en&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
     const response = await fetch(url);
     const air = await response.json(); 
     if (air.cod == 404) {
         weatherErr.textContent = "Please, write correct city";
+    } else {
+        temperature.textContent = `${Math.round(air.main.temp)}°C`;
+        weatherDescription.textContent = `${air.weather[0].description}`;
+        weatherHumidity.textContent = `${Math.round(air.main.humidity)}%`;
+        windSpeed.textContent = `${Math.round(air.wind.speed)}m/s`;
+    
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${air.weather[0].id}`);
     }
-    temperature.textContent = `${Math.round(air.main.temp)}°C`;
-    weatherDescription.textContent = `${air.weather[0].description}`;
-    weatherHumidity.textContent = `${Math.round(air.main.humidity)}%`;
-    windSpeed.textContent = `${Math.round(air.wind.speed)}m/s`;
-
-    weatherIcon.className = 'weather-icon owf';
-    weatherIcon.classList.add(`owf-${air.weather[0].id}`);
   }
-  getWeather();
-
-  userCity.addEventListener('change', getWeather(x));
+  getWeather(localStorage.getItem('cityUser'));
+  userCity.addEventListener('change', (e) => {
+    getWeather(e.target.value);
+  });
   
   //цитатки
   const author = document.querySelector('.author');
@@ -177,10 +176,14 @@ playListContainer.append(li);
 })
 
 const liList = document.querySelectorAll('li');
-console.log(liList)
+const audioName = document.querySelector('.audio-name')
+const nowTime = document.querySelector('.now');
+const allTime = document.querySelector('.all');
 
 let playNum = 0;
 function playAudio() {
+    audioName.textContent = playList[playNum].title;
+    allTime.textContent = `/ ${playList[playNum].duration}`;
     audio.src = playList[playNum].src;
     if (!isPlay) {
         liList.forEach((el)=>{
@@ -209,6 +212,8 @@ function playnextAudio () {
         playNum ++;
         audio.src = playList[playNum].src;
     }
+    audioName.textContent = playList[playNum].title;
+    allTime.textContent = `/ ${playList[playNum].duration}`;
     audio.currentTime = 0;
     audio.play();
     isPlay = true;
@@ -227,6 +232,8 @@ function playprevAudio () {
         playNum--;
         audio.src = playList[playNum].src;
     }
+    audioName.textContent = playList[playNum].title;
+    allTime.textContent = `/ ${playList[playNum].duration}`;
     audio.currentTime = 0;
     audio.play();
     isPlay = true;
@@ -236,14 +243,83 @@ function playprevAudio () {
     liList[playNum].classList.add('.item-active');   
 }
 
-function autoNextSong () {    
-    console.log(playList[playNum].duration)                                 //!!!!!!!!
-    if (playList[playNum].currentTime == playList[playNum].duration) {
-        playnextAudio ();
-    }
-}
-autoNextSong ()
-
+audio.addEventListener('ended', playnextAudio);
 play.addEventListener('click', playAudio);
 prevAudio.addEventListener('click', playprevAudio);
 nextAudio.addEventListener('click', playnextAudio);
+
+//player pro
+
+document.querySelector('#laught').oninput = laught;
+const inp = document.querySelector('#laught');
+const volume = document.querySelector('.volume');
+
+function laught (){
+    let v = this.value;
+    audio.volume = v / 100;
+    if (v == 0) {
+        muteAudio();
+    } else {
+    volume.classList.remove('mute');
+    }
+}
+
+function muteAudio() {
+    if (volume.classList.contains('mute')) {
+        audio.volume = inp.value / 100;
+    }
+    else {
+    audio.volume = 0;
+    }
+    volume.classList.toggle('mute');
+}
+
+volume.addEventListener('click',  muteAudio);
+
+
+const progress = document.querySelector('.progress');
+audio.ontimeupdate = progressAudio;
+
+function progressAudio () {
+    let allT = audio.duration;
+    let nowT = audio.currentTime;
+    progress.value = nowT / allT * 100;
+    nowTime.textContent = formatTime(nowT);
+    function formatTime(seconds) {
+        let min = Math.floor((seconds / 60));
+        let sec = Math.floor(seconds - (min * 60));
+        if (sec < 10){ 
+            sec  = `0${sec}`;
+        };
+        return `0${min}:${sec}`;
+    };
+    if (progress.value == 100) {
+        playnextAudio();
+    }
+}
+
+/*
+function WindV () {                                                         //!!!
+    let w = this.offsetWidth;
+    let o = event.offsetX;
+    console.log(w);
+    console.log(o);
+    audio.pause();
+    audio.currentTime = audio.duration * (o / w);
+    audio.play();
+}
+progress.addEventListener('click', WindV);
+*/
+//menu
+
+const settingsBTN = document.querySelector('.settings');
+const foot = document.querySelector('footer');
+const menu = document.querySelector('.menu-settings');
+
+function showMenu () {
+    settingsBTN.classList.toggle('settings-active');
+    foot.classList.toggle('footer-active');
+    menu.classList.toggle('menu-active');
+}
+
+settingsBTN.addEventListener('click', showMenu);

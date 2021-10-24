@@ -1,23 +1,33 @@
 const playList = [
     {      
-      title: 'Aqua Caelestis',
-      src: './assets/sounds/Aqua Caelestis.mp3',
-      duration: '00:10'
+      title: 'The Sword of Destiny',
+      src: './assets/sounds/The Sword of Destiny.mp3',
+      duration: '02:22'
     },  
     {      
-      title: 'River Flows In You',
-      src: './assets/sounds/River Flows In You.mp3',
-      duration: '01:37'
+      title: 'Silver for Monsters',
+      src: './assets/sounds/Silver for Monsters.mp3',
+      duration: '02:22'
     },  
     {      
-      title: 'Ennio Morricone',
-      src: './assets/sounds/Ennio Morricone.mp3',
-      duration: '01:37'
+      title: 'Gwent Music',
+      src: './assets/sounds/Gwent Music.mp3',
+      duration: '02:40'
     },  
     {      
-      title: 'Summer Wind',
-      src: './assets/sounds/Summer Wind.mp3',
-      duration: '01:50'
+      title: 'Blood and Wine',
+      src: './assets/sounds/Blood and Wine.mp3',
+      duration: '02:20'
+    },   
+    {      
+      title: 'Kaer Morhen',
+      src: './assets/sounds/Kaer Morhen.mp3',
+      duration: '02:35'
+    },   
+    {      
+      title: 'Hearts of Stone',
+      src: './assets/sounds/Hearts of Stone.mp3',
+      duration: '02:53'
     }
   ]
   export default playList;
