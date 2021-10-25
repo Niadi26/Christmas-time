@@ -15,6 +15,23 @@ const TRANSLATIONS = {
         MORNING: 'Good morning,',
         AFTERNOON: 'Good afternoon,',
         EVENING: 'Good evening,',
+        WEATHER: 'en',
+        HUMIDITY: 'Humidity',
+        WIND: 'Wind speed',
+        QUOTESJSON: './js/dataEN.json',
+        NAME: '[Enter your name]',
+        CITYDEFAULT: 'Minsk',
+        LANGSETTINGS: 'Languadge:',
+        ENSETTINGS: 'English',
+        RUSETTINGS: 'Russan',
+        BGSETTINGS: 'Chose photo src:',
+        OPASITYSETTINGS: 'What you wanna hide:',
+        PLAYERSETTINGS: 'Player',
+        WEATHERSETTINGS: 'Weater',
+        TIMESETTINGS: 'Time',
+        DATESETTINGS: 'Date',
+        GREETINGSETTINGS: 'Greeting',
+        QUOTESETTINGS: 'Quotes',
     },
     [LANGUAGES.RU]:{
         DATE: 'ru-Ru',
@@ -22,21 +39,52 @@ const TRANSLATIONS = {
         MORNING: 'Доброго утра,',
         AFTERNOON: 'Надеюсь у тебя хороший день,',
         EVENING: 'Славного вечера,',
+        WEATHER: 'ru',
+        HUMIDITY: 'Влажность',
+        WIND: 'Скорость движения воздуха',
+        QUOTESJSON: './js/dataRU.json',
+        NAME: '[Введите имя]',
+        CITYDEFAULT: 'Минск',
+        LANGSETTINGS: 'Язык:',
+        ENSETTINGS: 'Английский',
+        RUSETTINGS: 'Русский',
+        BGSETTINGS: 'Откуда подгрузить фото:',
+        OPASITYSETTINGS: 'Скрыть следующие элементы:',
+        PLAYERSETTINGS: 'Плеер',
+        WEATHERSETTINGS: 'Погода',
+        TIMESETTINGS: 'Времня',
+        DATESETTINGS: 'Дата',
+        GREETINGSETTINGS: 'Приветствие',
+        QUOTESETTINGS: 'Цитаты',
     },
 };
 
+const checkLANG = document.getElementById('LANG');
+let currentLanguage = localStorage.getItem('languageUser') || LANGUAGES.EN;
+let inputValue;
+
 function setLang(event) {
     if(event.target && event.target.tagName === 'INPUT'){
+        inputValue = event.target.value;
        currentLanguage = event.target.value;
+       setPlaceholder();
+       addTextSettings();
+       getWeather(localStorage.getItem('cityUser'));
+       getQuotes();
     }
 }
-
-const checkLANG = document.getElementById('LANG');
-const checkEN = document.getElementById('EN');
-const checkRU = document.getElementById('RU');
-let currentLanguage = LANGUAGES.EN;
 checkLANG.addEventListener('click', setLang);
 
+// placeholder 
+
+const userName = document.getElementById('name'); 
+const userCity = document.getElementById('city');
+
+function setPlaceholder() {
+        userName.setAttribute( 'placeholder', TRANSLATIONS[currentLanguage].NAME);
+        userCity.setAttribute('placeholder', TRANSLATIONS[currentLanguage].CITYDEFAULT);
+}
+setPlaceholder();
 // info
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
@@ -60,24 +108,23 @@ function getTimeOfDay(x) {
     }
     return  timeOfDay;
 }
-getTimeOfDay(new Date().getHours());
+//getTimeOfDay(new Date().getHours());
 
 
 function showTime() {
     time.textContent = new Date().toLocaleTimeString();
-    date.textContent = new Date().toLocaleDateString(`${TRANSLATIONS[currentLanguage].DATE}`, dateOptions);
+    date.textContent = new Date().toLocaleDateString(TRANSLATIONS[currentLanguage].DATE, dateOptions);
     greeting.textContent = getTimeOfDay(new Date().getHours());
     setTimeout(showTime, 1000);
 }
 showTime();
 
 //локальное хранилище
-const userName = document.getElementById('name'); 
-const userCity = document.getElementById('city');
 
 function setLocalStorage () {
     localStorage.setItem('nameUser', userName.value);
     localStorage.setItem('cityUser', userCity.value);
+    localStorage.setItem('languageUser', currentLanguage);
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
@@ -90,6 +137,11 @@ function getLocalStorage () {
         userCity.value = localStorage.getItem('cityUser'); 
         return userCity.value
     }
+    if (localStorage.getItem('languageUser')) {
+        currentLanguage = localStorage.getItem('languageUser'); 
+        return currentLanguage;
+    }
+    checkInput();
 }
 
 window.addEventListener('load', getLocalStorage);
@@ -174,8 +226,8 @@ const windSpeed = document.querySelector('.wind');
 const weatherErr = document.querySelector('.weather-error');
 
 async function getWeather(city) {
-    const currentCity = city || 'Minsk';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&lang=en&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
+    const currentCity = city || TRANSLATIONS[currentLanguage].CITYDEFAULT;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&lang=${TRANSLATIONS[currentLanguage].WEATHER}&appid=1cac88b1a4110319c96b4fc22457c7a7&units=metric`;
     const response = await fetch(url);
     const air = await response.json(); 
     if (air.cod == 404) {
@@ -188,15 +240,14 @@ async function getWeather(city) {
         weatherErr.textContent = "";
         temperature.textContent = `${Math.round(air.main.temp)}°C`;
         weatherDescription.textContent = `${air.weather[0].description}`;
-        weatherHumidity.textContent = `Humidity: ${Math.round(air.main.humidity)}%`;
-        windSpeed.textContent = `Wind speed: ${Math.round(air.wind.speed)}m/s`;
+        weatherHumidity.textContent = `${TRANSLATIONS[currentLanguage].HUMIDITY}: ${Math.round(air.main.humidity)}%`;
+        windSpeed.textContent = `${TRANSLATIONS[currentLanguage].WIND}: ${Math.round(air.wind.speed)}m/s`;
     
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${air.weather[0].id}`);
     }
   }
 
-  console.log('test', typeof localStorage.getItem('cityUser'))
   getWeather(localStorage.getItem('cityUser'));
   userCity.addEventListener('change', (e) => {
     getWeather(e.target.value);
@@ -209,7 +260,7 @@ async function getWeather(city) {
   let quotes;
 
   async function getQuotes() {  
-    const adress = './js/data.json';
+    const adress = TRANSLATIONS[currentLanguage].QUOTESJSON; 
     const result = await fetch(adress);
     quotes = await result.json(); 
     function getQuote() {
@@ -229,7 +280,7 @@ const prevAudio = document.querySelector('.play-prev');
 const nextAudio = document.querySelector('.play-next');
 const play = document.querySelector('.play');
 let isPlay = false;
-
+const progress = document.querySelector('.progress');
 
 playList.forEach((el, index) => {
 const li = document.createElement('li');
@@ -340,8 +391,6 @@ function muteAudio() {
 
 volume.addEventListener('click',  muteAudio);
 
-
-const progress = document.querySelector('.progress');
 audio.ontimeupdate = progressAudio;
 
 function progressAudio () {
@@ -362,8 +411,8 @@ function progressAudio () {
     }
 }
 
-/*
-function WindV () {                                                         //!!!
+
+function WindV () {                                                         
     let w = this.offsetWidth;
     let o = event.offsetX;
     console.log(w);
@@ -373,18 +422,114 @@ function WindV () {                                                         //!!
     audio.play();
 }
 progress.addEventListener('click', WindV);
-*/
+
 //menu
 
-const settingsBTN = document.querySelector('.settings');
+const settingsBTN = document.querySelector('.settingsBTN');
 const foot = document.querySelector('footer');
 const menu = document.querySelector('.menu-settings');
 
+const pLang = document.getElementById('p-lang');
+const labelEn = document.getElementById('label-en');
+const labelRu = document.getElementById('label-ru');
+const pBg = document.getElementById('p-bg');
+const pOpasity = document.getElementById('p-opasity');
+
+const playerOpasity = document.getElementById('player-opasity');
+const weatherOpasity = document.getElementById('weather-opasity');
+const timeOpasity = document.getElementById('time-opasity');
+const dateOpasity = document.getElementById('date-opasity');
+const greetingOpasity = document.getElementById('greeting-opasity');
+const quoteOpasity = document.getElementById('quote-opasity');
+
+const arrDiv = document.querySelectorAll('.can-hide');
+const arrInp = document.querySelectorAll('.hige-item');
+const divHideSettings = document.querySelector('.hide-settings');
+
+function addTextSettings () {
+    pLang.textContent = TRANSLATIONS[currentLanguage].LANGSETTINGS;
+    labelEn.textContent = TRANSLATIONS[currentLanguage].ENSETTINGS;
+    labelRu.textContent = TRANSLATIONS[currentLanguage].RUSETTINGS;
+    pBg.textContent = TRANSLATIONS[currentLanguage].BGSETTINGS;
+    pOpasity.textContent = TRANSLATIONS[currentLanguage].OPASITYSETTINGS;
+    playerOpasity.textContent = TRANSLATIONS[currentLanguage].PLAYERSETTINGS;
+    weatherOpasity.textContent = TRANSLATIONS[currentLanguage].WEATHERSETTINGS;
+    timeOpasity.textContent = TRANSLATIONS[currentLanguage].TIMESETTINGS;
+    dateOpasity.textContent = TRANSLATIONS[currentLanguage].DATESETTINGS;
+    greetingOpasity.textContent = TRANSLATIONS[currentLanguage].GREETINGSETTINGS;
+    quoteOpasity.textContent = TRANSLATIONS[currentLanguage].QUOTESETTINGS;
+}
+addTextSettings();
+
 function showMenu () {
-    settingsBTN.classList.toggle('settings-active');
+    settingsBTN.classList.toggle('settingsBTN-active');
     foot.classList.toggle('footer-active');
     menu.classList.toggle('menu-active');
 }
 
 settingsBTN.addEventListener('click', showMenu);
 
+function addOpasity(event) {
+    if(event.target && event.target.tagName === 'INPUT' || event.target && event.target.tagName === 'LABEL') {
+        arrInp.forEach((el, indx, arr) => {
+            let num;
+            if (el.checked) {
+                num = +el.value;
+                if (!arrDiv[num].classList.contains('opasity')) {
+                    arrDiv[num].classList.add('opasity');
+                } else {
+                arrDiv[num].classList.remove('opasity');
+                }
+                localStorage.setItem(`checked${num}`, true);
+            } else {
+                num = +el.value;
+                localStorage.removeItem(`checked${num}`);
+            }
+        });
+    }
+}
+
+divHideSettings.addEventListener('click', addOpasity);
+
+//тут какая-то моя хуйня, которая на удивление работает, показать ментору.
+
+function checkInput() {
+    if (localStorage.getItem('checked0')) {
+        const i0 = document.getElementById('popasity');
+        i0.setAttribute('checked','true');
+    }
+    if (localStorage.getItem('checked1')) {
+        const i1 = document.getElementById('wopasity');
+        i1.setAttribute('checked','true');
+    }
+    if (localStorage.getItem('checked2')) {
+        const i2 = document.getElementById('topasity');
+        i2.setAttribute('checked','true');
+    }
+    if (localStorage.getItem('checked3')) {
+        const i3 = document.getElementById('dopasity');
+        i3.setAttribute('checked','true');
+    }
+    if (localStorage.getItem('checked4')) {
+        const i4 = document.getElementById('gopasity');
+        i4.setAttribute('checked','true');
+    }
+    if (localStorage.getItem('checked5')) {
+        const i5 = document.getElementById('qopasity');
+        i5.setAttribute('checked','true');
+    }
+}
+checkInput();
+
+function checkOnLoad() {
+    arrInp.forEach((el, indx, arr) => {
+        let num;
+        if (el.checked) {
+            num = +el.value;
+            if (!arrDiv[num].classList.contains('opasity')) {
+                arrDiv[num].classList.add('opasity');
+            } 
+        }
+    });
+}    
+checkOnLoad();

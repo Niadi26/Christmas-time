@@ -10,7 +10,7 @@
 </head>
 <body>
   <header class="header">
-    <div class="player">
+    <div class="player can-hide">
       <div class="player-controls">
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
@@ -30,8 +30,8 @@
       </div>  
       <ul class="play-list"></ul>
     </div>
-    <div class="weather">
-      <input id="city" type="text" class="city" placeholder="Minsk"/>
+    <div class="weather can-hide">
+      <input id="city" type="text" class="city"/>
       <i class="weather-icon owf"></i>
       <div class="weather-error"></div>
       <div class="description-container">
@@ -47,14 +47,14 @@
       <button class="slide-prev slider-icon"></button>
       <button class="slide-next slider-icon"></button>
     </div>
-    <time class="time"></time>
-    <date class="date"></date>
-    <div class="greeting-container">
+    <time class="time can-hide"></time>
+    <date class="date can-hide"></date>
+    <div class="greeting-container can-hide">
       <span class="greeting"></span>
-      <input id="name" type="text" class="name" placeholder="[Enter your name]"/>
+      <input id="name" type="text" class="name"/>
     </div>
   </main>
-  <section class="quote-container">
+  <section class="quote-container can-hide">
     <button class="change-quote"></button>
     <div>
       <div class="quote"></div>
@@ -65,27 +65,60 @@
     <div class="footer-info">2021</div>
     <a href="https://rs.school" class="footer-info">RS school</a>
     <a href="https://github.com/Niadi26" class="footer-info">gitHab</a>
-    <button class="settings"></button>
+    <button class="settingsBTN"></button>
     <div class="menu-settings">
       <div id="LANG" class="item-settings">
-        <p class="ittem-title">Languadge:</p>
-        <label for="EN" class="check-info"><input id="EN" type="radio" name="lang" class="check-lang" checked value="EN">English</label>
-        <label for="RU" class="check-info"><input id="RU" type="radio" name="lang" class="check-lang" value="RU">Russan</label>
+        <p id="p-lang" class="ittem-title"></p>
+        <div class="cont">
+          <input id="EN" type="radio" name="lang" class="check-lang" value="EN">
+          <label id="label-en" for="EN" class="check-info">  </label>
+        </div>
+        <div class="cont">
+        <input id="RU" type="radio" name="lang" class="check-lang" value="RU"> 
+        <label id="label-ru" for="RU" class="check-info"> </label>
+        </div>
       </div>
       <div class="item-settings">
-        <p class="ittem-title">Photo from:</p>
-        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">gitHab</label>
-        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">Unsplash API</label>
-        <label for="bg" class="check-info"><input type="radio" name="bg" class="check-bg">Flickr API</label>
+        <p id="p-bg" class="ittem-title"></p>
+        <div class="cont">
+          <input id="git" type="radio" name="bg" class="check-bg" checked>
+          <label id="label-git" for="git" class="check-info">gitHab</label>
+        </div>
+        <div class="cont">
+          <input id="unsplash" type="radio" name="bg" class="check-bg">
+          <label id="label-unsplash" for="unsplash" class="check-info">Unsplash API</label>
+        </div>
+        <div class="cont">
+          <input id="flickr" type="radio" name="bg" class="check-bg">
+          <label id="label-flickr" for="flickr" class="check-info">Flickr API</label>
+        </div>
       </div>
-      <div class="item-settings">
-        <p class="ittem-title">Wanna hide?</p>
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Player</label>
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Weather</label>
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Time</label>
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Date</label> 
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Greeting</label>
-        <label for="" class="check-info"><input type="checkbox" class="hige-item">Quote</label>
+      <div class="item-settings hide-settings">
+        <p id="p-opasity" class="ittem-title"></p>
+        <div class="cont">
+          <input  id="popasity" type="checkbox" class="hige-item" value="0">
+          <label id="player-opasity" for="popasity" class="check-info"></label>
+        </div>
+        <div class="cont">
+          <input id="wopasity" type="checkbox" class="hige-item" value="1">
+          <label id="weather-opasity" for="wopasity" class="check-info"></label>
+        </div>
+        <div class="cont">
+          <input id="topasity" type="checkbox" class="hige-item" value="2">
+          <label id="time-opasity" for="topasity" class="check-info"></label>
+        </div>
+        <div class="cont">
+           <input id="dopasity" type="checkbox" class="hige-item" value="3">
+           <label id="date-opasity" for="dopasity" class="check-info"></label> 
+        </div>
+        <div class="cont">
+          <input id="gopasity" type="checkbox" class="hige-item" value="4">
+          <label id="greeting-opasity" for="gopasity" class="check-info"></label>
+        </div>
+        <div class="cont">
+          <input id="qopasity" type="checkbox" class="hige-item" value="5">
+          <label id="quote-opasity" for="qopasity" class="check-info"></label>
+        </div>
       </div>
     </div>
   </footer>
