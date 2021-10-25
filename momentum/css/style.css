@@ -23,7 +23,7 @@ a:visited {
 }
 
 body {
-  min-width: 480px;
+  min-width: 320px;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
@@ -367,6 +367,7 @@ input[type=range]  {
 .footer {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   position: relative;
   overflow: hidden;
   margin-top: 20px;
@@ -386,6 +387,7 @@ input[type=range]  {
 
 .author {
   min-height: 20px;
+  margin-top: 15px;
 }
 
 @media (max-width: 768px) {
@@ -473,7 +475,7 @@ input[type=range]  {
 }
 .menu-active {
   right: 50px;
-  transition: 0.5s;
+  transition: 1s;
 }
 
 .can-hide {
@@ -483,4 +485,61 @@ input[type=range]  {
 
 .opasity {
   opacity: 0;
+}
+
+@media (max-width:500px) {
+  .player {
+    margin-right: 10px;
+  }
+  .player-controls {
+    margin-bottom: 15px;
+  }
+  .laught-container {
+    display: none;
+  }
+  .play-item {
+    padding-bottom: 2px;
+    font-size: 12px;
+  }
+  .weather{
+    font-size: 12px;
+  }
+  .time {
+    font-size: 50px;
+    margin-bottom: 0;
+  }
+  .date {
+    font-size: 17px;
+    margin-bottom: 0px;
+  }
+  .change-quote {
+    margin-bottom: 15px;
+  }
+  .quote {
+    font-size: 15px;
+  }
+  .author {
+    font-size: 12px;
+  }
+  .footer {
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width:370px) {
+  .header {
+    padding: 10px 5px;
+  }
+  .play-list {
+    font-size: 10px;
+  }
+  .quote-container  {
+    padding: 5px;
+  }
+  .menu-active {
+    right: 10px;
+  }
 }

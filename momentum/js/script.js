@@ -533,3 +533,53 @@ function checkOnLoad() {
     });
 }    
 checkOnLoad();
+
+//img api
+const checkBG = document.getElementById('BG');
+
+async function getLinkToImageUn() {
+    const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=-GLf81mBHCrcdc8QNVsRnwog9ZXNjk2fobfOvm1RFWo`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.urls.regular);
+    function getBgUn() {
+        const img = new Image();
+        img.src = data.urls.regular;
+        img.onload = () => {  
+        body.style.backgroundImage = `url('${img.src}')`;
+        }
+    };
+    getBgUn();
+   }
+
+async function getLinkToImageFl() {
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=88f45e1f8e8e9d3720da83ccb198d622&tags=nature&extras=url_l&format=json&nojsoncallback=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.urls.regular);
+    function getBgFl() {
+            const img = new Image();
+            img.src = data.urls.regular;
+            img.onload = () => {  
+                body.style.backgroundImage = `url('${img.src}')`;
+            }
+    }
+   getBgFl();
+};
+
+function getSourse(event) {
+    if(event.target && event.target.tagName === 'INPUT' || event.target && event.target.tagName === 'LABEL') {
+        if(event.target.value == 'Unsplash') {
+            console.log('uh')
+            getLinkToImageUn()
+        } 
+        else if(event.target.value == 'Flickr') {
+            console.log('oh')
+            getLinkToImageFl();
+        }
+    }
+}
+
+checkBG.addEventListener('click', getSourse);
+
+console.log('Привет! Моя самооценка 131 балл, не выполненные пункты: изображения от  API - 10 (честно старалась, можно прочекать код, но уже просто нет сил), соответственно нет API в настройках - 6, Доп функционал - 10, кнопки возле каждого трека - 3. Надеюсь тебе понравилась моя музыка и набор цитат:)')
