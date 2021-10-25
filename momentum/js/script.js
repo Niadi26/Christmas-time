@@ -41,7 +41,7 @@ const TRANSLATIONS = {
         EVENING: 'Славного вечера,',
         WEATHER: 'ru',
         HUMIDITY: 'Влажность',
-        WIND: 'Скорость движения воздуха',
+        WIND: 'Скорость воздуха',
         QUOTESJSON: './js/dataRU.json',
         NAME: '[Введите имя]',
         CITYDEFAULT: 'Минск',

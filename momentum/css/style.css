@@ -398,9 +398,11 @@ input[type=range]  {
 
   .greeting-container {
     min-height: 40px;
-    font-size: 32px;
+    font-size: 25px;
   }
-
+  .name {
+    font-size: 25px;
+  }
   .greeting {
     padding: 5px;
   }
@@ -512,11 +514,19 @@ input[type=range]  {
     font-size: 17px;
     margin-bottom: 0px;
   }
+  .greeting-container {
+    font-size: 20px;
+    text-align: center;
+  }
+  .name {
+    font-size: 20px;
+  }
   .change-quote {
     margin-bottom: 15px;
   }
   .quote {
     font-size: 15px;
+    text-align: center;
   }
   .author {
     font-size: 12px;
@@ -535,6 +545,12 @@ input[type=range]  {
   }
   .play-list {
     font-size: 10px;
+  }
+  .greeting-container {
+    font-size: 15px;
+  }
+  .name {
+    font-size: 15px;
   }
   .quote-container  {
     padding: 5px;
