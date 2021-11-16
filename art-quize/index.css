@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+a:hover {
+    transform: scale(1.1);
+}
+
+a:active {
+    color: #FFBCA2;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    transition: 1s;
+}
+
+
+body {
+    height: 100vh;
+    font-family: 'Gilda Display', serif;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #000;
+}
+
+.wrapper {
+    position: relative;
+    max-width: 680px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background: url('image-data/bg.jpg') center/contain no-repeat;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: end;
+    height: 10vh;
+    padding: 20px 10px;
+}
+
+.category_header {
+    justify-content: space-between;
+    align-items: center;
+}
+.header_logo {
+    width: 160px;
+    height: 60px;
+    background: url('image-data/svg/Logo.svg') center/cover no-repeat;
+}
+
+.navigation_container {
+    display: flex;
+    align-items: center;
+    column-gap: 80px;
+}
+
+.navigation_item:hover {
+    color: #FFBCA2;
+}
+
+.category {
+    background-color: black;
+    height: 80vh;
+}
+
+.section_container {
+    padding: 50px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 15px;
+
+}
+
+.in_settings {
+    width: 32px;
+    height: 32px;
+    background: url('image-data/svg/settings.svg') center/cover no-repeat;
+}
+
+.btn_svg:hover {
+    transform: scale(1.2);
+}
+
+.main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50vh;
+    width: 80%;
+}
+
+.main_logo {
+    background: url('image-data/svg/MainLogo.svg') center/contain no-repeat;
+    display: block;
+    height: 170px;
+    width: 440px;
+    margin: 0 auto;
+}
+
+.button_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.main_button {
+    display: block;
+    width: 45%;
+    height: 70px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 50px;
+    border: #FFFFFF 1px solid;
+    color: #FFFFFF;
+    background-color: Transparent;
+}
+
+@media (max-width: 560px) {
+    .button_container {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+    }
+    .main_button {
+        width: 80%;
+    }
+    .main_logo {
+        background: url('image-data/svg/MainLogoSmall.svg') center no-repeat;
+        width: 200px;
+        margin-bottom: 30px;
+    }
+}
+
+.main_button:hover {
+    background-color: #FFFFFF;
+    color: #000;
+}
+
+.main_button:active {
+    transition: 0.5s;
+    background-color: #FFBCA2;
+    color: #000;
+}
+
+.footer {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px;
+}
+
+.settings{
+    height: 90vh;
+}
+
+.settings_header {
+    justify-content: space-between;
+}
+
+.settings_header_el {
+    display: flex;
+    align-items: center;
+    column-gap: 22px;
+}
+.arrow {
+    width: 9px;
+    height: 20px;
+    background: url('image-data/svg/Vector.svg') center/contain no-repeat;
+}
+
+.cross {
+    width: 20px;
+    height: 20px;
+    background: url('image-data/svg/VectorX.svg') center/contain no-repeat;
+}
+
+.settings_main {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 70px 10px 10px;
+}
+
+.settings_inp {
+    margin-top: 20px;
+}
+
+input[type=range]  {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+        height: 3px;
+        width: 200px;
+        border-radius: 20px;
+        background-color: rgb(209, 209, 209);
+}
+      
+input[type=range]::-webkit-slider-thumb {
+        background: #FFBCA2;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        -webkit-appearance: none;
+        margin-top: -5px;
+}
+
+input[type=range]::-moz-range-track {
+        height: 3px;
+        border-radius: 20px;
+        background-color: rgb(209, 209, 209);
+}
+      
+input[type=range]::-moz-range-thumb  {
+        background: #FFBCA2;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        -webkit-appearance: none;
+        margin-top: -5px;
+}
+
+.settings_txt {    
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.checkbox_txt::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    width: 25px;
+    height: 55px;
+    transition: 0.5s;
+}
+
+.time_on:checked ~ label:before {
+    background: #FFBCA2;
+}
+
+.checkbox_txt {
+    font-size: 30px;
+    padding-left: 10px;
+}
+
+.time_on {
+    width: 20px;
+    height: 20px;
+}
+
+.time_btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.time_btn:hover {
+    transition: 0.5s;
+    background-color: #FFBCA2;
+    color: #000;
+}
+.time_numb {
+    width: 50px;
+    height: 15px;
+    text-align: center;
+}
+
+.settings_button_container {
+ align-self: flex-end;
+ width: 70%;
+}
+
+@media (max-width: 560px) {
+    .cross {
+        display: none;
+    }
+    .settings_main {
+        align-items: center;
+        background-color: #000;
+    }
+    .settings_button_container {
+        align-self: auto;
+        flex-direction: row;
+        width: 100%;
+    }
+    .settings_button {
+        height: 50px;
+        width: 45%;
+        padding: 0;
+    }
+    .checkbox_txt::before {
+        display: none;
+    }
+    .settings_el {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+@media (max-width: 500px) {
+    nav {
+        display: none;
+    }
+    .section_container {
+        padding: 0;
+        padding-top: 50px;
+        gap: 20px;
+    }
+    
+}
+
+.hide {
+    display: none;
+}

@@ -4,9 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="image-data/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap" rel="stylesheet">
     <title>Art-Quize</title>
 </head>
 <body>
-    <h1>Hello!</h1>
+    <div class="wrapper">
+        <div class="settings hide">
+            <div class="settings_header header">
+                <div class="settings_header_el">
+                    <button class="out_settings arrow btn_svg"></button>
+                    <p class="">Settings</p>
+                </div>
+                <div class="settings_header_el">   
+                    <button class="out_settings cross btn_svg"></button>
+                </div>
+            </div>
+            <div class="settings_main">
+                <div class="settings_el">
+                    <p class="settings_txt">Volume</p>
+                    <input type="range" class="volume_on settings_inp">
+            <!--       <div class="volume_container">
+                        <img src="image-data/svg/VolOff.svg" alt="">
+                        <img src="image-data/svg/VolOn.svg" alt="">
+                    </div>--> 
+                </div>
+                <div class="settings_el">
+                    <p class="settings_txt">Time game</p>
+                    <div class="">
+                    <input id="checkbox" type="checkbox" class="time_on settings_inp">
+                    <label for="checkbox" class="checkbox_txt">On</label>
+                    </div>
+                </div>
+                <div class="settings_el">
+                    <p class="settings_txt">Time to answer</p>
+                    <div class="time_input settings_inp">
+                        <button type="" class="time_btn" onclick="this.nextElementSibling.stepDown(5)">-</button>
+                        <input type="number" min="0" max="30" value="0" readonly class="time_numb">
+                        <button type="" class="time_btn" onclick="this.previousElementSibling.stepUp(5)">+</button>
+                    </div>
+                </div>
+                <div class="button_container settings_button_container">
+                    <button class="main_button settings_button">Default</button>
+                    <button class="main_button settings_button">Save</button>
+                </div>
+            </div>
+        </div>
+        <header class="header">
+            <button class="in_settings btn_svg"></button>
+        </header>
+        <header class="header category_header hide">
+            <a class="header_logo" href="#"></a>
+            <nav class="navigation">
+                <ul class="navigation_container">
+                    <li class="">
+                        <a href="" class="navigation_item">Home</a>
+                    </li>
+                    <li class="">
+                        <a href="" class="navigation_item">Categories</a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="in_settings btn_svg"></button>
+        </header>
+        <main class="main">
+            <div class="main_container">
+                <div class="main_logo"> </div>
+                <div class="button_container">
+                    <button class="main_button">Artist quiz</button>
+                    <button class="main_button">Pictures quiz</button>
+                </div>
+            </div>
+        </main>
+        <section class="category hide">
+            <div class="section_container">
+            </div>
+        </section>
+        <section class="category hide">
+            <div class="section_container"></div>
+        </section>
+        <footer class="footer">
+            <a href="https://rs.school" class="footer-info">RS school</a>
+            <div class="footer-info">2021</div>
+            <a href="https://github.com/Niadi26" class="footer-info">gitHub</a>
+        </footer>
+    </div>
+    <script src='index.js'></script>
 </body>
 </html> 
