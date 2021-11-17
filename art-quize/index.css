@@ -32,7 +32,7 @@ button {
 
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Gilda Display', serif;
     font-size: 16px;
     color: #FFFFFF;
@@ -46,31 +46,41 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background: url('image-data/bg.jpg') center/contain no-repeat;
+    background: url('image-data/bg.jpg') bottom/contain no-repeat;
     overflow: hidden;
 }
 
 .header {
     display: flex;
     justify-content: end;
+    align-items: center;
     height: 10vh;
     padding: 20px 10px;
+    transition: 0.5s;
 }
 
-.category_header {
+.header_category {
+    justify-content: space-between;
+}
+
+.navigation_header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .header_logo {
+    display: block;
     width: 160px;
     height: 60px;
+    margin-right: 70px;
     background: url('image-data/svg/Logo.svg') center/cover no-repeat;
 }
 
 .navigation_container {
     display: flex;
     align-items: center;
-    column-gap: 80px;
+    column-gap: 50px;
 }
 
 .navigation_item:hover {
@@ -80,14 +90,33 @@ body {
 .category {
     background-color: black;
     height: 80vh;
+    transition: 0.5s;
 }
 
 .section_container {
     padding: 50px 30px;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 30px 15px;
+    gap: 20px 15px;
 
+}
+
+.category_cards {
+    overflow: hidden;
+    width: 130px;
+    height: 140px;
+    transition: 1s;
+}
+.category_img {
+    width: 130px;
+    height: 130px;
+    object-fit: fill;
+}
+
+.category_cards:hover {
+    transform: scale(1.1);
+    border: #FFBCA2 1px solid;
 }
 
 .in_settings {
@@ -178,7 +207,16 @@ body {
 }
 
 .settings{
-    height: 90vh;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    right: -1000px;
+    transition: 0.5s;
+    background-color: #000;
+}
+
+.settings_on {
+    right: 0;
 }
 
 .settings_header {
@@ -343,10 +381,19 @@ input[type=range]::-moz-range-thumb  {
     }
     .section_container {
         padding: 0;
-        padding-top: 50px;
+        padding: 50px 10px 10px;
         gap: 20px;
     }
     
+}
+
+.active_nav{
+    color: #FFBCA2;
+    filter: grayscale(100%); 
+}
+
+.footer_black {
+    background-color: #000;
 }
 
 .hide {
