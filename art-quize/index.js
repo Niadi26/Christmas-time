@@ -438,9 +438,7 @@ headerBlock.addEventListener('click', (e) => {
         mainBlock.classList.remove('hide');
         footerBlock.classList.remove('footer_black');
         scoreBlock.classList.add('hide'); 
-    } else if (e.target.id === 'categories') {
-        scoreBlock.classList.add('hide');
-    }
+    } 
 })
 
 body.addEventListener('mouseup', (e) => {
@@ -449,3 +447,4 @@ body.addEventListener('mouseup', (e) => {
     }
 })
 
+console.log('157 баллов. 20 (стартовая страница) +15 (настройки, только верстка) + 30 (категории) + 50 (вопросы) + 25 (результаты, частично выполнено(верстка, изменение результатов, отображение картин, еще в процессе)) + 10 (плавность) + 5 (анимация только мелких деталей) + 2 ( доп. функционал: разные уведомления по окончанию раунда в зависимости от результата)')
