@@ -78,8 +78,8 @@ const wrapper = document.querySelector('.wrapper');
 let counter;
 let firstNum;
 let randomNum;
-const imgArr = makeImgArr('https://raw.githubusercontent.com/Niadi26/data/master/full/', 'full.jpg');
-const infoImgArr = makeImgArr('https://raw.githubusercontent.com/Niadi26/data/master/img/', '.jpg');
+const imgArr = makeImgArr('https://raw.githubusercontent.com/Niadi26/image-data/master/full/', 'full.jpg');
+const infoImgArr = makeImgArr('https://raw.githubusercontent.com/Niadi26/image-data/master/img/', '.jpg');
 const trueAnswers = [];
 
 function makeImgArr(url, end) {
