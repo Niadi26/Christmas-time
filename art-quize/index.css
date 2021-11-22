@@ -46,7 +46,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background: url('image-data/bg.jpg') bottom/contain no-repeat;
+    background: url('data/bg.jpg') bottom/contain no-repeat;
     overflow: hidden;
 }
 
@@ -74,7 +74,7 @@ body {
     width: 160px;
     height: 60px;
     margin-right: 70px;
-    background: url('image-data/svg/Logo.svg') center/cover no-repeat;
+    background: url('data/svg/Logo.svg') center/cover no-repeat;
 }
 
 .navigation_container {
@@ -99,7 +99,7 @@ body {
 .in_settings {
     width: 32px;
     height: 32px;
-    background: url('image-data/svg/settings.svg') center/cover no-repeat;
+    background: url('data/svg/settings.svg') center/cover no-repeat;
 }
 
 .btn_svg:hover {
@@ -123,7 +123,7 @@ body {
 }
 
 .main_logo {
-    background: url('image-data/svg/MainLogo.svg') center/contain no-repeat;
+    background: url('data/svg/MainLogo.svg') center/contain no-repeat;
     display: block;
     height: 170px;
     width: 440px;
@@ -159,7 +159,7 @@ body {
         width: 80%;
     }
     .main_logo {
-        background: url('image-data/svg/MainLogoSmall.svg') center no-repeat;
+        background: url('data/svg/MainLogoSmall.svg') center no-repeat;
         width: 200px;
         margin-bottom: 30px;
     }
@@ -209,13 +209,13 @@ body {
 .arrow {
     width: 9px;
     height: 20px;
-    background: url('image-data/svg/Vector.svg') center/contain no-repeat;
+    background: url('data/svg/Vector.svg') center/contain no-repeat;
 }
 
 .cross {
     width: 20px;
     height: 20px;
-    background: url('image-data/svg/VectorX.svg') center/contain no-repeat;
+    background: url('data/svg/VectorX.svg') center/contain no-repeat;
 }
 
 .settings_main {
@@ -413,7 +413,7 @@ input[type=range]::-moz-range-thumb  {
     width: 16px;
     height: 16px;
     border: none;
-    background: url('image-data/svg/exit.svg') center/cover no-repeat;
+    background: url('data/svg/exit.svg') center/cover no-repeat;
     transition: 0.5s;
 }
 
@@ -483,11 +483,11 @@ input[type=range]::-moz-range-thumb  {
 }
 
 .true_index {
-    background: url('image-data/svg/yes.svg') center/cover no-repeat;
+    background: url('data/svg/yes.svg') center/cover no-repeat;
 }
 
 .false_index {
-    background: url('image-data/svg/no.svg') center/cover no-repeat;
+    background: url('data/svg/no.svg') center/cover no-repeat;
 }
 
 .info_img {
