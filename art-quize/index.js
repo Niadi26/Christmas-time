@@ -28,7 +28,7 @@ const footerBlock = document.querySelector('.footer');
 
 const navHeader = document.createElement('div');
 navHeader.classList.add('navigation_header');
-navHeader.innerHTML = "<a id='home_logo' class='header_logo' href='#'></a><nav class='navigation'><ul class='navigation_container'><li class=''><a href='#' id='home' class='navigation_item'>Home</a> </li><li class=''><a href='#' id='categories' class='navigation_item'>Categories</a></li></ul></nav>"
+navHeader.innerHTML = "<a id='home_logo' class='header_logo' href='#'></a><nav class='navigation'><ul class='navigation_container'><li class=''><a href='#' id='home' class='navigation_item'>Home</a> </li><li class=''><a href='#' id='categories' class='navigation_item'>Categories</a></li><li class=''><a href='#' id='categories' class='navigation_item active_nav hide'>Score</a></li></ul></nav>"
    
 
 artistQuizButton.addEventListener('click', ()=> {
@@ -47,17 +47,6 @@ picturesQuizButton.addEventListener('click', ()=> {
     footerBlock.classList.add('footer_black');
 });
 
-headerBlock.addEventListener('click', (e) => {
-    if(e.target.id === 'home_logo' || e.target.id === 'home') {
-        headerBlock.classList.remove('header_category');
-        navHeader.remove();
-        artistBlock.classList.add('hide');
-        picturesBlock.classList.add('hide');
-        mainBlock.classList.remove('hide');
-        footerBlock.classList.remove('footer_black');
-    } 
-})
-
 let getInfo = async function() {
     let result = await fetch('./data/data.json');
     let arr = await result.json();
@@ -75,6 +64,7 @@ function shuffle(array) {
 
 const body = document.querySelector('body');
 const wrapper = document.querySelector('.wrapper');
+
 let counter;
 let firstNum;
 let randomNum;
@@ -103,6 +93,8 @@ body.addEventListener('click', (e) => {
                 makePossiblePictures(ind, arr);
             }
         })
+    artistBlock.classList.add('hide');
+    picturesBlock.classList.add('hide');
     }
 })
 
@@ -165,7 +157,8 @@ let divQwestion;
         divQwestion.append(newQw);
         divQwestion.append(newImg)
         divQwestion.append(newAns);
-        wrapper.append(divQwestion);                                
+        wrapper.append(divQwestion);     
+        mainBlock.classList.remove('hide');                         
   }
 
   function createAnswers(arr, imgSrc) {
@@ -223,7 +216,8 @@ let divQwestion;
         divQwestion.append(exitButton);
         divQwestion.append(newQw);
         divQwestion.append(newAns);
-        wrapper.append(divQwestion);                                
+        wrapper.append(divQwestion);
+        mainBlock.classList.remove('hide');                                 
   }
 
 body.addEventListener('click', (e) => {
@@ -357,7 +351,8 @@ body.addEventListener('click', (e) => {
         actual_score.innerHTML = `${trueAnswers.length}/10`;
         actual_score.classList.remove('hide')
         changeCategory.classList.remove('img_black');
-        trueAnswers.length = 0;
+        footerBlock.classList.remove('footer_black');
+        createScore(firstNum);
     }
 })
 
@@ -392,8 +387,65 @@ body.addEventListener('click', (e) => {
     if (e.target.className === 'qwestion_exit_block') {
         if (e.target.id === 'qwestion_yes') {
         divQwestion.remove();
+        footerBlock.classList.remove('footer_black'); 
         } else if (e.target.id === 'qwestion_no') {
         blockExit.remove();
         }
     }
 })
+
+//score
+let scoreBlock;
+function createScore (index) {
+    const picturesArr = [];
+    const rigthAnswers = [];
+    for(let i = 0; i < 10; i++) {
+        picturesArr.push(infoImgArr[index]);
+        +index++;
+    }
+    scoreBlock = document.createElement('div');
+    scoreBlock.className = 'score_container hide';
+    picturesArr.forEach((el, index, arr) => {
+        let item = document.createElement('div');
+        item.className = 'score_el';
+        const img = new Image();
+        img.src = arr[index];
+        img.onload = () => {  
+            item.style.backgroundImage = `url('${img.src}')`;
+        }
+        scoreBlock.append(item);
+    })
+    wrapper.append(scoreBlock);
+    trueAnswers.length = 0;
+}
+
+body.addEventListener('click', (e) => {
+    if (e.target.className === 'category_score') {
+        mainBlock.classList.remove('hide'); 
+        scoreBlock.classList.remove('hide');
+        artistBlock.classList.add('hide');
+        picturesBlock.classList.add('hide');
+    }
+})
+
+
+headerBlock.addEventListener('click', (e) => {
+    if(e.target.id === 'home_logo' || e.target.id === 'home') {
+        headerBlock.classList.remove('header_category');
+        navHeader.remove();
+        artistBlock.classList.add('hide');
+        picturesBlock.classList.add('hide');
+        mainBlock.classList.remove('hide');
+        footerBlock.classList.remove('footer_black');
+        scoreBlock.classList.add('hide'); 
+    } else if (e.target.id === 'categories') {
+        scoreBlock.classList.add('hide');
+    }
+})
+
+body.addEventListener('mouseup', (e) => {
+    if (e.target.className === 'score_el') {
+
+    }
+})
+
