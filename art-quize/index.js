@@ -258,9 +258,10 @@ function createInfo(index, result, key) {
         let nextInfo = document.createElement('button');
         if(result) {
             trueInfo.className = 'info_result true_index';
-            trueAnswers.push(infoImgArr[index]);
+            trueAnswers.push([infoImgArr[index], 'true']);                          
         } else {
             trueInfo.className = 'info_result false_index';
+            trueAnswers.push([infoImgArr[index], 'false']);                         
         }
         imgInfo.className = 'info_img';
         nameInfo.className = 'info_name';
@@ -290,10 +291,9 @@ function createInfo(index, result, key) {
 
 body.addEventListener('click', (e) => {
     if (e.target.className === 'info_button') {
-        console.log(`${trueAnswers.length} - правильные ответы` );
         if(counter == +firstNum + 9) {
             divInfo.remove();
-            createResult(trueAnswers.length)
+            countScore()                                              
         } else {
         divQwestion.remove();
         ++counter;
@@ -309,6 +309,18 @@ body.addEventListener('click', (e) => {
     }
 })
 
+
+function countScore() {
+    let trueCount = 0;
+    trueAnswers.forEach((el, ind, arr)=> {
+        if(arr[ind][1] === 'true') {
+            trueCount += 1;
+        }
+    });
+    localStorage.setItem(firstNum,JSON.stringify(trueAnswers));
+    createResult(trueCount);
+}
+
 function createResult(index) {
         let blockResult = document.createElement('div');
         let textResult = document.createElement('div');
@@ -319,6 +331,7 @@ function createResult(index) {
         textResult.className = 'result_txt';
         scoreResult.className = 'result_score';
         buttonResult.className = 'result_button';
+        buttonResult.id = `${index}`
 
     if (index < 1) {
         textResult.innerHTML = 'Try again!';
@@ -348,11 +361,11 @@ body.addEventListener('click', (e) => {
         let changeCategory = document.getElementById(`${firstNum}`);
         let actual_score = changeCategory.getElementsByTagName("button")[0];
         divQwestion.remove();
-        actual_score.innerHTML = `${trueAnswers.length}/10`;
+        actual_score.innerHTML = `${e.target.id}/10`;                  
         actual_score.classList.remove('hide')
         changeCategory.classList.remove('img_black');
         footerBlock.classList.remove('footer_black');
-        createScore(firstNum);
+        trueAnswers.length = 0;                                              
     }
 })
 
@@ -387,6 +400,7 @@ body.addEventListener('click', (e) => {
     if (e.target.className === 'qwestion_exit_block') {
         if (e.target.id === 'qwestion_yes') {
         divQwestion.remove();
+        trueAnswers.length = 0;                                   
         footerBlock.classList.remove('footer_black'); 
         } else if (e.target.id === 'qwestion_no') {
         blockExit.remove();
@@ -396,38 +410,40 @@ body.addEventListener('click', (e) => {
 
 //score
 let scoreBlock;
-function createScore (index) {
-    const picturesArr = [];
-    const rigthAnswers = [];
-    for(let i = 0; i < 10; i++) {
-        picturesArr.push(infoImgArr[index]);
-        +index++;
-    }
+
+function createScore (array, num) {
+    let idNum = num;
     scoreBlock = document.createElement('div');
     scoreBlock.className = 'score_container hide';
-    picturesArr.forEach((el, index, arr) => {
+    array.forEach((el, index, arr) => {
         let item = document.createElement('div');
-        item.className = 'score_el';
         const img = new Image();
-        img.src = arr[index];
+        img.src = arr[index][0];
         img.onload = () => {  
             item.style.backgroundImage = `url('${img.src}')`;
         }
+        item.className = 'score_el';
+        item.dataset.id = idNum;
+        if (arr[index][1] === 'false') {
+            item.className = 'score_el img_black';
+        }
         scoreBlock.append(item);
+        idNum++;
     })
     wrapper.append(scoreBlock);
-    trueAnswers.length = 0;
 }
 
 body.addEventListener('click', (e) => {
     if (e.target.className === 'category_score') {
+        let num = +e.target.dataset.num;
+        const picturesArr = JSON.parse(localStorage.getItem(`${num}`));
+        createScore(picturesArr, num);
         mainBlock.classList.remove('hide'); 
         scoreBlock.classList.remove('hide');
         artistBlock.classList.add('hide');
         picturesBlock.classList.add('hide');
     }
 })
-
 
 headerBlock.addEventListener('click', (e) => {
     if(e.target.id === 'home_logo' || e.target.id === 'home') {
@@ -438,13 +454,39 @@ headerBlock.addEventListener('click', (e) => {
         mainBlock.classList.remove('hide');
         footerBlock.classList.remove('footer_black');
         scoreBlock.classList.add('hide'); 
-    } 
-})
-
-body.addEventListener('mouseup', (e) => {
-    if (e.target.className === 'score_el') {
-
+    } else if (e.target.id === 'categories') {
+        scoreBlock.classList.add('hide'); 
+        mainBlock.classList.add('hide');
+        if (artistBlock.className === 'category artist_category hide') {
+            artistBlock.classList.remove('hide');
+        } else if (picturesBlock.className === 'category pictures_category hide') {
+            picturesBlock.classList.remove('hide');
+        }
     }
 })
 
-console.log('157 баллов. 20 (стартовая страница) +15 (настройки, только верстка) + 30 (категории) + 50 (вопросы) + 25 (результаты, частично выполнено(верстка, изменение результатов, отображение картин, еще в процессе)) + 10 (плавность) + 5 (анимация только мелких деталей) + 2 ( доп. функционал: разные уведомления по окончанию раунда в зависимости от результата)')
+body.addEventListener('click', (e) => {
+    if (e.target.className === 'score_el' || e.target.className === 'score_el img_black') {
+        let num = e.target.dataset.id;
+        let infoScore = document.createElement('div');
+        let infoScoreName = document.createElement('p');
+        let infoScoreAutor = document.createElement('p');
+        let infoScoreData = document.createElement('p');
+        infoScore.className = 'info_score';
+        infoScoreName.className = 'txt_score';
+        infoScoreAutor.className = 'txt_score';
+        infoScoreData.className = 'txt_score';
+        getInfo().then((arr) => {
+            infoScoreName.innerHTML = arr[num].name;
+            infoScoreAutor.innerHTML = arr[num].author;
+            infoScoreData.innerHTML = arr[num].year;
+        })
+        infoScore.append(infoScoreName);
+        infoScore.append(infoScoreAutor);
+        infoScore.append(infoScoreData);
+        e.target.append(infoScore);
+    }
+})
+
+
+console.log('182 баллa. 20 (стартовая страница) +15 (настройки, только верстка) + 30 (категории) + 50 (вопросы) + 50 (результаты) + 10 (плавность) + 5 (анимация только деталей страницы(кнопки, картинки категорий и скора, блок настроек)) + 2 ( доп. функционал: разные уведомления по окончанию раунда в зависимости от результата)')
