@@ -3,7 +3,7 @@ import { Source } from '../../interfacesNews/interfacesNews';
 
 class Sources {
     draw(data: Source[]) {
-        const fragment = document.createDocumentFragment() as DocumentFragment;
+        const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
         data.forEach((item) => {

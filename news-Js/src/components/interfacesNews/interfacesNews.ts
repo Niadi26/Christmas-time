@@ -1,4 +1,3 @@
-
 export interface NewsData {
     status: string;
     totalResults?: number;
@@ -13,7 +12,10 @@ export interface NewsDataError {
 }
 
 export type Article = {
-    source: {id: string; name: string};
+    source: {
+        id: string;
+        name: string;
+    };
     author: string;
     title: string;
     description: string;
@@ -21,7 +23,7 @@ export type Article = {
     urlToImage: string;
     publishedAt: string;
     content: string;
-}
+};
 
 export type Source = {
     id: string;
@@ -31,4 +33,4 @@ export type Source = {
     category: string;
     language: string;
     country: string;
-}
+};
