@@ -11,13 +11,20 @@ header {
 header h1 {
     font-size: 40px;
     font-weight: 800;
+    text-align: center;
+}
+
+@media (max-width: 360px) {
+    header h1 {
+      font-size: 35px;
+    }
 }
 
 footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 footer .copyright {
     font-size: 14px;
@@ -30,6 +37,6 @@ footer .copyright a {
 footer .copyright a:hover {
     color: #555;
 }
-footer .copyright:before {
+footer .copyright:nth-child(2)::before {
     content: '©';
 }
