@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Neucha&display=swap')
+
+$fontTitle: 'Neucha', cursive
+$fontTxt:'Balsamiq Sans', cursive
+$colTxt: #FFFFFF
+$colActive: #f2dd67
+$colBg: #192F2D
+$colBgToys: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 0.5) 0%, rgba(179, 246, 255, 0.5) 100%)
+
+
+%flexStructure
+  width: 100%
+  height: 10vh
+  display: flex
+  justify-content: space-between
+
+%titleTxt
+  font-family: $fontTitle
+  text-transform: uppercase
+  font-size: 25px
+  line-height: 25px
+
+* 
+  margin: 0
+  padding: 0
+  border: 0
+  box-sizing: border-box
+
+a 
+  text-decoration: none
+  cursor: pointer
+  color: #FFFFFF
+  transition: 0.5s
+
+a:hover 
+  transform: scale(1.1)
+
+a:active 
+  color: $colActive
+
+ul,
+li 
+  list-style: none
+
+button 
+    cursor: pointer
+    transition: 1s
+
+body
+  min-height: 100vh
+  color: $colTxt
+  background-color: $colBg
+
+  
+.wrapper
+  width: 80%
+  margin: 0 auto
+  position: relative
+
+.wrapper_header
+  @extend %flexStructure
+  width: 80%
+  margin: 0 auto
+
+.header
+  @extend %titleTxt
+  z-index: 10
+  padding-top: 20px
+  transition: 1s
+  
+.main
+  display: flex
+  min-height: 80vh
+
+.footer 
+  @extend %flexStructure
+  @extend %titleTxt
+  padding: 10px
+
+.nav_items
+  display: inline-block
+  margin: 0 15px
+
+.search_items
+  height: 30px
+
+.favorite_items
+  display: inline-block
+  width: 45px
+  height: 45px
+  margin-left: 15px
+  text-align: center
+  border-radius: 50%
+  background-color: #b67940
+  border: 1px solid #b3653b
+  box-shadow: 0 0 10px 1px #ffffff
+
+.alertFavorite
+  position: fixed
+  top: 70px
+  left: 660px
+  z-index: 10
+
+.header_fixed
+  width: 100%
+  position: fixed
+  top: 0
+  left: 0
+  background-color: #162626
+  animation-name: header_fixed
+  animation-duration: 1s
+
+@keyframes header_fixed
+  0%
+    top: -100px
+  100%
+    top: 0
