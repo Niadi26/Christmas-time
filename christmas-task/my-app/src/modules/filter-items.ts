@@ -42,13 +42,13 @@ class CheckboxFilter {
     public node: HTMLElement;
   constructor(filtersName, filtersType: string) {
     const parent = new DomElement('div', '', '');
-    const title = new DomElement('h3', '', filtersType, '', parent.node);
+    const title = new DomElement('h3', 'form__input-titles', filtersType, '', parent.node);
     const inputsCont = new DomElement('div', '', '', '', parent.node);
     const inputsItems = filtersName.forEach((el) => {
         const input = new DomElement('input', '', '', '', inputsCont.node);
         input.node.setAttribute('type', 'checkbox');
         input.node.setAttribute('id', el);
-        const label = new DomElement('label', el, '', '', inputsCont.node);
+        const label = new DomElement('label', `form__input-checks form__input-${el}`, '', '', inputsCont.node);
         label.node.setAttribute('for', el);
     })
 
@@ -61,20 +61,40 @@ class CountFilter {
     public node: HTMLElement;
   constructor(filtersCount, filtersType: string) {
     const parent = new DomElement('div', '', '');
-    const title = new DomElement('h3', '', filtersType, '', parent.node);
-    const inputsCont = new DomElement('div', '', '', '', parent.node);
+    const title = new DomElement('h3', 'form__input-titles', filtersType, '', parent.node);
+    const inputsCont = new DomElement('div', 'form__select-container', '', '', parent.node);
     const inputsItems = filtersCount.forEach((el) => {
       const input = new DomElement('input', '', '', '', inputsCont.node);
       input.node.setAttribute('type', 'range');
-      input.node.setAttribute('min', el[0]);
+      input.node.setAttribute('min', '1');
       input.node.setAttribute('step', '1');
-      input.node.setAttribute('max', el[1]);
+      input.node.setAttribute('max', '12');
       input.node.setAttribute('value', el);
     })
     const inputsValues = new DomElement('div', '', '', '', parent.node);
-    const inputsMin = new DomElement('div', '', '', '', inputsValues.node);
-    const inputsMax = new DomElement('div', '', '', '', inputsValues.node);
+    const inputsMin = new DomElement('div', '', '1', '', inputsValues.node);
+    const inputsMax = new DomElement('div', '', '2', '', inputsValues.node);
 
+    /*const sliders = document.querySelectorAll('input[type="range"]') as NodeListOf<HTMLInputElement>;
+
+    sliders[0].addEventListener('input', (e) => {
+    if(+sliders[0].value > +sliders[1].value){
+        sliders[1].value = sliders[0].value;
+      }
+    });
+
+    sliders[1].addEventListener('input', (e) => {
+    if(+sliders[1].value < +sliders[0].value){
+        sliders[0].value = sliders[1].value;
+      }
+    });
+
+    sliders.forEach((slider) => {
+      slider.addEventListener('change', () => {
+        console.log(`from ${sliders[0].value} to ${sliders[1].value}`);
+      })
+    });
+*/
     this.node = parent.node as HTMLElement;
   }
 }
@@ -90,8 +110,8 @@ const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения'
 class FilterField {
     public node: HTMLElement;
     constructor() {
-      const filtrCont = new DomElement('div', '', '');
-      const title = new DomElement('h2', '', 'Фильтры', '', filtrCont.node);
+      const filtrCont = new DomElement('div', 'form__items', '');
+      const title = new DomElement('h2', 'form__titles', 'Фильтры', '', filtrCont.node);
       this.node = filtrCont.node as HTMLElement;
     }
   }

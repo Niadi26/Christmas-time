@@ -8,10 +8,10 @@ export class Form {
     
     form.node.append(filterField.node);
     form.node.append(sortField.node);
-    const buttonsCont = new DomElement('div', '', '', '', form.node);
-    const buttonFilter = new DomElement('button', '', 'Сброс фильтров', '', buttonsCont.node);
+    const buttonsCont = new DomElement('div', 'form__items', '', '', form.node);
+    const buttonFilter = new DomElement('button', 'form__button', 'Сброс фильтров', '', buttonsCont.node);
     buttonFilter.node.setAttribute('id', 'filterBtn');
-    const buttonReset = new DomElement('button', '', 'Сброс настроек', '', buttonsCont.node)
+    const buttonReset = new DomElement('button', 'form__button', 'Сброс настроек', '', buttonsCont.node)
     buttonReset.node.setAttribute('id', 'resetBtn');
   }
 }

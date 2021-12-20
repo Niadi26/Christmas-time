@@ -10,9 +10,9 @@ const SORTITEMS: Array<string> = [
 class SortField {
     public node: HTMLElement;
   constructor(sortList: Array<string>) {
-    const sort = new DomElement('div', '', '');
-    const title = new DomElement('h2', '', 'Сортировка', '', sort.node);
-    const sortSelect = new DomElement('select', '', '', '', sort.node);
+    const sort = new DomElement('div', 'form__items', '');
+    const title = new DomElement('h2', 'form__titles', 'Сортировка', '', sort.node);
+    const sortSelect = new DomElement('select', 'form__select', '', '', sort.node);
     sortSelect.node.setAttribute('size', '1');
     const sortOptions = sortList.forEach((el)=> {
         const sortItems = new DomElement( 'option', '', el, '', sortSelect.node);

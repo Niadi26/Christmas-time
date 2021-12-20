@@ -11,7 +11,7 @@ class Navigation {
     constructor(navigationList: Array<string>) {
       const ul = new DomElement('ul', '', '');
       const linkList = navigationList.forEach((el)=> {
-        const link = new DomElement( 'li', 'nav_items', '', '', ul.node);
+        const link = new DomElement( 'li', 'nav__items', '', '', ul.node);
         const item = new DomElement( 'a', '', el, '', link.node);
       })
       this.node = ul.node as HTMLElement
