@@ -1,4 +1,5 @@
 import {DomElement} from './createElement';
+import { toysFilters } from './data-flters';
 
 const FORMSNAME = [
   'bell',
@@ -40,28 +41,31 @@ const YEARCOUNTS = [
 //take array whith names of filters (N: red, green) and type of filter (N: color)
 class CheckboxFilter {
     public node: HTMLElement;
-  constructor(filtersName, filtersType: string) {
+    public imputsContainer: HTMLElement;
+  constructor(filtersName, filtersTitle: string, filtersType: string) {
     const parent = new DomElement('div', '', '');
-    const title = new DomElement('h3', 'form__input-titles', filtersType, '', parent.node);
+    const title = new DomElement('h3', 'form__input-titles', filtersTitle, '', parent.node);
     const inputsCont = new DomElement('div', '', '', '', parent.node);
+    inputsCont.node.setAttribute('id', `${filtersType}`)
     const inputsItems = filtersName.forEach((el) => {
-        const input = new DomElement('input', '', '', '', inputsCont.node);
-        input.node.setAttribute('type', 'checkbox');
-        input.node.setAttribute('id', el);
         const label = new DomElement('label', `form__input-checks form__input-${el}`, '', '', inputsCont.node);
         label.node.setAttribute('for', el);
+        const input = new DomElement('input', '', '', '', label.node);
+        input.node.setAttribute('type', 'checkbox');
+        input.node.setAttribute('id', el);
     })
 
     this.node = parent.node as HTMLElement;
+    this.imputsContainer = inputsCont.node as HTMLElement;
   }
 }
 
 //take array whith min and max counts of filter (N: 1990, 2021) and type of filter (N: year)
 class CountFilter {
     public node: HTMLElement;
-  constructor(filtersCount, filtersType: string) {
+  constructor(filtersCount, filtersTitle: string, filtersType: string) {
     const parent = new DomElement('div', '', '');
-    const title = new DomElement('h3', 'form__input-titles', filtersType, '', parent.node);
+    const title = new DomElement('h3', 'form__input-titles', filtersTitle, '', parent.node);
     const inputsCont = new DomElement('div', 'form__select-container', '', '', parent.node);
     const inputsItems = filtersCount.forEach((el) => {
       const input = new DomElement('input', '', '', '', inputsCont.node);
@@ -99,12 +103,12 @@ class CountFilter {
   }
 }
 
-const formFilter = new CheckboxFilter(FORMSNAME, 'Форма');
-const colorFilter = new CheckboxFilter(COLORSNAME, 'Цвет');
-const sizeFilter = new CheckboxFilter(SIZENAME, 'Размер');
-const favoriteFilter = new CheckboxFilter(FAVORITENAME, 'Любимое');
-const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров');
-const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения');
+const formFilter = new CheckboxFilter(FORMSNAME, 'Форма', 'form');
+const colorFilter = new CheckboxFilter(COLORSNAME, 'Цвет', 'color');
+const sizeFilter = new CheckboxFilter(SIZENAME, 'Размер', 'size');
+const favoriteFilter = new CheckboxFilter(FAVORITENAME, 'Любимое', 'favorite');
+const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров', 'count');
+const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения', 'year');
 
 
 class FilterField {

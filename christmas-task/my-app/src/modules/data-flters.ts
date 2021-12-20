@@ -1,4 +1,5 @@
-
+interface typeFilter {string: boolean}
+/*
 interface IFilters {
     form: {
       bell: boolean,
@@ -24,8 +25,8 @@ interface IFilters {
     count: [string, string],
     string: [string, string],
   }
-  
-  const toysFilters: IFilters = {
+  */
+  export const toysFilters = {
     form: {
       bell: false,
       ball: false,
@@ -46,7 +47,9 @@ interface IFilters {
       medium: false,
       small: false
     },
-    favorite: false,    
+    favorite: {
+    favorite: false,   
+    }, 
     count: ['1', '12'],
     string: ['1940', '2021'],
   }

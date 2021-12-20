@@ -1,5 +1,4 @@
 import {DomElement} from './createElement';
-import { Header } from './header';
 
 export const favoriteToys: Array<string> = [];
 
@@ -28,4 +27,7 @@ export class ToysContainer {
     this.node = toysCont.node as HTMLElement;
   }
 
+  clear(): void {
+    this.node.remove()
+  }
 }

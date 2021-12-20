@@ -3,6 +3,7 @@ import { sortField } from './sort-items';
 import { filterField } from './filter-items';
 
 export class Form {
+    public node: HTMLElement;
   constructor() {
     const form = new DomElement('form', 'form', '', 'main')
     
@@ -13,5 +14,7 @@ export class Form {
     buttonFilter.node.setAttribute('id', 'filterBtn');
     const buttonReset = new DomElement('button', 'form__button', 'Сброс настроек', '', buttonsCont.node)
     buttonReset.node.setAttribute('id', 'resetBtn');
+
+    this.node = form.node as HTMLElement
   }
 }
