@@ -13,7 +13,7 @@ export class ToysContainer {
       const toyName = new DomElement('h4', 'toy__title' , element.name, '', toyItem.node);
       const toyImg = new DomElement('h4', 'toy__img' , '', '', toyItem.node);
       const img = new Image();
-      img.src = `../assets/toys/${element.num}.webp`;
+      img.src = `./assets/toys/${element.num}.webp`;
       img.onload = () => {  
         toyImg.node.style.backgroundImage = `url('${img.src}')`;
       }

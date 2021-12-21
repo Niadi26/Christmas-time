@@ -11,6 +11,7 @@ import { AlertLimit } from './modules/warning';
 import { filterToys } from './modules/filter-function';
 
 import { DomElement } from './modules/createElement';
+alert('Привет! Если есть возможность, прошу проверить в четверг, еще дорабатываю множество деталей. Одна из ошибок, которые не могу побороть - фильтры работают только на второй клик. Если есть варианты почему так - напиши обязательно в фитбек, спасибо!')
 
 const header = new Header(favoriteToys);
 const form =  new Form();

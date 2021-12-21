@@ -106,8 +106,8 @@ const formFilter = new CheckboxFilter(SHAPESNAME, 'Форма', 'shape');
 const colorFilter = new CheckboxFilter(COLORSNAME, 'Цвет', 'color');
 const sizeFilter = new CheckboxFilter(SIZENAME, 'Размер', 'size');
 const favoriteFilter = new CheckboxFilter(FAVORITENAME, 'Любимое', 'favorite');
-const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров', 'count');
-const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения', 'year');
+//const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров', 'count');
+//const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения', 'year');
 
 
 class FilterField {

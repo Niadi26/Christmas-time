@@ -9,7 +9,6 @@ export const filterShapeToys = function (filtersParametrs, dataToys: Toys): Toys
   if(filtersParametrs.shape.bell) {
     rightToys = allSerchingToys.filter(el => el.shape === 'колокольчик');
     rightToys.forEach(el => toysOnPage.push(el));
-    console.log('bell true')
   }
   if(filtersParametrs.shape.ball) {
     rightToys = allSerchingToys.filter(el => el.shape === 'шар');
@@ -37,7 +36,6 @@ export const filterColorToys= function (filtersParametrs, filtredToys: Toys = []
   const toysOnPage: Toys = [];
   const allSerchingToys: Toys = filtredToys;
 
-  console.log(allSerchingToys)
   if(filtersParametrs.color.white) {
     rightToys = allSerchingToys.filter(el => el.color === 'белый');
     if (rightToys.length === 0) {
@@ -124,11 +122,9 @@ export const filterFavoriteToys = function(filtersParametrs, filtredToys: Toys =
   const toysOnPage: Toys = [];
   let rightToys: Toys = [];
   const allSerchingToys: Toys = filtredToys;
-  if(allSerchingToys.length === 0) {
-    dataToys.forEach(el => allSerchingToys.push(el))
-  }
+  
   if(filtersParametrs.favorite.favorite) {
-    rightToys = allSerchingToys.filter(el => el.favorite === true);
+    rightToys = allSerchingToys.filter(el => el.favorite === 'Да');
     if (rightToys.length === 0) {
       AlertNoCoincidence()
     } else {

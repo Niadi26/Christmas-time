@@ -6,7 +6,7 @@ export interface toy {
   shape: string,
   color: string,
   size: string,
-  favorite: boolean,
+  favorite: string,
 }
 
 export type Toys = Array<toy>;
@@ -20,7 +20,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '2',
@@ -30,7 +30,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'зелёный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '3',
@@ -40,7 +40,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '4',
@@ -50,7 +50,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '5',
@@ -60,7 +60,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'красный',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '6',
@@ -70,7 +70,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '7',
@@ -80,7 +80,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'белый',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '8',
@@ -90,7 +90,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '9',
@@ -100,7 +100,7 @@ export const dataToys: Toys = [
     shape: 'колокольчик',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '10',
@@ -110,7 +110,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '11',
@@ -120,7 +120,7 @@ export const dataToys: Toys = [
     shape: 'шишка',
     color: 'белый',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '12',
@@ -130,7 +130,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '13',
@@ -140,7 +140,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '14',
@@ -150,7 +150,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '15',
@@ -160,7 +160,7 @@ export const dataToys: Toys = [
     shape: 'колокольчик',
     color: 'синий',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '16',
@@ -170,7 +170,7 @@ export const dataToys: Toys = [
     shape: 'шишка',
     color: 'синий',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '17',
@@ -180,7 +180,7 @@ export const dataToys: Toys = [
     shape: 'шишка',
     color: 'красный',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '18',
@@ -190,7 +190,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '19',
@@ -200,7 +200,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '20',
@@ -210,7 +210,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '21',
@@ -220,7 +220,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '22',
@@ -230,7 +230,7 @@ export const dataToys: Toys = [
     shape: 'шишка',
     color: 'желтый',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '23',
@@ -240,7 +240,7 @@ export const dataToys: Toys = [
     shape: 'колокольчик',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '24',
@@ -250,7 +250,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '25',
@@ -260,7 +260,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '26',
@@ -270,7 +270,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '27',
@@ -280,7 +280,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '28',
@@ -290,7 +290,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '29',
@@ -300,7 +300,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '30',
@@ -310,7 +310,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '31',
@@ -320,7 +320,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '32',
@@ -330,7 +330,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '33',
@@ -340,7 +340,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '34',
@@ -350,7 +350,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'зелёный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '35',
@@ -360,7 +360,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'желтый',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '36',
@@ -370,7 +370,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '37',
@@ -380,7 +380,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'зелёный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '38',
@@ -390,7 +390,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'синий',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '39',
@@ -400,7 +400,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '40',
@@ -410,7 +410,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '41',
@@ -420,7 +420,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '42',
@@ -430,7 +430,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'зелёный',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '43',
@@ -440,7 +440,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '44',
@@ -450,7 +450,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'красный',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '45',
@@ -460,7 +460,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '46',
@@ -470,7 +470,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'красный',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '47',
@@ -480,7 +480,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'красный',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '48',
@@ -490,7 +490,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '49',
@@ -500,7 +500,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '50',
@@ -510,7 +510,7 @@ export const dataToys: Toys = [
     shape: 'колокольчик',
     color: 'красный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '51',
@@ -520,7 +520,7 @@ export const dataToys: Toys = [
     shape: 'шишка',
     color: 'красный',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '52',
@@ -530,7 +530,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'красный',
     size: 'большой',
-    favorite: true,
+    favorite: 'Да',
   },
   {
     num: '53',
@@ -540,7 +540,7 @@ export const dataToys: Toys = [
     shape: 'снежинка',
     color: 'белый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '54',
@@ -550,7 +550,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'зелёный',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '55',
@@ -560,7 +560,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'желтый',
     size: 'большой',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '56',
@@ -570,7 +570,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'желтый',
     size: 'малый',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '57',
@@ -580,7 +580,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'желтый',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '58',
@@ -590,7 +590,7 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'белый',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '59',
@@ -600,7 +600,7 @@ export const dataToys: Toys = [
     shape: 'шар',
     color: 'желтый',
     size: 'средний',
-    favorite: false,
+    favorite: 'Нет',
   },
   {
     num: '60',
@@ -610,6 +610,6 @@ export const dataToys: Toys = [
     shape: 'фигурка',
     color: 'белый',
     size: 'средний',
-    favorite: true,
+    favorite: 'Да',
   },
 ];
