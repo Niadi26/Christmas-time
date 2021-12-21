@@ -10,5 +10,5 @@ export function AlertLimit (elementClick: HTMLElement): void {
 export function AlertNoCoincidence (): void {
     const alert = new DomElement('div', 'alert', '', 'main')
     const alertTxt = new DomElement ('p', '', 'Совпрадений не обнаружено!', '', alert.node);
-    setTimeout(()=> alert.delete(), 1000);
+    setTimeout(()=> alert.delete(), 1300);
 }

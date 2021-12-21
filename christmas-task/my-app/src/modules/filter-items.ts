@@ -75,8 +75,8 @@ class CountFilter {
       input.node.setAttribute('value', el);
     })
     const inputsValues = new DomElement('div', '', '', '', parent.node);
-    const inputsMin = new DomElement('div', '', '1', '', inputsValues.node);
-    const inputsMax = new DomElement('div', '', '2', '', inputsValues.node);
+    //const inputsMin = new DomElement('div', '', '1', '', inputsValues.node);
+    //const inputsMax = new DomElement('div', '', '2', '', inputsValues.node);
 
     /*const sliders = document.querySelectorAll('input[type="range"]') as NodeListOf<HTMLInputElement>;
 
@@ -106,8 +106,8 @@ const formFilter = new CheckboxFilter(SHAPESNAME, 'Форма', 'shape');
 const colorFilter = new CheckboxFilter(COLORSNAME, 'Цвет', 'color');
 const sizeFilter = new CheckboxFilter(SIZENAME, 'Размер', 'size');
 const favoriteFilter = new CheckboxFilter(FAVORITENAME, 'Любимое', 'favorite');
-//const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров', 'count');
-//const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения', 'year');
+const countFilter = new CountFilter(COUNTCOUNTS, 'Количество экземпляров', 'count');
+const yearFilter = new CountFilter(YEARCOUNTS, 'Год приобретения', 'year');
 
 
 class FilterField {
@@ -125,5 +125,5 @@ export const filterField = new FilterField();
   filterField.node.append(colorFilter.node)
   filterField.node.append(sizeFilter.node)
   filterField.node.append(favoriteFilter.node)
-  //filterField.node.append(countFilter.node)
-  //filterField.node.append(yearFilter.node)
+  filterField.node.append(countFilter.node)
+  filterField.node.append(yearFilter.node)

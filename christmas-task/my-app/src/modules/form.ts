@@ -4,6 +4,8 @@ import { filterField } from './filter-items';
 
 export class Form {
     public node: HTMLElement;
+    public buttonFilter: HTMLElement;
+    public buttonReset: HTMLElement;
   constructor() {
     const form = new DomElement('form', 'form', '', 'main')
     
@@ -15,6 +17,8 @@ export class Form {
     const buttonReset = new DomElement('button', 'form__button', 'Сброс настроек', '', buttonsCont.node)
     buttonReset.node.setAttribute('id', 'resetBtn');
 
-    this.node = form.node as HTMLElement
+    this.node = form.node as HTMLElement;
+    this.buttonFilter = buttonFilter.node as HTMLElement;
+    this.buttonReset = buttonReset.node as HTMLElement;
   }
 }
