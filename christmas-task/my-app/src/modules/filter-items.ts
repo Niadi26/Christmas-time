@@ -1,11 +1,10 @@
 import {DomElement} from './createElement';
 import { toysFilters } from './data-flters';
 
-const FORMSNAME = [
+const SHAPESNAME = [
   'bell',
   'ball',
   'cone',
-  'star',
   'snow',
   'figure',
 ]
@@ -103,7 +102,7 @@ class CountFilter {
   }
 }
 
-const formFilter = new CheckboxFilter(FORMSNAME, 'Форма', 'form');
+const formFilter = new CheckboxFilter(SHAPESNAME, 'Форма', 'shape');
 const colorFilter = new CheckboxFilter(COLORSNAME, 'Цвет', 'color');
 const sizeFilter = new CheckboxFilter(SIZENAME, 'Размер', 'size');
 const favoriteFilter = new CheckboxFilter(FAVORITENAME, 'Любимое', 'favorite');
@@ -126,5 +125,5 @@ export const filterField = new FilterField();
   filterField.node.append(colorFilter.node)
   filterField.node.append(sizeFilter.node)
   filterField.node.append(favoriteFilter.node)
-  filterField.node.append(countFilter.node)
-  filterField.node.append(yearFilter.node)
+  //filterField.node.append(countFilter.node)
+  //filterField.node.append(yearFilter.node)

@@ -1,16 +1,20 @@
 import './style.sass';
-import { dataToys } from './modules/data-toys';
-import { favoriteToys } from './modules/toys-container';
-import { Header } from './modules/header';
+import { toy, Toys, dataToys } from './modules/data-toys';               //our data
+import { toysFilters } from './modules/data-flters';
+
+import { Header } from './modules/header';                   //our page
 import { Form } from './modules/form';
 import { ToysContainer } from './modules/toys-container';
-import { DomElement } from './modules/createElement';
+
+import { favoriteToys } from './modules/toys-container';    //dinamic items
 import { AlertLimit } from './modules/warning';
-import { toysFilters } from './modules/data-flters';
+import { filterToys } from './modules/filter-function';
+
+import { DomElement } from './modules/createElement';
 
 const header = new Header(favoriteToys);
 const form =  new Form();
-const toys = new ToysContainer(dataToys);
+let toys = new ToysContainer(dataToys);
 
 toys.node.addEventListener('click', (e) => {
   const elementClick = e!.target as HTMLElement;
@@ -39,27 +43,21 @@ form.node.addEventListener('click', function(e): void {
   if (elementClick.tagName == 'LABEL') {
   const filtersObject = toysFilters;
   const checkboxes = document.querySelectorAll('input[type=checkbox]') as NodeListOf<HTMLInputElement>;
+    elementClick.classList.toggle('form__input-checks_checked');
   //console.log(checkboxes)
   checkboxes.forEach((el) => {
     const valueFilter = el.id;
     const typeFilter = el.closest('div')!.id;
     if(el.checked === true) {
-      console.log(`${el.id} true!`)
+      console.log(`${el.id} true`)
       filtersObject[typeFilter][valueFilter] = true;
-      localStorage.setItem(`${typeFilter}.${valueFilter}`, 'true');
     } else {
       filtersObject[typeFilter][valueFilter] = false;
-      //localStorage.setItem(`${typeFilter}.${valueFilter}`, 'false');  delete
     }
-    elementClick.classList.toggle('form__input-checks_checked');
-  })
-  console.log(filtersObject)  
-  //toys.clear();
-  //toys = new ToysContainer     
+  })  
+  //console.log(filtersObject)
+  toys.clear();
+  const filterResult = filterToys(filtersObject, dataToys)
+  toys = new ToysContainer(filterResult)
   }
 }) 
-
-const a: {[key: string]: {[key: string]: boolean}} = {}
-
-a.form = {}
-a.form.ball = true

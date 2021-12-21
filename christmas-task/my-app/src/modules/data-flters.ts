@@ -1,5 +1,7 @@
 interface typeFilter {string: boolean}
 /*
+interface IFilters: {[key: string]: {[key: string]: boolean}}
+
 interface IFilters {
     form: {
       bell: boolean,
@@ -27,11 +29,10 @@ interface IFilters {
   }
   */
   export const toysFilters = {
-    form: {
+    shape: {
       bell: false,
       ball: false,
       cone: false,
-      star: false,
       snow: false,
       figure: false,
      },

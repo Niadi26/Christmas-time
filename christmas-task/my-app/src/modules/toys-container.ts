@@ -30,4 +30,5 @@ export class ToysContainer {
   clear(): void {
     this.node.remove()
   }
+
 }
