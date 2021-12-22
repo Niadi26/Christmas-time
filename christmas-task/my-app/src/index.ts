@@ -122,6 +122,12 @@ header.search.addEventListener('keyup', function (e) {
   makeOurToys(loadFilters, filter)
 })
 
+// how to clean serch?
+// header.search.addEventListener('input', (e) => {
+//   const element = e.target as HTMLInputElement;
+//   if(!element.value) makeOurToys(loadFilters)
+// })
+
 form.buttonReset.addEventListener('click', () => {
   localStorage.setItem('FilterObject', JSON.stringify(toysFilters));
   localStorage.setItem('sortFilter', '-1');
@@ -133,5 +139,3 @@ form.buttonFilter.addEventListener('click', () => {
   localStorage.setItem('FilterObject', JSON.stringify(toysFilters))
   makeOurToys(toysFilters);
 })
-
-console.log('150/200 буду дорабатывать поиск. Tребования к вёрстке +10 Карточка игрушки +10 Добавление игрушек в избранное +20 Сортировка +20 Фильтры в указанном диапазоне от и до +0 Фильтры по значению +30 По фильтрам разного типа +20 Сброс фильтров +10 Сохранение настроек в local storage +10 Поиск +20(осталась очистка) Дополнительный функционал на выбор +0')
