@@ -10,9 +10,20 @@ import { AlertLimit, AlertNoCoincidence } from "./modules/warning";
 import { filterToys } from "./modules/filter-function";
 import { sortToys, sortField, addOptionCheck } from "./modules/sort-items";
 import { DomElement } from "./modules/createElement"
-import { addClassCheck, setLocalStorage } from "./modules/local-storage"
+import { addClassCheck } from "./modules/local-storage"
 
-window.addEventListener('load', setLocalStorage);
+function setLocalStorage () {
+  if (!localStorage.getItem('FilterObject')) {
+    localStorage.setItem('FilterObject', JSON.stringify(toysFilters))
+  }
+  if (!localStorage.getItem('sortFilter')) {
+    localStorage.setItem('sortFilter', '-1')
+  }
+  if (!localStorage.getItem('favoriteToys')) {
+    localStorage.setItem('favoriteToys', JSON.stringify(favoriteToys))
+  }
+}
+setLocalStorage()
 const loadStringFilters = localStorage.getItem('FilterObject') as string;
 const sortIndex = localStorage.getItem('sortFilter');
 const loadFilters = JSON.parse(loadStringFilters);
