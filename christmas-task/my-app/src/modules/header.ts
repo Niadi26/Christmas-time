@@ -15,12 +15,17 @@ export class Header {
     searchInput.node.setAttribute('placeholder', 'Найти...');
     searchInput.node.setAttribute('autocomplete', 'off');
     searchInput.node.setAttribute('id', 'search');
+    searchInput.node.focus()
 
-    const favoriteToys = new DomElement( 'div', 'favorite_items', arrayFavoriteToys.length, '', serchHeader.node);
+    const favoriteToysCont = new DomElement( 'div', 'favorite_items', arrayFavoriteToys.length, '', serchHeader.node);
     navHeader.node.append(navigationHeader.node)
 
-  this.favorite = favoriteToys.node as HTMLElement;
+  this.favorite = favoriteToysCont.node as HTMLElement;
   this.search = searchInput.node as HTMLInputElement;
+
+  const getFavoriteToys = localStorage.getItem('favoriteToys');
+  const favoriteToys = JSON.parse(getFavoriteToys!);
+  if(favoriteToys.length) favoriteToysCont.node.innerHTML= favoriteToys.length;
 
   window.onscroll = function FixHeader(): void {
     if(window.pageYOffset > 100) {

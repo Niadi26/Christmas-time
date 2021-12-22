@@ -17,8 +17,5 @@ export class DomElement {
   delete(): void {
     this.node.remove()
   }
-  
-  listen(f:(event?: Event)=>void): void {
-      this.node.addEventListener('click', f)
-  }
+
 }

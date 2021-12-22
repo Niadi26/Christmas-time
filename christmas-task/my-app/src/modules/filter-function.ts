@@ -61,7 +61,7 @@ export const filterColorToys= function (filtersParametrs, filtredToys: Toys = []
     }
   }
   if(filtersParametrs.color.green) {
-    rightToys = allSerchingToys.filter(el => el.color === 'зеленый');
+    rightToys = allSerchingToys.filter(el => el.color === 'зелёный');
     if (rightToys.length === 0) {
       AlertNoCoincidence()
     } else {

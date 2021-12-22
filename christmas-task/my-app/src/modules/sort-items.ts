@@ -10,7 +10,7 @@ const SORTITEMS: Array<string> = [
 
 class SortField {
     public node: HTMLElement;
-    public select: HTMLElement
+    public select: HTMLSelectElement
   constructor(sortList: Array<string>) {
     const sort = new DomElement('div', 'form__items', '');
     const title = new DomElement('h2', 'form__titles', 'Сортировка', '', sort.node);
@@ -21,7 +21,7 @@ class SortField {
         sortItems.node.setAttribute('value', el);
       })
     this.node = sort.node as HTMLElement;
-    this.select = sortSelect.node as HTMLElement
+    this.select = sortSelect.node  as HTMLSelectElement
   }
 
 }
@@ -39,4 +39,13 @@ export function sortToys (index: string, dataToys): Toys {
     dataToys.sort((a, b) => a.year < b.year ? 1 : -1);
   }
   return dataToys
+}
+
+export function addOptionCheck(checktIndex): void {
+  if (checktIndex == '-1') return
+  else {
+  const selectedOptionsArray = sortField.select.options;
+  const selectedOption = selectedOptionsArray[+checktIndex];
+  selectedOption.selected = true;
+  }
 }

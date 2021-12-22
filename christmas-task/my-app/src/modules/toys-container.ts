@@ -23,11 +23,15 @@ export class ToysContainer {
       const toyColor = new DomElement('p', 'toy__txt' , `Цвет игрушки: ${element.color}`, '', toyItem.node);
       const toySize = new DomElement('p', 'toy__txt' , `Размер игрушки: ${element.size}`, '', toyItem.node);
       const toyLove = new DomElement('p', 'toy__txt' , `Любимая: ${element.favorite}`, '', toyItem.node);
+
+      const getFavoriteToys = localStorage.getItem('favoriteToys');
+      const favoriteToys = JSON.parse(getFavoriteToys!)
+      if(favoriteToys.includes(element.num)) toyItem.node.classList.add('toy_favorite');
     });
     this.node = toysCont.node as HTMLElement;
   }
 
-  clear(): void {
+  delete(): void {
     this.node.remove()
   }
 
