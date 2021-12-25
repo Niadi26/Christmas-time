@@ -61,7 +61,9 @@ button
 body
   min-height: 100vh
   color: $colTxt
-  background-color: $colBg
+  background-image: url('./assets/bg.webp')
+  @extend %background
+  background-size: cover
 
   
 .wrapper
@@ -84,6 +86,7 @@ body
   z-index: 10
   padding-top: 20px
   transition: 1s
+  background-color: $colBg
   
 .main
   display: flex
@@ -94,6 +97,7 @@ body
   @extend %titleTxt
   padding: 10px
   margin-top: 20px
+  background-color: $colBg
 
 .nav__items
   display: inline-block

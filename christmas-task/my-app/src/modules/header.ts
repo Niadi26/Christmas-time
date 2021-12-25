@@ -2,8 +2,10 @@ import {DomElement} from './createElement';
 import { navigationHeader } from './navigation';
 
 export class Header {
+  public node: HTMLElement
   public favorite: HTMLElement
   public search: HTMLInputElement
+  public navigation: HTMLElement
   constructor(arrayFavoriteToys) {
     const parent = document.querySelector('.header') as HTMLElement;
     const wrapperHeader = new DomElement('div', 'wrapper_header', '', 'header')
@@ -19,9 +21,11 @@ export class Header {
 
     const favoriteToysCont = new DomElement( 'div', 'favorite_items', arrayFavoriteToys.length, '', serchHeader.node);
     navHeader.node.append(navigationHeader.node)
-
+  
+  this.node = parent;
   this.favorite = favoriteToysCont.node as HTMLElement;
   this.search = searchInput.node as HTMLInputElement;
+  this.navigation = navHeader.node as HTMLElement;
 
   const getFavoriteToys = localStorage.getItem('favoriteToys');
   const favoriteToys = JSON.parse(getFavoriteToys!);
