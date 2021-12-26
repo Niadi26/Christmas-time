@@ -29,7 +29,6 @@ $colBgHover:#f6f861c4
 
 %background
   background-position: center
-  background-size: contain
   background-repeat: no-repeat
 
 * 
@@ -55,10 +54,13 @@ li
   list-style: none
 
 button 
-    cursor: pointer
-    transition: 1s
+  background-color: #00000000
+  cursor: pointer
+  transition: 1s
 
 body
+  display: flex
+  flex-direction: column
   min-height: 100vh
   color: $colTxt
   background-image: url('./assets/bg.webp')
@@ -66,25 +68,27 @@ body
   background-size: cover
 
   
-.wrapper
-  width: 80%
+.wrapper__main
+  flex: 1 0 90%
+  width: 90%
   margin: 0 auto
+  margin-top: 20px 
 
-.wrapper_header
+.wrapper
   @extend %flexStructure
-  width: 80%
-  margin: 0 auto
+  width: 90%
+  height: auto
+  margin: 20px auto
 
 @media ( max-width: 870px)
   .wrapper
-    width: 90%
+    width: 95%
   .wrapper_header
-    width: 90%
+    width: 95%
 
 .header
   @extend %titleTxt
   z-index: 10
-  padding-top: 20px
   transition: 1s
   background-color: $colBg
   
@@ -98,6 +102,46 @@ body
   padding: 10px
   margin-top: 20px
   background-color: $colBg
+
+.footer-info
+  height: auto
+
+.start__wrapper
+  width: 70%
+  margin: 0 auto
+
+.start__name
+  width: 500px
+  height: 200px
+  margin: 0 auto
+  margin-top: 100px
+  border-radius: 30px
+  backdrop-filter: blur(31px)
+  background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%)
+  border: 1px solid #528888
+
+.start_txt
+  margin-top: 30px
+  font-family: $fontTitle
+  font-size: 50px
+  line-height: 60px
+  text-align: center
+  text-transform: uppercase
+
+.start__button
+  display: block
+  width: 60%
+  margin: 20px auto
+  @extend %someTxt
+  color: #fff
+  padding: 15px 5px
+  backdrop-filter: blur(31px)
+  background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%)
+  border: 1px solid #528888
+  border-radius: 15px
+  transition: 1s
+  &:hover
+    box-shadow: 1px 1px 20px 10px #528888
 
 .nav__items
   display: inline-block
@@ -165,7 +209,12 @@ form
 
 
 .form__items
-  margin-top: 40px
+  margin-top: 20px
+  padding: 15px
+  backdrop-filter: blur(31px)
+  background: radial-gradient(118.88% 606.86% at 0% 0%, rgba(36, 197, 219, 0.15) 0%, rgba(36, 197, 219, 0) 100%)
+  border: 1px solid #528888
+  border-radius: 15px
 
 .form__items:first-child
   margin-top: 0
@@ -188,6 +237,7 @@ input[type="checkbox"]
   margin: 5px 10px
   border-radius: 5px
   @extend %background
+  background-size: contain
   cursor: pointer
   transition: 1s
 
@@ -249,6 +299,40 @@ input[type="checkbox"]
   border: 1px solid #162626
   background-color: $colBgEl
 
+.settings__input-tree
+  display: inline-block
+  width: 90px
+  height: 90px
+  margin: 10px 5px
+  @extend %background
+  background-size: contain
+  border-radius: 20px
+  transition: 1s
+
+.settings__input-bg
+  @extend %background
+  margin: 5px
+  background-size: cover
+  display: inline-block
+  width: 50px
+  height: 50px
+  border-radius: 5px
+  transition: 1s
+
+.settings__input-garland  
+  @extend %background
+  display: inline-block
+  margin: 5px
+  width: 20px
+  height: 20px
+  border-radius: 50% 
+  transition: 1s
+
+.settings__input-garland:hover ,
+.settings__input-tree:hover ,
+.settings__input-bg:hover 
+  box-shadow: 1px 1px 20px 5px $colActive
+  transform: scale(1.2)
 
 .form__select
   width: 100%
@@ -260,36 +344,30 @@ input[type="checkbox"]
   box-shadow: 0 1px 0 1px #313f33
   background-color: $colBgEl
 
-.form__select-container
-  position: relative
-  pointer-events: none
+.form__sound
+  width: 35px
+  height: 35px
+  @extend %background
+  background-size: cover
+  background-image: url('./assets/svg/audio.svg')
+  margin-right: 20px 
 
-.form__select-container input[type="range"]
-  width: 100%
-  height: 2em
-  display: block
-  margin: 0
-
-.form__select-container input[type="range"]:last-child
-  margin-top: -2em
-
-input[type="range"]::-webkit-slider-thumb 
-  pointer-events: all
-
-input[type="range"]::-moz-range-thumb 
-  pointer-events: all
-
-input[type="range"]::-ms-thumb 
-  pointer-events: all
+.form__snow 
+  width: 35px
+  height: 35px
+  background-image: url('./assets/svg/snow.svg')
+  @extend %background
+  background-size: cover
 
 .form__button
-  width: 40%
+  display: block
+  width: 70%
   @extend %someTxt
   color: #fff
   padding: 15px 5px
   border: 1px solid #162626
   background-color: $colBgEl
-  margin-right: 10px
+  margin: 10px auto
   border-radius: 15px
   transition: 1s
 
@@ -337,6 +415,7 @@ input[type="range"]::-ms-thumb
 
 .toy__img
   @extend %background
+  background-size: contain
   background-position: left
   width: 100%
   height: 100px
@@ -351,3 +430,63 @@ input[type="range"]::-ms-thumb
     max-width: 210px
   .toy__txt
     padding-top: 5px
+
+.tree__form
+  flex: 1 0 25%
+  padding-top: 20px
+
+.tree__container
+  @extend %background
+  background-size: cover
+  position: relative
+  flex: 1 0 60%
+  height: auto
+  width: 45%
+
+.tree__element
+  @extend %background
+  width: 500px
+  height: 800px
+  top:50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  position: absolute
+  z-index: 5
+
+.tree__toys-container  
+  flex: 1 0 20%
+  padding: 30px 5px 0
+ 
+.toy
+  display: inline-block
+  position: relative
+  width: 65px
+  height: 65px
+  border: 2px solid #badce0
+  border-radius: 10px
+  padding: 5px
+  margin: 5px
+  transition: 1s
+  background-color: $colBgEl
+
+.toy__img
+  width: 50px
+  height: 50px
+  @extend %background
+  background-size: contain
+
+.tree__toy:hover 
+  box-shadow: 1px 1px 20px 5px $colActive
+  transform: scale(1.2) 
+
+.toy__count
+  position: absolute
+  bottom: 0
+  right: 0
+  width: 20px
+  height: 20px
+  background-color: #5c8fee
+  border-radius: 50%
+  text-align: center
+  z-index: 5
+  

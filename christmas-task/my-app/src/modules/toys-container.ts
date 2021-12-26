@@ -11,7 +11,7 @@ export class ToysContainer {
       const toyItem = new DomElement('div', 'toy', '', '', toysCont.node);
       toyItem.node.setAttribute('id' , element.num);
       const toyName = new DomElement('h4', 'toy__title' , element.name, '', toyItem.node);
-      const toyImg = new DomElement('h4', 'toy__img' , '', '', toyItem.node);
+      const toyImg = new DomElement('p', 'toy__img' , '', '', toyItem.node);
       const img = new Image();
       img.src = `./assets/toys/${element.num}.webp`;
       img.onload = () => {  

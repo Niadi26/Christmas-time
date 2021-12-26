@@ -8,7 +8,7 @@ export class Header {
   public navigation: HTMLElement
   constructor(arrayFavoriteToys) {
     const parent = document.querySelector('.header') as HTMLElement;
-    const wrapperHeader = new DomElement('div', 'wrapper_header', '', 'header')
+    const wrapperHeader = new DomElement('div', 'wrapper', '', 'header')
     const navHeader = new DomElement('nav', '', '', '', wrapperHeader.node);
     const serchHeader = new DomElement('div', '', '', '',  wrapperHeader.node);
     const searchInput = new DomElement( 'input', 'search_items', '', '', serchHeader.node);

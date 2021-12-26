@@ -5,7 +5,8 @@ import { Toys, toy, dataToys } from "./data-toys";
 export class FavoriteContainer {
     public node: HTMLElement;
     constructor(favoriteArray: Array<string>, dataToys: Toys) {
-      const parent = new DomElement('div', 'toys', '', 'main');
+      const parent = new DomElement('div', 'tree__toys-container ', '', 'main');
+      const title = new DomElement('h3', 'form__titles', 'Игрушки', '', parent.node)
       if(favoriteArray.length) {
         favoriteArray.forEach((el) => {
           const favoriteToy = new FavoriteToy(el, dataToys, parent.node)
@@ -22,13 +23,14 @@ export class FavoriteContainer {
 
 class FavoriteToy {
   constructor(number: number | string, dataToys: Toys, container: HTMLElement) {
-    const parent = new DomElement('div', '', '', '', container);
+    const parent = new DomElement('div', 'toy', '', '', container);
+    const toy = new DomElement('div', 'toy__img', '', '', parent.node)
     const img = new Image();
     img.src = `./assets/toys/${number}.webp`;
     img.onload = () => {  
-      parent.node.style.backgroundImage = `url('${img.src}')`;
+      toy.node.style.backgroundImage = `url('${img.src}')`;
     }
-    const toy = dataToys.find(item => item.num == number) as toy;
-    const count = new DomElement('div', '', `${toy.count}`);
+    const toyData = dataToys.find(item => item.num == number) as toy;
+    const count = new DomElement('div', 'toy__count', `${toyData.count}`, '', parent.node);
   }
 }  
