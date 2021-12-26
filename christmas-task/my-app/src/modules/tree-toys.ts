@@ -23,7 +23,7 @@ export class FavoriteContainer {
 
 class FavoriteToy {
   constructor(number: number | string, dataToys: Toys, container: HTMLElement) {
-    const parent = new DomElement('div', 'toy', '', '', container);
+    const parent = new DomElement('div', 'tree__toys', '', '', container);
     const toy = new DomElement('div', 'toy__img', '', '', parent.node)
     const img = new Image();
     img.src = `./assets/toys/${number}.webp`;
