@@ -1,10 +1,11 @@
 import {DomElement} from './createElement';
+import { Toys } from './data-toys'
 
 export const favoriteToys: Array<string> = [];
 
 export class ToysContainer {
     public node: HTMLElement
-  constructor(data) {
+  constructor(data: Toys) {
     const parent = document.querySelector('.main') as HTMLElement;
     const toysCont = new DomElement('div', 'main__container', '', '', parent);
     data.forEach(element => {

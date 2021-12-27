@@ -6,7 +6,7 @@ export class Header {
   public favorite: HTMLElement
   public search: HTMLInputElement
   public navigation: HTMLElement
-  constructor(arrayFavoriteToys) {
+  constructor(arrayFavoriteToys: Array<string>) {
     const parent = document.querySelector('.header') as HTMLElement;
     const wrapperHeader = new DomElement('div', 'wrapper', '', 'header')
     const navHeader = new DomElement('nav', '', '', '', wrapperHeader.node);
@@ -19,7 +19,7 @@ export class Header {
     searchInput.node.setAttribute('id', 'search');
     searchInput.node.focus()
 
-    const favoriteToysCont = new DomElement( 'div', 'favorite_items', arrayFavoriteToys.length, '', serchHeader.node);
+    const favoriteToysCont = new DomElement( 'div', 'favorite_items', String(arrayFavoriteToys.length), '', serchHeader.node);
     navHeader.node.append(navigationHeader.node)
   
   this.node = parent;
@@ -30,14 +30,6 @@ export class Header {
   const getFavoriteToys = localStorage.getItem('favoriteToys');
   const favoriteToys = JSON.parse(getFavoriteToys!);
   if(favoriteToys.length) favoriteToysCont.node.innerHTML= favoriteToys.length;
-
-  // window.onscroll = function FixHeader(): void {
-  //   if(window.pageYOffset > 100) {
-  //     parent.classList.add('header_fixed');
-  //   } else {
-  //     parent.classList.remove('header_fixed');
-  //   }
-  // }
   }
 
   changeFavorite(text: string): void {

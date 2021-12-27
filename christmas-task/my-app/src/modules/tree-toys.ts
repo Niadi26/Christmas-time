@@ -1,5 +1,5 @@
 import { DomElement } from "./createElement";
-import { Toys, toy, dataToys } from "./data-toys";   
+import { Toys, toy } from "./data-toys";   
 
 
 export class FavoriteContainer {
@@ -8,7 +8,7 @@ export class FavoriteContainer {
       const parent = new DomElement('div', 'tree__toys-container ', '', 'main');
       const title = new DomElement('h3', 'form__titles', 'Игрушки', '', parent.node);
       const getFavoriteToys = localStorage.getItem('favoriteToys');
-      const favoriteToys = JSON.parse(getFavoriteToys!);
+      const favoriteToys = JSON.parse(getFavoriteToys!) as [];
       if(favoriteToys.length) {
         favoriteToys.forEach((el) => {
           const favoriteToy = new FavoriteToy(el, dataToys, parent.node)
@@ -44,7 +44,7 @@ class FavoriteToy {
         const parentClick = elementClick.parentElement;
         let countOfToys = +count.node.textContent!;
         const dropElement = document.querySelector('area');
-        let elemBelow;
+        let elemBelow: Element;
         const shiftX = event.clientX - toy.node.getBoundingClientRect().left;
         const shiftY = event.clientY - toy.node.getBoundingClientRect().top;
         //start
@@ -58,15 +58,15 @@ class FavoriteToy {
         }
         //move
         document.addEventListener('mousemove', onMouseMove);
-        function onMouseMove(event) {
+        function onMouseMove(event: MouseEvent) {
           moveAt(event.pageX, event.pageY);
 
           toy.node.hidden = true;
-          elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+          elemBelow = document.elementFromPoint(event.clientX, event.clientY) as Element;
           toy.node.hidden = false;
         }
         
-        function moveAt(pageX, pageY) {
+        function moveAt(pageX: number, pageY: number) {
           toy.node.style.left = pageX - shiftX + 'px';
           toy.node.style.top = pageY - shiftY + 'px';
         }

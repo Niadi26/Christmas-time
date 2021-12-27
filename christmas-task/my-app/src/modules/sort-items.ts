@@ -1,5 +1,5 @@
 import {DomElement} from './createElement';
-import { toy, Toys, dataToys } from "./data-toys";
+import { Toys } from "./data-toys";
 
 const SORTITEMS: Array<string> = [
     'От А до Я',
@@ -28,7 +28,7 @@ class SortField {
 
 export const sortField = new SortField(SORTITEMS);
 
-export function sortToys (index: string, dataToys): Toys {
+export function sortToys (index: string, dataToys: Toys): Toys {
   if(index == '0') {
     dataToys.sort((a, b) => a.name > b.name ? 1 : -1);
   } else if (index == '1') {
@@ -41,7 +41,7 @@ export function sortToys (index: string, dataToys): Toys {
   return dataToys
 }
 
-export function addOptionCheck(checktIndex): void {
+export function addOptionCheck(checktIndex: string): void {
   if (checktIndex == '-1') return
   else {
   const selectedOptionsArray = sortField.select.options;

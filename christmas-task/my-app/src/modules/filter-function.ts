@@ -1,7 +1,8 @@
 import { Toys, dataToys } from "./data-toys";
-import { AlertNoCoincidence } from './warning'
+import { AlertNoCoincidence } from './warning';
+import { IFilters } from './data-flters'
 
-export const filterShapeToys = function (filtersParametrs, dataToys: Toys): Toys {
+export const filterShapeToys = function (filtersParametrs: IFilters, dataToys: Toys): Toys {
   let rightToys: Toys = [];
   const toysOnPage: Toys = [];
   const allSerchingToys: Toys = dataToys;
@@ -31,7 +32,7 @@ export const filterShapeToys = function (filtersParametrs, dataToys: Toys): Toys
   } else {return toysOnPage}
 }
 
-export const filterColorToys= function (filtersParametrs, filtredToys: Toys = []): Toys {
+export const filterColorToys= function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
   let rightToys: Toys = [];
   const toysOnPage: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -81,7 +82,7 @@ export const filterColorToys= function (filtersParametrs, filtredToys: Toys = []
   } else {return toysOnPage}
 }
 
-export const filterSizeToys = function (filtersParametrs, filtredToys: Toys = []): Toys {
+export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
   const toysOnPage: Toys = [];
   let rightToys: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -118,7 +119,7 @@ export const filterSizeToys = function (filtersParametrs, filtredToys: Toys = []
 }
 
 
-export const filterFavoriteToys = function(filtersParametrs, filtredToys: Toys = []): Toys {
+export const filterFavoriteToys = function(filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
   const toysOnPage: Toys = [];
   let rightToys: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -136,7 +137,7 @@ export const filterFavoriteToys = function(filtersParametrs, filtredToys: Toys =
   } else {return toysOnPage}
 }
 
-export function filterToys(toysFilters, dataToys): Toys {
+export function filterToys(toysFilters: IFilters, dataToys: Toys): Toys {
   const filterShapeToysResult: Toys = filterShapeToys(toysFilters, dataToys);
   const filterPlusColorToysResult: Toys = filterColorToys(toysFilters, filterShapeToysResult);
   const filterPlusSizeToysResult: Toys = filterSizeToys(toysFilters, filterPlusColorToysResult);

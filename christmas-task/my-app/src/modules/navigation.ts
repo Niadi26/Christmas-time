@@ -1,5 +1,4 @@
 import {DomElement} from './createElement';
-import { StartPage } from './start-page';
 import { TreePage } from './tree-page';
 import { ToysPage } from './toys-page';
 import { makePage } from '..';

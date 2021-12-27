@@ -1,9 +1,8 @@
-import { DomElement } from "./createElement";
 import { SettingsContainer} from "./tree-settings";
 import { TreeContainer } from "./tree-container";
 import { FavoriteContainer } from "./tree-toys";
 import { favoriteToys } from "./toys-container";
-import { Toys, toy, dataToys } from "./data-toys";   
+import { dataToys } from "./data-toys";   
 import { Header } from "./header";
 
 export class TreePage {
@@ -34,7 +33,6 @@ export class TreePage {
         const settingsObject = JSON.parse(dataObject);
         const valueSetting = elementClick.dataset.num;
         const typeSetting = elementClick.dataset.type;
-        //elementClick.classList.toggle("form__input-checks_checked");
         settingsObject[typeSetting!] = valueSetting;
         localStorage.setItem('settingsTree', JSON.stringify(settingsObject));
         if(typeSetting == 'tree') {

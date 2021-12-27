@@ -1,5 +1,4 @@
 import {DomElement} from './createElement';
-import { toysFilters } from './data-flters';
 
 const SHAPESNAME = [
   'bell',
@@ -27,21 +26,11 @@ const FAVORITENAME = [
   'favorite'
 ]
 
-const COUNTCOUNTS = [
-    1,
-    12
-]
-
-const YEARCOUNTS = [
-    1940,
-    2021
-]
-
 //take array whith names of filters (N: red, green) and type of filter (N: color)
 class CheckboxFilter {
     public node: HTMLElement;
     public imputsContainer: HTMLElement;
-  constructor(filtersName, filtersTitle: string, filtersType: string) {
+  constructor(filtersName: Array<string>, filtersTitle: string, filtersType: string) {
     const parent = new DomElement('div', '', '');
     const title = new DomElement('h3', 'form__input-titles', filtersTitle, '', parent.node);
     const inputsCont = new DomElement('div', '', '', '', parent.node);

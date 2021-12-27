@@ -1,5 +1,5 @@
-import { Toys, dataToys } from "./data-toys";    
-import { toysFilters } from "./data-flters";
+import { dataToys } from "./data-toys";    
+import { IFilters, toysFilters } from "./data-flters";
 
 import { Header } from "./header";              
 import { Form } from "./form";
@@ -25,9 +25,9 @@ export class ToysPage {
     let toys: DomElement;
     toys = makeOurToys(loadFilters);
     addClassCheck(loadFilters);
-    addOptionCheck(sortIndex);
+    addOptionCheck(sortIndex!);
 
-    function makeOurToys(filtersObject, searchFilter?): DomElement {
+    function makeOurToys(filtersObject: IFilters, searchFilter?: RegExp): DomElement {
     const index = localStorage.getItem('sortFilter') as string;
     if (toys) toys.delete()
     const filterResult = filterToys(filtersObject, dataToys);
@@ -75,7 +75,7 @@ export class ToysPage {
     const elementClick = e!.target as HTMLElement;
     if (elementClick.tagName == "LABEL") {
         const dataObject = localStorage.getItem('FilterObject') as string;
-        let filtersObject = JSON.parse(dataObject) as Toys;
+        let filtersObject = JSON.parse(dataObject) as IFilters;
         const checkboxes = document.querySelectorAll(
         "input[type=checkbox]"
         ) as NodeListOf<HTMLInputElement>;
@@ -104,7 +104,7 @@ export class ToysPage {
     const selectedOption: number = elementClick.options.selectedIndex;
     localStorage.setItem('sortFilter', String(selectedOption));
     const dataObject = localStorage.getItem('FilterObject') as string;
-    const filtersObject = JSON.parse(dataObject) as Toys;
+    const filtersObject = JSON.parse(dataObject) as IFilters;
     makeOurToys(filtersObject);
     })
 

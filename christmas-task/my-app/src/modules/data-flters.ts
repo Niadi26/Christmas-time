@@ -1,13 +1,12 @@
-interface typeFilter {string: boolean}
-/*
-interface IFilters: {[key: string]: {[key: string]: boolean}}
+//interface typeFilter {string: boolean}
 
-interface IFilters {
-    form: {
+//interface IFilters: {[key: string]: {[key: string]: boolean}}
+
+export interface IFilters {
+    shape: {
       bell: boolean,
       ball: boolean,
       cone: boolean,
-      star: boolean,
       snow: boolean,
       figure: boolean,
     },
@@ -23,12 +22,14 @@ interface IFilters {
       medium: boolean,
       small: boolean
     },
-    favorite: boolean,
+    favorite: {
+      favorite: boolean,
+    },
     count: [string, string],
     string: [string, string],
   }
-  */
-  export const toysFilters = {
+
+  export const toysFilters: IFilters = {
     shape: {
       bell: false,
       ball: false,
