@@ -31,13 +31,13 @@ export class Header {
   const favoriteToys = JSON.parse(getFavoriteToys!);
   if(favoriteToys.length) favoriteToysCont.node.innerHTML= favoriteToys.length;
 
-  window.onscroll = function FixHeader(): void {
-    if(window.pageYOffset > 100) {
-      parent.classList.add('header_fixed');
-    } else {
-      parent.classList.remove('header_fixed');
-    }
-  }
+  // window.onscroll = function FixHeader(): void {
+  //   if(window.pageYOffset > 100) {
+  //     parent.classList.add('header_fixed');
+  //   } else {
+  //     parent.classList.remove('header_fixed');
+  //   }
+  // }
   }
 
   changeFavorite(text: string): void {

@@ -50,5 +50,13 @@ export class SettingsContainer {
     const settingsRecet = new DomElement('button', 'form__button', 'Сбросить настройки', '', form.node)
     
     this.node = form.node as HTMLElement;
+
+    music.node.addEventListener('click', () => {
+      debugger
+      const audio = new Audio();
+      audio.src = './assets/audio/audio.mp3';
+      audio.currentTime = 0;
+      audio.play()
+    })
   }
 }
