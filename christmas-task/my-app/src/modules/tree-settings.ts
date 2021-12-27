@@ -6,6 +6,14 @@ enum TreeSettingsNumbers {
     garland = 6,
 }
 
+export const settingsTree = {
+  tree: 1,
+  bg: 1,
+  garland: 1,
+  sound: false,
+  snow: false,
+}
+
 class Setting {
   public node: HTMLElement;
   public imputsContainer: HTMLElement;
@@ -13,7 +21,7 @@ class Setting {
     const parent = new DomElement('div', 'form__items', '');
     const title = new DomElement('h3', 'form__titles', settingsTitle, '', parent.node);
     const inputsCont = new DomElement('div', '', '', '', parent.node);
-    inputsCont.node.setAttribute('id', `${settingsType}`)
+    //inputsCont.node.setAttribute('id', `${settingsType}`)
     for (let i = 1; i <= settingsCount; i++) {
       const label = new DomElement('label', `settings__input-${settingsType}`, '', '', inputsCont.node);
       const img = new Image();
@@ -22,10 +30,12 @@ class Setting {
         label.node.style.backgroundImage = `url('${img.src}')`;
 
       }
-      label.node.setAttribute('for', `${settingsType}${i}`);
+      label.node.setAttribute('data-num', `${i}`);
+      label.node.setAttribute('data-type', `${settingsType}`);
       const input = new DomElement('input', '', '', '', label.node);
-      input.node.setAttribute('type', 'checkbox');
-     input.node.setAttribute('id', `${settingsType}${i}`);
+      input.node.setAttribute('type', 'radio');
+      label.node.setAttribute('value', `${i}`);
+      label.node.setAttribute('name', `${settingsType}`);
     }
 
     this.node = parent.node as HTMLElement;

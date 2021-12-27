@@ -12,15 +12,41 @@ export class TreePage {
     public tree: HTMLElement;
     public favorite: HTMLElement;
   constructor() {
+    
+    const dataObject = localStorage.getItem('settingsTree') as string;
+    const settingsObject = JSON.parse(dataObject);
+
     const header = new Header(favoriteToys);
     const settings = new SettingsContainer();
-    const tree = new TreeContainer();
-    const favorite = new FavoriteContainer(favoriteToys, dataToys);
+    const tree = new TreeContainer( settingsObject.bg, settingsObject.tree);
+    const favorite = new FavoriteContainer(dataToys);
 
     this.header = header.node as HTMLElement;
     this.settings = settings.node as HTMLElement
     this.tree = tree.node as HTMLElement
     this.favorite = favorite.node as HTMLElement
+
+
+    settings.node.addEventListener('click', (e) => {
+      const elementClick = e!.target as HTMLElement;
+      if (elementClick.tagName == "LABEL") {
+        const dataObject = localStorage.getItem('settingsTree') as string;
+        const settingsObject = JSON.parse(dataObject);
+        const valueSetting = elementClick.dataset.num;
+        const typeSetting = elementClick.dataset.type;
+        console.log(valueSetting)
+        //elementClick.classList.toggle("form__input-checks_checked");
+        settingsObject[typeSetting!] = valueSetting;
+        localStorage.setItem('settingsTree', JSON.stringify(settingsObject));
+        if(typeSetting == 'tree') {
+          const treeImg = document.getElementById('changeTree');
+          treeImg!.setAttribute('src', `./assets/tree/${valueSetting}.webp`);
+        } else if(typeSetting == 'bg') {
+          const bg = document.getElementById('changeBg');
+          bg!.style.backgroundImage = `url('./assets/bg/${valueSetting}.webp')`;
+        }
+      }
+      })
   }
   delete(): void {
     this.header.remove()
@@ -29,3 +55,5 @@ export class TreePage {
     this.favorite.remove()
   }
 }
+
+

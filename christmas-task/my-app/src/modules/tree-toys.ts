@@ -4,11 +4,13 @@ import { Toys, toy, dataToys } from "./data-toys";
 
 export class FavoriteContainer {
     public node: HTMLElement;
-    constructor(favoriteArray: Array<string>, dataToys: Toys) {
+    constructor( dataToys: Toys) {
       const parent = new DomElement('div', 'tree__toys-container ', '', 'main');
-      const title = new DomElement('h3', 'form__titles', 'Игрушки', '', parent.node)
-      if(favoriteArray.length) {
-        favoriteArray.forEach((el) => {
+      const title = new DomElement('h3', 'form__titles', 'Игрушки', '', parent.node);
+      const getFavoriteToys = localStorage.getItem('favoriteToys');
+      const favoriteToys = JSON.parse(getFavoriteToys!);
+      if(favoriteToys.length) {
+        favoriteToys.forEach((el) => {
           const favoriteToy = new FavoriteToy(el, dataToys, parent.node)
         })
       } else {

@@ -3,7 +3,8 @@ import { toysFilters } from "./modules/data-flters";
 import { favoriteToys } from "./modules/toys-container";
 import { StartPage } from "./modules/start-page";
 import { ToysPage} from "./modules/toys-page";
-import { TreePage } from "./modules/tree-page"
+import { TreePage } from "./modules/tree-page";
+import { settingsTree} from "./modules/tree-settings";
 
 function setLocalStorage () {
   if (!localStorage.getItem('FilterObject')) {
@@ -14,6 +15,9 @@ function setLocalStorage () {
   }
   if (!localStorage.getItem('favoriteToys')) {
     localStorage.setItem('favoriteToys', JSON.stringify(favoriteToys))
+  }
+  if (!localStorage.getItem('settingsTree')) {
+    localStorage.setItem('settingsTree', JSON.stringify(settingsTree))
   }
 }
 setLocalStorage()
