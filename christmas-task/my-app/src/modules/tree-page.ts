@@ -34,7 +34,6 @@ export class TreePage {
         const settingsObject = JSON.parse(dataObject);
         const valueSetting = elementClick.dataset.num;
         const typeSetting = elementClick.dataset.type;
-        console.log(valueSetting)
         //elementClick.classList.toggle("form__input-checks_checked");
         settingsObject[typeSetting!] = valueSetting;
         localStorage.setItem('settingsTree', JSON.stringify(settingsObject));
@@ -44,6 +43,9 @@ export class TreePage {
         } else if(typeSetting == 'bg') {
           const bg = document.getElementById('changeBg');
           bg!.style.backgroundImage = `url('./assets/bg/${valueSetting}.webp')`;
+        } else if(typeSetting == 'garland') {
+          const treeImg = document.getElementById('changeBg');
+          treeImg?.append()
         }
       }
       })

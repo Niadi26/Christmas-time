@@ -21,7 +21,6 @@ class Setting {
     const parent = new DomElement('div', 'form__items', '');
     const title = new DomElement('h3', 'form__titles', settingsTitle, '', parent.node);
     const inputsCont = new DomElement('div', '', '', '', parent.node);
-    //inputsCont.node.setAttribute('id', `${settingsType}`)
     for (let i = 1; i <= settingsCount; i++) {
       const label = new DomElement('label', `settings__input-${settingsType}`, '', '', inputsCont.node);
       const img = new Image();
@@ -52,8 +51,8 @@ export class SettingsContainer {
     public node: HTMLElement;
   constructor() {
     const form = new DomElement('form', 'tree__form', '', 'main');
-    const music = new DomElement('button', 'form__sound', '', '', form.node);
-    const snow = new DomElement('button', 'form__snow', '', '', form.node);
+    const music = new DomElement('p', 'form__sound', '', '', form.node);
+    const snow = new DomElement('p', 'form__snow', '', '', form.node);
     form.node.append(settingTree.node);
     form.node.append(backgroundTree.node);
     form.node.append(garlandTree.node);
@@ -62,11 +61,25 @@ export class SettingsContainer {
     this.node = form.node as HTMLElement;
 
     music.node.addEventListener('click', () => {
-      debugger
       const audio = new Audio();
       audio.src = './assets/audio/audio.mp3';
-      audio.currentTime = 0;
-      audio.play()
+      if(music.node.classList.contains('form__input-checks_checked')) {
+        audio.pause();
+        music.node.classList.toggle('form__input-checks_checked');
+      } else {
+          music.node.classList.toggle('form__input-checks_checked');
+          audio.currentTime = 0;
+          audio.play();
+      }
+    })
+
+    snow.node.addEventListener('click', () => {
+      snow.node.classList.toggle('form__input-checks_checked');
+      //made snow
+    })
+
+    settingsRecet.node.addEventListener('click', () => {
+      localStorage.setItem('settingsTree', JSON.stringify(settingsTree));
     })
   }
 }

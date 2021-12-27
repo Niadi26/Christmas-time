@@ -328,6 +328,7 @@ input[type="radio"]
   height: 20px
   border-radius: 50% 
   transition: 1s
+  background-size: cover
 
 .settings__input-garland:hover ,
 .settings__input-tree:hover ,
@@ -346,19 +347,29 @@ input[type="radio"]
   background-color: $colBgEl
 
 .form__sound
+  display: inline-block
   width: 35px
   height: 35px
   @extend %background
   background-size: cover
   background-image: url('./assets/svg/audio.svg')
   margin-right: 20px 
+  transition: 1s
+  border-radius: 20px
 
 .form__snow 
+  display: inline-block
   width: 35px
   height: 35px
   background-image: url('./assets/svg/snow.svg')
   @extend %background
   background-size: cover
+  transition: 1s
+  border-radius: 20px
+
+.form__sound:hover,
+.form__snow:hover
+  transform: scale(1.2)
 
 .form__button
   display: block

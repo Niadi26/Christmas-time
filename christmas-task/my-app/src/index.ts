@@ -1,10 +1,10 @@
 import "./style.sass";   
 import { toysFilters } from "./modules/data-flters";
 import { favoriteToys } from "./modules/toys-container";
+import { settingsTree} from "./modules/tree-settings";
 import { StartPage } from "./modules/start-page";
 import { ToysPage} from "./modules/toys-page";
 import { TreePage } from "./modules/tree-page";
-import { settingsTree} from "./modules/tree-settings";
 
 function setLocalStorage () {
   if (!localStorage.getItem('FilterObject')) {
@@ -36,4 +36,3 @@ export function makePage():void {
     const pageTree = new TreePage();
   })
 }
-

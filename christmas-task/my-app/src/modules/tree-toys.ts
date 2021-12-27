@@ -65,8 +65,7 @@ class FavoriteToy {
           elemBelow = document.elementFromPoint(event.clientX, event.clientY);
           toy.node.hidden = false;
         }
-        // переносит мяч на координаты (pageX, pageY),
-        // дополнительно учитывая изначальный сдвиг относительно указателя мыши
+        
         function moveAt(pageX, pageY) {
           toy.node.style.left = pageX - shiftX + 'px';
           toy.node.style.top = pageY - shiftY + 'px';
@@ -75,7 +74,7 @@ class FavoriteToy {
         toy.node.onmouseup = function() {
           if(!elemBelow || elemBelow != dropElement) {
             count.node.innerHTML = `${++countOfToys}`;
-            parentClick!.append(toy.node);               //что делать если парент это ёлка?
+            parentClick!.append(toy.node);               //
             toy.node.style.left = 5 + 'px';
             toy.node.style.top = 5 + 'px';
             toy.node.style.zIndex = '0';
