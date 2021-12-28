@@ -65,9 +65,9 @@ export class SettingsContainer {
     this.music = music.node as HTMLLIElement;
     this.snow = snow.node as HTMLLIElement;
 
+    const audio = new Audio();
+    audio.src = './assets/audio/audio.mp3';
     music.node.addEventListener('click', () => {
-      const audio = new Audio();
-      audio.src = './assets/audio/audio.mp3';
       if(loadSettings.sound) {
         audio.pause();
         music.node.classList.toggle('form__input-checks_checked');
