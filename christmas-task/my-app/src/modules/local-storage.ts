@@ -1,6 +1,6 @@
 import { IFilters } from "./data-flters";
 
-export function addClassCheck(objectFilters: IFilters): void {
+export function addClassCheck(objectFilters): void {
     const checkboxes = document.querySelectorAll(
       "input[type=checkbox]"
     ) as NodeListOf<HTMLInputElement>;

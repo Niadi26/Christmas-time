@@ -4,6 +4,7 @@ import { FavoriteContainer } from "./tree-toys";
 import { favoriteToys } from "./toys-container";
 import { dataToys } from "./data-toys";   
 import { Header } from "./header";
+import { DomElement } from "./createElement";
 
 export class TreePage {
     public header: HTMLElement;
@@ -43,11 +44,12 @@ export class TreePage {
           bg!.style.backgroundImage = `url('./assets/bg/${valueSetting}.webp')`;
         } else if(typeSetting == 'garland') {
           const treeImg = document.getElementById('changeBg');
-          treeImg?.append()
+          makeGarland(treeImg!, valueSetting);
         }
       }
       })
   }
+
   delete(): void {
     this.header.remove()
     this.settings.remove()
@@ -56,4 +58,44 @@ export class TreePage {
   }
 }
 
+const garland = [
+  6,
+  8,
+  12,
+  16,
+  18,
+]
+let container: DomElement;
 
+function makeGarland(parent: HTMLElement, condition?: string):void {
+  if(container) container.node.innerHTML = '';
+  if(condition == '1') return
+  else {
+    container = new DomElement('div', 'garland', '', '', parent );
+    for(let u = 0; u < garland.length; u++) { 
+      const ul = new DomElement('ul', 'garland__thread', '', '', container.node);
+      ul.node.style.top = 100 * u + 'px';
+      if(condition == '6') {
+        for(let i = 0; i < +garland[u]; i++ ) {
+          const li = new DomElement('li', 'garland__ball', '', '', ul.node);
+        }
+      } else if(condition == '5') {
+        for(let i = 0; i < +garland[u]; i++ ) {
+          const li = new DomElement('li', 'garland__ball-green', '', '', ul.node);
+        }
+      } else if(condition == '4') {
+        for(let i = 0; i < +garland[u]; i++ ) {
+          const li = new DomElement('li', 'garland__ball-red', '', '', ul.node);
+        }
+      } else if(condition == '3') {
+        for(let i = 0; i < +garland[u]; i++ ) {
+          const li = new DomElement('li', 'garland__ball-blue', '', '', ul.node);
+        }
+      } else if(condition == '2') {
+        for(let i = 0; i < +garland[u]; i++ ) {
+          const li = new DomElement('li', 'garland__ball-yellow', '', '', ul.node);
+        }
+      }
+    }
+  }
+}

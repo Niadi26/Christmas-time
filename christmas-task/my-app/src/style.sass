@@ -503,4 +503,159 @@ input[type="radio"]
   border-radius: 50%
   text-align: center
   z-index: 5
+
+.garland
+  position: absolute
+  top: 35%
+  left: 50%
+  transform: translate(-50%, -50%)
+  z-index: 10
+  width: 100%
+  height: auto
+  text-align: center
+
+.garland__thread 
+  height: 40px
+  position: absolute
+  display: block
+  white-space: nowrap
+  overflow: hidden
+  text-align: center
+  pointer-events: none
+  right: 50%
+  transform: translate(50%)
+
+.garland__ball 
+  position: relative
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin: 10px 5px
+  border-radius: 50%
+  background: #00fda9
+  box-shadow: 0 0 10px 5px #01ffaa
+  animation: blink-green 2s infinite
+
+  &:nth-child(4n-2) 
+    background: #00ffffaa
+    box-shadow: 0 0 10px 5px #00ffffaa
+    animation-name: blink-blue
+    animation-duration: 0.5s
+    
+  &:nth-child(4n+1) 
+    background: #ff0099
+    box-shadow: 0 0 10px 5px #fd0098
+    animation-name: blink-red
+    animation-duration: 1s
+
+  &:nth-child(4n+3) 
+    background: #fbff00
+    box-shadow: 0 0 10px 5px #fbff00
+    animation-name: blink-yellow
+    animation-duration: 1.5s
+
+  &:nth-child(odd) 
+    animation-duration: 1.8s
+    
+  &:nth-child(3n+1) 
+    animation-duration: 1.4s
   
+@keyframes blink-green 
+    0%, 100%  
+      background: #06fdab
+      box-shadow: 0 0 10px 5px  #00f8a6
+    50%  
+      background: #01faa780
+      box-shadow: 0 0 10px 5px  #03f8a733
+
+@keyframes blink-blue 
+    0%, 100%  
+      background: #04ffff
+      box-shadow: 0 0 10px 5px  #04fcfc
+    50%  
+      background: #03fdfd80
+      box-shadow: 0 0 10px 5px  #04ffff33
+
+@keyframes blink-red  
+    0%, 100%  
+      background: #fc0599
+      box-shadow: 0 0 10px 5px  #fc0499
+    50%  
+      background: #fa009680
+      box-shadow: 0 0 10px 5px  #fa009633
+
+@keyframes blink-yellow 
+    0%, 100%  
+      background: #f7ef00
+      box-shadow: 0 0 10px 5px  #f7e700
+    50%  
+      background: #f3f70080
+      box-shadow: 0 0 10px 5px  #f7e70033
+
+
+.garland__ball-green 
+  position: relative
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin-right: 10px
+  margin-top: 10px
+  border-radius: 50%
+  background: #00fda9
+  box-shadow: 0 0 10px 5px #01ffaa
+  animation: blink-green 2s infinite
+  &:nth-child(odd) 
+    animation-duration: 1.8s
+  &:nth-child(3n+1) 
+    animation-duration: 1.4s
+
+.garland__ball-red 
+  position: relative
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin-right: 10px
+  margin-top: 10px
+  border-radius: 50%
+  background: #fc0599
+  box-shadow: 0 0 10px 5px  #fc0499
+  animation: blink-red 2s infinite
+  &:nth-child(odd) 
+    animation-duration: 1.8s 
+  &:nth-child(3n+1) 
+    animation-duration: 1.4s
+
+
+.garland__ball-blue
+  position: relative
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin-right: 10px
+  margin-top: 10px
+  border-radius: 50%
+  background: #04ffff
+  box-shadow: 0 0 10px 5px  #04fcfc
+  animation: blink-blue 2s infinite  
+  &:nth-child(odd) 
+    animation-duration: 1.8s
+  &:nth-child(3n+1) 
+    animation-duration: 1.4s
+
+
+.garland__ball-yellow
+  position: relative
+  display: inline-block
+  width: 15px
+  height: 15px
+  margin-right: 10px
+  margin-top: 10px
+  border-radius: 50%
+  background: #f7ef00
+  box-shadow: 0 0 10px 5px  #f7e700
+  animation: blink-yellow 2s infinite  
+  &:nth-child(odd) 
+    animation-duration: 1.8s
+  &:nth-child(3n+1) 
+    animation-duration: 1.4s
+
