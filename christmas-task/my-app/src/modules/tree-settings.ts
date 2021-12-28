@@ -1,4 +1,5 @@
 import { DomElement } from "./createElement";
+import { loadSettings } from "./tree-page"
 
 enum TreeSettingsNumbers {
     three = 6,
@@ -49,6 +50,8 @@ const garlandTree = new Setting(TreeSettingsNumbers.garland, 'Гирлянда' 
 
 export class SettingsContainer {
     public node: HTMLElement;
+    public music: HTMLElement;
+    public snow: HTMLElement;
   constructor() {
     const form = new DomElement('form', 'tree__form', '', 'main');
     const music = new DomElement('p', 'form__sound', '', '', form.node);
@@ -59,27 +62,50 @@ export class SettingsContainer {
     const settingsRecet = new DomElement('button', 'form__button', 'Сбросить настройки', '', form.node)
     
     this.node = form.node as HTMLElement;
+    this.music = music.node as HTMLLIElement;
+    this.snow = snow.node as HTMLLIElement;
 
     music.node.addEventListener('click', () => {
       const audio = new Audio();
       audio.src = './assets/audio/audio.mp3';
-      if(music.node.classList.contains('form__input-checks_checked')) {
+      if(loadSettings.sound) {
         audio.pause();
         music.node.classList.toggle('form__input-checks_checked');
+        loadSettings.sound = false;
+        localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
       } else {
           music.node.classList.toggle('form__input-checks_checked');
           audio.currentTime = 0;
           audio.play();
+          loadSettings.sound = true;
+          localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
       }
     })
 
     snow.node.addEventListener('click', () => {
+      if(loadSettings.snow) {
+        snow.node.classList.toggle('form__input-checks_checked');
+        loadSettings.snow = false;
+        localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
+      } else {
       snow.node.classList.toggle('form__input-checks_checked');
-      //made snow
+      const timer = setInterval(makeSnow, 300);
+      loadSettings.snow = true;
+      localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
+      }
     })
 
     settingsRecet.node.addEventListener('click', () => {
       localStorage.setItem('settingsTree', JSON.stringify(settingsTree));
     })
   }
+}
+
+export function makeSnow(): void {
+  const parent = document.getElementById('changeBg') as HTMLElement;
+  const snowflake = new DomElement('div', 'snowflake', '', '', parent);
+  snowflake.node.style.left = Math.random() * window.innerWidth + 'px';
+  snowflake.node.style.opacity = String(Math.random());
+
+  setTimeout(() => {snowflake.delete()}, 10000)
 }

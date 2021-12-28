@@ -1,10 +1,13 @@
-import { SettingsContainer} from "./tree-settings";
+import { SettingsContainer, makeSnow } from "./tree-settings";
 import { TreeContainer } from "./tree-container";
 import { FavoriteContainer } from "./tree-toys";
 import { favoriteToys } from "./toys-container";
 import { dataToys } from "./data-toys";   
 import { Header } from "./header";
 import { DomElement } from "./createElement";
+
+const loadStringSettings = localStorage.getItem('settingsTree') as string;
+export const loadSettings = JSON.parse(loadStringSettings);
 
 export class TreePage {
     public header: HTMLElement;
@@ -48,6 +51,20 @@ export class TreePage {
         }
       }
       })
+
+      if(loadSettings.sound) {
+        settings.music.classList.add('form__input-checks_checked');
+        document.addEventListener('onload', () => {
+        const audio = new Audio();
+        audio.src = './assets/audio/audio.mp3';
+        audio.currentTime = 0;
+        audio.play();
+        })
+      }
+      if(loadSettings.snow) {
+        settings.snow.classList.add('form__input-checks_checked');
+        const timer = setInterval(makeSnow, 300);
+      }
   }
 
   delete(): void {
