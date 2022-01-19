@@ -1,28 +1,22 @@
-import * as carTypes from "./data-cars";
+import * as carTypes from "./data-Icars";
 
 const homeURL = 'http://127.0.0.1:3000';
 
-const PATH = {
-  garage: '/garage',
-  engine: '/engine',
-  winners: '/winners',
+const queryParametrs = (parametrs: carTypes.queryParametrs = []): string => {
+  return parametrs.length ? `?${parametrs.map((item) => `${item.key}=[${item.value}]`).join('&')}` : '';
 }
 
-const queryParametrs = (parametrs: carTypes.queryParametrs = []) => {
-  parametrs.length ? `${parametrs.map((item) => `${item.key}=[${item.value}]`).join('&')}` : '';
-}
-
-const getCars = async (path: string, parametrs: carTypes.queryParametrs) =>{
+export const getCars = async (path: string, parametrs: carTypes.queryParametrs = []) =>{
   try {
     const response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`);
     const data = await response.json();
-    return data
+    return data;
   } catch(error) {
      console.log(error)
   }
 } 
 
-const getCar = async (path: string, id: number) =>{
+export const getCar = async (path: string, id: number) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}`);
     const data = await response.json();
@@ -32,7 +26,7 @@ const getCar = async (path: string, id: number) =>{
   }
 } 
 
-const createCar = async (path: string, body: carTypes.ICar) =>{
+export const createCar = async (path: string, body: carTypes.ICar) =>{
   try {
     const response = await fetch(`${homeURL}${path}`, {
       method: "POST",
@@ -48,9 +42,9 @@ const createCar = async (path: string, body: carTypes.ICar) =>{
   }
 } 
 
-const deleteCar = async (id: number) =>{
+export const deleteCar = async (path: string,id: number) =>{
   try {
-    const response = await fetch(`${homeURL}${PATH.garage}/${id}`, {
+    const response = await fetch(`${homeURL}${path}/${id}`, {
         method: "DELETE",
     });
     const data = await response.json();
@@ -60,7 +54,7 @@ const deleteCar = async (id: number) =>{
   }
 }
 
-const updateCar = async (path: string, id: number, body: carTypes.ICar | carTypes.IWinner) =>{
+export const updateCar = async (path: string, id: number, body: carTypes.ICar | carTypes.IWinner) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}`, {
       method: "PUT",
@@ -76,7 +70,7 @@ const updateCar = async (path: string, id: number, body: carTypes.ICar | carType
   }
 }
 
-const startCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
+export const startCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}${queryParametrs(parametrs)}`, {
       method: "PATCH",
@@ -87,7 +81,8 @@ const startCar = async (path: string, id: number,  parametrs: carTypes.queryPara
     console.log(error)
   }
 }
-const switchCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
+
+export const switchCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}${queryParametrs(parametrs)}`, {
       method: "PATCH",

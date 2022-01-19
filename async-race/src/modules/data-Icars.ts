@@ -1,10 +1,10 @@
 export interface ICar {
     'name': string,
     'color': string,
-    'id'?: number,
+    'id': number,
 }
 
-export type Cars = [ICar];
+export type Cars = ICar[];
 
 export interface IEngine {
     "velocity": number,
@@ -21,6 +21,11 @@ export interface IWinner {
     "time": number,
 }
 
-export type Winners = [IWinner]
+export type Winners = IWinner[]
 
-export type queryParametrs = [{[key: string]: string}] | [];
+export type queryParametrs = IqueryParametr[] | [];
+
+export interface IqueryParametr {
+    key: string,
+    value: string,
+}
