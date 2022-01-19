@@ -1,6 +1,7 @@
 import {DomElement} from '../create-element';
+import {CreateCar} from '../create-car'
 
-class CreateCar {
+class CreateCarBlock {
   public node: HTMLElement
   constructor() {
     const block = new DomElement('div', '', '');
@@ -8,22 +9,29 @@ class CreateCar {
     const title = new DomElement('h2', '', 'Create car', '', wrapper.node);
     const createCar = new DomElement('div', '', '', '', wrapper.node);
     const nameCar = new DomElement('input', '', '', '', createCar.node);
+    nameCar.node.dataset.name = 'create';
     const colorCar = new DomElement('input', '', '', '', createCar.node);
     colorCar.node.setAttribute('type', 'color');
     colorCar.node.setAttribute('value', '#e6c300');
+    colorCar.node.dataset.color = 'create';
     const createButton = new DomElement('button', '', 'Create', '', createCar.node);
+    createButton.node.setAttribute('id', 'create');
     const changeCar = new DomElement('div', '', '', '', wrapper.node);
     const nameChange = new DomElement('input', '', '', '', changeCar.node);
+    nameChange.node.dataset.name = 'change';
     const colorChange = new DomElement('input', '', '', '', changeCar.node);
     colorChange.node.setAttribute('type', 'color');
+    colorChange.node.dataset.color = 'change';
     const changeButton = new DomElement('button', '', 'Update', '', changeCar.node);
+    changeButton.node.setAttribute('id', 'change');
     const create100 = new DomElement('button', '', 'Generate 100 cars', '', wrapper.node);
+    create100.node.setAttribute('id', 'create100');
 
     this.node = block.node;
   }
 }
 
-const createCars = new CreateCar();
+const createCars = new CreateCarBlock();
 
 class Garage {
   public node: HTMLElement;
@@ -53,3 +61,23 @@ class Garage {
 }
 
 export const garage = new Garage(createCars.node);
+
+createCars.node.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement
+  if (elementClick.id === 'create') {
+    const inputName = document.querySelector(`[data-name=${elementClick.id}]`) as HTMLInputElement;
+    const inputColor = document.querySelector(`[data-color=${elementClick.id}]`) as HTMLInputElement;
+    const name = inputName.value;
+    const color = inputColor.value;
+    if(!name) inputName.style.border = '2px solid red';
+    else {
+      inputName.style.border = '';
+      CreateCar(name, color);
+      inputName.value = '';
+    }
+  } else if (elementClick.id === 'change') {
+    console.log('change');
+  } else if (elementClick.id === 'create100') {
+    console.log('100')
+  }
+})

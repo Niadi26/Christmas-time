@@ -3,6 +3,10 @@ export interface ICar {
     'color': string,
     'id': number,
 }
+export interface ICarCreate {
+    'name': string,
+    'color': string
+}
 
 export type Cars = ICar[];
 
