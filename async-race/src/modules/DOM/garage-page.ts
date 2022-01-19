@@ -1,5 +1,5 @@
 import {DomElement} from '../create-element';
-import {CreateCar} from '../create-car'
+import {CreateCar, DeleteCar, GetOneCar, ChangeCar} from '../create-car'
 
 class CreateCarBlock {
   public node: HTMLElement
@@ -24,6 +24,7 @@ class CreateCarBlock {
     colorChange.node.dataset.color = 'change';
     const changeButton = new DomElement('button', '', 'Update', '', changeCar.node);
     changeButton.node.setAttribute('id', 'change');
+    changeButton.node.setAttribute('disabled', 'true');
     const create100 = new DomElement('button', '', 'Generate 100 cars', '', wrapper.node);
     create100.node.setAttribute('id', 'create100');
 
@@ -64,20 +65,37 @@ export const garage = new Garage(createCars.node);
 
 createCars.node.addEventListener('click', (e) => {
   const elementClick = e.target as HTMLElement
-  if (elementClick.id === 'create') {
+  if (elementClick.id === 'create' || elementClick.id === 'change') {
     const inputName = document.querySelector(`[data-name=${elementClick.id}]`) as HTMLInputElement;
     const inputColor = document.querySelector(`[data-color=${elementClick.id}]`) as HTMLInputElement;
     const name = inputName.value;
     const color = inputColor.value;
-    if(!name) inputName.style.border = '2px solid red';
-    else {
-      inputName.style.border = '';
-      CreateCar(name, color);
-      inputName.value = '';
+    if(elementClick.id === 'create') {
+      if(!name) inputName.style.border = '2px solid red';
+      else {
+        inputName.style.border = '';
+        CreateCar(name, color);
+      } 
+    } else if (elementClick.id === 'change') {
+      ChangeCar('1', name, color);                        //how get id???
+      elementClick.setAttribute('disabled', 'true');
     }
-  } else if (elementClick.id === 'change') {
-    console.log('change');
+    inputName.value = '';
   } else if (elementClick.id === 'create100') {
     console.log('100')
+  }
+})
+
+garage.node.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement;
+  if (elementClick.dataset.action === 'delete') {
+    const parent = elementClick.closest('.wrapper');
+    const idCar = parent?.id;
+    parent?.remove();
+    DeleteCar(idCar!);
+  } else if (elementClick.dataset.action === 'update') {
+    const parent = elementClick.closest('.wrapper');
+    const idCar = parent?.id;
+    GetOneCar(idCar!);
   }
 })

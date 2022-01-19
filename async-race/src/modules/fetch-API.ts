@@ -16,7 +16,7 @@ export const getCars = async (path: string, parametrs: carTypes.queryParametrs =
   }
 } 
 
-export const getCar = async (path: string, id: number) =>{
+export const getCar = async (path: string, id: string) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}`);
     const data = await response.json();
@@ -42,7 +42,7 @@ export const createCar = async (path: string, body: carTypes.ICarCreate) =>{
   }
 } 
 
-export const deleteCar = async (path: string,id: number) =>{
+export const deleteCar = async (path: string,id: number | string) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}`, {
         method: "DELETE",
@@ -54,7 +54,7 @@ export const deleteCar = async (path: string,id: number) =>{
   }
 }
 
-export const updateCar = async (path: string, id: number, body: carTypes.ICar | carTypes.IWinner) =>{
+export const updateCar = async (path: string, id: string, body: carTypes.ICarCreate | carTypes.IWinnerCreate) =>{
   try {
     const response = await fetch(`${homeURL}${path}/${id}`, {
       method: "PUT",
