@@ -1,3 +1,4 @@
+
 body 
   min-height: 100vh
   display: flex
@@ -7,6 +8,14 @@ body
   color: white
   text-transform: uppercase
   background-color: #363636
+  overflow-x: hidden
+
+button
+  cursor: pointer
+  position: relative
+  z-index: 10
+  &:active
+    transform: scale(1.1)
 
 h2
   color: #e6c300
@@ -26,5 +35,19 @@ main
   border-left: 2px solid #e6c300
 
 .pictureCar 
-  width: 50px
-  height: 30px
+  position: relative
+  width: 150px
+  height: 80px
+
+.move
+  animation: car var(--timeCar) linear
+  animation-fill-mode: forwards
+
+@keyframes car
+  0%
+    left: 0px
+  100%
+    left: var(--wayCar)
+
+.paused
+  animation-play-state: paused

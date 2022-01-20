@@ -1,5 +1,5 @@
-
-import { DomElement } from './create-element';
+import { carIMG } from './data-svgCar';
+import { DomElement } from '../create-element';
 
 export class Car {
   public node: HTMLElement;
@@ -15,6 +15,7 @@ export class Car {
     startButton.node.dataset.action = 'start';
     const resetButton = new DomElement('button', '', 'reset', '', buttons.node);
     resetButton.node.dataset.action = 'reset';
+    resetButton.node.setAttribute('disabled', 'true');
     const carName = new DomElement('div', '', name, '',buttons.node);
     carName.node.dataset.name = `c${id}`;
     const carBlock = new DomElement('div', '', '', '', garage.node);
@@ -23,9 +24,8 @@ export class Car {
     updateCar.node.dataset.action = 'update';
     const deleteCar = new DomElement('button', '', '', '', optionsCar.node);
     deleteCar.node.dataset.action = 'delete';
-    const pictureCar = new DomElement('div', 'pictureCar', '', '', carBlock.node);
+    const pictureCar = new DomElement('div', 'pictureCar', carIMG(color), '', carBlock.node);
     pictureCar.node.dataset.car = `c${id}`;
-    pictureCar.node.style.backgroundColor = color;
 
     this.node = wrapper.node as HTMLElement;
     this.car = pictureCar.node as HTMLElement;

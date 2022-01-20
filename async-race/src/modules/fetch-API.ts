@@ -1,9 +1,9 @@
-import * as carTypes from "./data-Icars";
+import * as carTypes from "./data-car/data-Icars";
 
 const homeURL = 'http://127.0.0.1:3000';
 
 const queryParametrs = (parametrs: carTypes.queryParametrs = []): string => {
-  return parametrs.length ? `?${parametrs.map((item) => `${item.key}=[${item.value}]`).join('&')}` : '';
+  return parametrs.length ? `?${parametrs.map((item) => `${item.key}=${item.value}`).join('&')}` : '';
 }
 
 export const getCars = async (path: string, parametrs: carTypes.queryParametrs = []) =>{
@@ -70,21 +70,9 @@ export const updateCar = async (path: string, id: string, body: carTypes.ICarCre
   }
 }
 
-export const startCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
+export const engineCar = async (path: string, parametrs: carTypes.queryParametrs) =>{
   try {
-    const response = await fetch(`${homeURL}${path}/${id}${queryParametrs(parametrs)}`, {
-      method: "PATCH",
-    });
-    const data = await response.json();
-    return data;
-  } catch(error) {
-    console.log(error)
-  }
-}
-
-export const switchCar = async (path: string, id: number,  parametrs: carTypes.queryParametrs) =>{
-  try {
-    const response = await fetch(`${homeURL}${path}/${id}${queryParametrs(parametrs)}`, {
+    const response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`, {
       method: "PATCH",
     });
     const data = await response.json();
