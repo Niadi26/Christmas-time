@@ -15,7 +15,12 @@ export interface IEngine {
     "distance": number,
 }
 
-export interface IEngineGrive {
+export interface IEngineResponse {
+    data: IEngine,
+    status: number | string | undefined
+}
+
+export interface IEngineDrive {
     "success": boolean
 }
 
@@ -36,5 +41,5 @@ export type queryParametrs = IqueryParametr[] | [];
 
 export interface IqueryParametr {
     key: string,
-    value: string,
+    value: string | number,
 }

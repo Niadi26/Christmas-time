@@ -1,4 +1,7 @@
 import { carIMG } from "./data-car/data-svgCar";
+import * as carTypes from "./data-car/data-Icars";
+
+const CAR_WIDTH = 110; 
 
 export function PengingInputs(id: string, texstInput: HTMLInputElement, colorInput: HTMLInputElement) {
     const carName = document.querySelector(`[data-name=c${id}]`) as HTMLElement;
@@ -22,3 +25,30 @@ export function PengingInputs(id: string, texstInput: HTMLInputElement, colorInp
   export function ChangeCarColor(divCar: HTMLElement, input: HTMLInputElement) {
     divCar.innerHTML = carIMG(input.value);
   }
+
+  export function StartAnimation (id: string, data: carTypes.IEngine) {
+    const way = document.body.clientWidth - CAR_WIDTH;
+    const time = Math.round(data.distance / data.velocity);
+    const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+    car.classList.add('move');
+    car.style.setProperty('--timeCar', `${time}ms`);
+    car.style.setProperty('--wayCar', `${way}px`);
+  }
+  
+export function StopAnimation (id: string) {
+  const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  car.classList.add('paused');
+}
+
+export function ResetAnimation (id: string) {
+  const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  car.classList.remove('paused');
+  car.classList.remove('move');
+}
+
+export function DisabledButtons(button: HTMLElement) {
+  button.setAttribute('disabled', 'true');
+  const resetButton = button.nextElementSibling;
+  const startButton = button.previousElementSibling;
+  (resetButton!.tagName === 'BUTTON') ? resetButton!.removeAttribute('disabled') : startButton!.removeAttribute('disabled');
+}

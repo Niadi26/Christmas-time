@@ -70,14 +70,21 @@ export const updateCar = async (path: string, id: string, body: carTypes.ICarCre
   }
 }
 
-export const engineCar = async (path: string, parametrs: carTypes.queryParametrs) =>{
+export const engineCar = async (path: string, parametrs: carTypes.queryParametrs) => {
+  let response;
   try {
-    const response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`, {
+    response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`, {
       method: "PATCH",
     });
     const data = await response.json();
-    return data;
+    const result = {
+      data: data,
+      status: response.status,
+    }
+    return result;
   } catch(error) {
-    console.log(error)
+    if (response?.status === 500) {
+      return {status: response.status};
+    }
   }
 }

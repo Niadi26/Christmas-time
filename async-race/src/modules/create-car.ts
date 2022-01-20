@@ -10,7 +10,12 @@ const PATH = {
     winners: '/winners',
   }
 
-const CAR_WIDTH = 110;  
+export const STATUS = {
+  started: 'started',
+  drive: 'drive',
+  stopped: 'stopped',
+}
+
 let carsCount: number;
 
 export async function GetAllCars() {
@@ -55,28 +60,11 @@ export async function ChangeCar(id: string, name: string = '', color: string) {
   const data = fetchCar.updateCar(PATH.garage, id, {name: name, color: color});
 }
 
-export const StartEngine = async function StartEngine( parametrs: carTypes.queryParametrs): Promise<carTypes.IEngine> {
-  const data = await fetchCar.engineCar(PATH.engine, parametrs);
+export const StartEngine = async function StartEngine( id: string | number, status: string): Promise<carTypes.IEngineResponse> {
+  const parametrs = [
+    {key: 'id', value: id},
+    {key:'status', value: status}
+  ]
+  const data = await fetchCar.engineCar(PATH.engine, parametrs) as carTypes.IEngineResponse;
   return data;
-}
-
-export function StartAnimation (id: string, data: carTypes.IEngine) {
-  const way = document.body.clientWidth - CAR_WIDTH;
-  const time = Math.round(data.distance / data.velocity);
-  const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
-  car.classList.add('move');
-  const docStyle = document.documentElement.style;
-  car.style.setProperty('--timeCar', `${time}ms`);
-  car.style.setProperty('--wayCar', `${way}px`);
-}
-
-export function StopAnimation (id: string) {
-  const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
-  car.classList.add('paused');
-}
-
-export function ResetAnimation (id: string) {
-  const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
-  car.classList.remove('paused');
-  car.classList.remove('move');
 }
