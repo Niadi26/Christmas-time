@@ -36,13 +36,18 @@ export const createCars = new CreateCarBlock();
 class Garage {
   public node: HTMLElement;
   public title: HTMLElement;
+  public garage: HTMLElement;
+  public race: HTMLElement;
   constructor(createCarBlock: HTMLElement) {
     const main = new DomElement('main', '', '');
     const wrapper = new DomElement('div', '', '', '', main.node);
     wrapper.node.append(createCarBlock);
     const buttons = new DomElement('div', '', '', '', wrapper.node);
     const startButton = new DomElement('button', '', 'Race', '', buttons.node);
+    startButton.node.setAttribute('id', 'race');
     const resettButton = new DomElement('button', '', 'Reset', '', buttons.node);
+    resettButton.node.setAttribute('id', 'reset');
+    resettButton.node.setAttribute('disabled', 'true');
     const title = new DomElement('h2', '', 'Garage (4)', '', wrapper.node);
     const pageCount = new DomElement('h3', '', 'Page #1', '', wrapper.node);
     const garage = new DomElement('div', '', '', '', wrapper.node);
@@ -53,6 +58,8 @@ class Garage {
 
     this.node = main.node;
     this.title = title.node;
+    this.garage = garage.node;
+    this.race = buttons.node;
   }
 
   changeTitle(num: number) {

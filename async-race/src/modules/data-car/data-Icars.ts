@@ -20,6 +20,14 @@ export interface IEngineResponse {
     status: number | string | undefined
 }
 
+export interface IRaceResult {
+    id: string,
+    time: number,
+    status: number | string | undefined
+}
+
+export type ResultRace = IRaceResult[]
+
 export interface IEngineDrive {
     "success": boolean
 }

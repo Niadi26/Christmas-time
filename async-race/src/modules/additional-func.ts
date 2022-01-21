@@ -1,5 +1,7 @@
 import { carIMG } from "./data-car/data-svgCar";
 import * as carTypes from "./data-car/data-Icars";
+import { carArray } from "./create-car";
+import { Winner } from "./DOM/car-wins";
 
 const CAR_WIDTH = 110; 
 
@@ -33,6 +35,7 @@ export function PengingInputs(id: string, texstInput: HTMLInputElement, colorInp
     car.classList.add('move');
     car.style.setProperty('--timeCar', `${time}ms`);
     car.style.setProperty('--wayCar', `${way}px`);
+    return time;
   }
   
 export function StopAnimation (id: string) {
@@ -50,5 +53,16 @@ export function DisabledButtons(button: HTMLElement) {
   button.setAttribute('disabled', 'true');
   const resetButton = button.nextElementSibling;
   const startButton = button.previousElementSibling;
+  (!resetButton) ? startButton!.removeAttribute('disabled') :
   (resetButton!.tagName === 'BUTTON') ? resetButton!.removeAttribute('disabled') : startButton!.removeAttribute('disabled');
+}
+
+export function DisabledButton(id: string) {
+  const button = document.getElementById(id);
+  button!.hasAttribute('disabled') ? button!.removeAttribute('disabled') : button!.setAttribute('disabled', 'true');
+}
+
+export function DrawResult(idWinner: string) {
+  const winner = carArray.find(el => el.id === idWinner);
+  Winner(winner!.name);
 }

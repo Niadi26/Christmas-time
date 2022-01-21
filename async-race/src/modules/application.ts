@@ -5,8 +5,8 @@ import { winners } from "./DOM/winners-page";
 import { NAVITEMS } from "./DOM/navigation";
 import { GetAllCars } from "./create-car";
 import * as carTypes from "./data-car/data-Icars";
-import {CreateCar, DeleteCar, GetOneCar, ChangeCar, StartEngine,  STATUS } from './create-car';
-import { StartAnimation, StopAnimation, ResetAnimation, DisabledButtons } from './additional-func';
+import {CreateCar, DeleteCar, GetOneCar, ChangeCar,  DriveAllCars, StopAllCars, StopCar, DriveCar } from './create-car';
+import { DisabledButtons, DisabledButton } from './additional-func';
 
 export function createPage(page: HTMLElement = garage.node): void {
     document.body.append(header.node);
@@ -48,7 +48,7 @@ createCars.node.addEventListener('click', (e) => {
         const idCar = elementClick.dataset.carID?.slice(1);
         ChangeCar(idCar!, name, color);
         elementClick.setAttribute('disabled', 'true');
-        //StopPendingInputs(idCar!, inputName, inputColor);
+        //StopPendingInputs(idCar!, inputName, inputColor);   //how reset listener
       }
       inputName.value = '';
     } else if (elementClick.id === 'create100') {
@@ -58,10 +58,10 @@ createCars.node.addEventListener('click', (e) => {
 })
 
 //buttons UPDATE, DELETE, START, STOP
-garage.node.addEventListener('click', async (e) => {
+garage.garage.addEventListener('click', async (e) => {
   const elementClick = e.target as HTMLElement;
   const parent = elementClick.closest('.wrapper');
-  const idCar = parent!.id;
+  const idCar = (parent) ? parent!.id : null;
   if(idCar === null) return;
   else{
     if (elementClick.dataset.action === 'delete') {
@@ -72,17 +72,25 @@ garage.node.addEventListener('click', async (e) => {
       changeButton!.dataset.carID = `c${idCar}`;
       GetOneCar(idCar!);
     } else if (elementClick.dataset.action === 'start') {
-      const dataStart = await StartEngine(idCar, STATUS.started) as unknown as carTypes.IEngineResponse;
-      DisabledButtons(elementClick)
-      const dataDrive = StartEngine(idCar, STATUS.drive);
-      StartAnimation(idCar, dataStart.data);
-      if((await dataDrive).status === 500) {
-        StopAnimation(idCar)};
+      DriveCar(idCar);
+      DisabledButtons(elementClick);
+      DisabledButton('race');
     } else if (elementClick.dataset.action === 'reset') {
-      StartEngine(idCar, STATUS.stopped);
-      ResetAnimation(idCar);
-      DisabledButtons(elementClick)
+      StopCar(idCar);
+      DisabledButtons(elementClick);
+      DisabledButton('race');
     }
   }
 })
 
+//RASE BUTTONS
+garage.race.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement;
+  if (elementClick.id === 'race') {
+    DriveAllCars();
+    DisabledButtons(elementClick);
+  } else if (elementClick.id === 'reset') {
+    StopAllCars();
+    DisabledButtons(elementClick);
+  }
+})

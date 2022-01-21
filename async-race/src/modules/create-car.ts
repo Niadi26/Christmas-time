@@ -2,7 +2,7 @@ import * as fetchCar from "./fetch-API";
 import { Car } from "./data-car/data-classCar";
 import * as carTypes from "./data-car/data-Icars";
 import { garage } from "./DOM/garage-page";
-import { PengingInputs } from "./additional-func";
+import { PengingInputs, DrawResult, StartAnimation, StopAnimation, ResetAnimation } from "./additional-func";
 
 const PATH = {
     garage: '/garage',
@@ -17,8 +17,8 @@ export const STATUS = {
 }
 
 let carsCount: number;
-const carArray: carTypes.Cars = [];
-const WinnersArray: carTypes.Winners = [];
+export const carArray: carTypes.Cars = [];
+export const WinnersArray: carTypes.Winners = [];
 
 export async function GetAllCars() {
   const parent = document.querySelector('[data-garage=garage]');
@@ -71,7 +71,7 @@ export async function ChangeCar(id: string, name: string = '', color: string) {
   carArray.splice(num, 1, newData);
 }
 
-export const StartEngine = async function StartEngine( id: string | number, status: string): Promise<carTypes.IEngineResponse> {
+export const Engine = async function Engine( id: string | number, status: string): Promise<carTypes.IEngineResponse> {
   const parametrs = [
     {key: 'id', value: id},
     {key:'status', value: status}
@@ -79,3 +79,41 @@ export const StartEngine = async function StartEngine( id: string | number, stat
   const data = await fetchCar.engineCar(PATH.engine, parametrs) as carTypes.IEngineResponse;
   return data;
 }
+
+export async function DriveCar(id: string): Promise<carTypes.IRaceResult> {
+  const dataStart = await Engine(id, STATUS.started) as unknown as carTypes.IEngineResponse;
+  const dataDrive = Engine(id, STATUS.drive);
+  const time = StartAnimation(id, dataStart.data);
+  if((await dataDrive).status === 500) {
+    StopAnimation(id)
+  };
+  return {id: id, time: time, status: (await dataDrive).status};
+}
+
+export async function StopCar(id: string) {
+  const dataEnd = await Engine(id, STATUS.stopped);
+  ResetAnimation(id);
+}
+
+export const DriveAllCars = async function() {
+  const resultsArray = carArray.map( async (car) => {
+    const result = await DriveCar(car.id);
+    return result;
+  });
+  const endResult = await Promise.all(resultsArray);
+  endResult.sort((a, b) => a.time > b.time ? 1 : -1);
+  console.log(endResult);
+  for(let i = 0; i < endResult.length; i++) {
+    if (endResult[i].status !== 500) {
+      DrawResult(endResult[i].id);
+      break;
+    }
+    continue
+  }
+};
+
+export const StopAllCars = function() {
+  carArray.map( async (car) => {
+   StopCar(car.id);
+})
+};
