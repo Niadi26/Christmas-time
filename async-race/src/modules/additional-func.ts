@@ -10,12 +10,12 @@ export function PengingInputs(id: string, texstInput: HTMLInputElement, colorInp
     colorInput.addEventListener('input', () => ChangeCarColor(carColor, colorInput));
   }
   
-  export function StopPendingInputs(id: string, texstInput: HTMLInputElement, colorInput: HTMLInputElement) {
-    const carName = document.querySelector(`[data-name=c${id}]`) as HTMLElement;
-    const carColor = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
-    texstInput.removeEventListener('input', () => ChangeCarName(carName, texstInput));
-    colorInput.removeEventListener('input', () => ChangeCarColor(carColor, colorInput));
-  }
+  // export function StopPendingInputs(id: string, texstInput: HTMLInputElement, colorInput: HTMLInputElement) {
+  //   const carName = document.querySelector(`[data-name=c${id}]`) as HTMLElement;
+  //   const carColor = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  //   texstInput.removeEventListener('input', () => ChangeCarName);
+  //   colorInput.removeEventListener('input', () => ChangeCarColor);
+  // }
   
   export function ChangeCarName(divName: HTMLElement, inputName: HTMLInputElement) {
     const lastName = divName.innerHTML;

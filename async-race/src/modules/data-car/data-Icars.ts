@@ -1,7 +1,7 @@
 export interface ICar {
     'name': string,
     'color': string,
-    'id': number,
+    'id': string,
 }
 export interface ICarCreate {
     'name': string,

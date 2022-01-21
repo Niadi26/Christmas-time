@@ -4,7 +4,7 @@ import { DomElement } from '../create-element';
 export class Car {
   public node: HTMLElement;
   public car: HTMLElement;
-  constructor(id: number, name: string, color: string) {
+  constructor(id: string, name: string, color: string) {
     const parent = document.querySelector('body');
     const wrapper = new DomElement('div', 'wrapper', '', '', parent!);
     wrapper.node.setAttribute('id', `${id}`);

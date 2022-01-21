@@ -6,7 +6,7 @@ import { NAVITEMS } from "./DOM/navigation";
 import { GetAllCars } from "./create-car";
 import * as carTypes from "./data-car/data-Icars";
 import {CreateCar, DeleteCar, GetOneCar, ChangeCar, StartEngine,  STATUS } from './create-car';
-import { StopPendingInputs, StartAnimation, StopAnimation, ResetAnimation, DisabledButtons } from './additional-func';
+import { StartAnimation, StopAnimation, ResetAnimation, DisabledButtons } from './additional-func';
 
 export function createPage(page: HTMLElement = garage.node): void {
     document.body.append(header.node);
@@ -45,9 +45,10 @@ createCars.node.addEventListener('click', (e) => {
           CreateCar(name, color);
         } 
       } else if (elementClick.id === 'change') {
-        ChangeCar('1', name, color);                        //how get id???     -ls
+        const idCar = elementClick.dataset.carID?.slice(1);
+        ChangeCar(idCar!, name, color);
         elementClick.setAttribute('disabled', 'true');
-        StopPendingInputs('1', inputName, inputColor);      //how get id???
+        //StopPendingInputs(idCar!, inputName, inputColor);
       }
       inputName.value = '';
     } else if (elementClick.id === 'create100') {
@@ -67,6 +68,8 @@ garage.node.addEventListener('click', async (e) => {
       parent?.remove();
       DeleteCar(idCar!);
     } else if (elementClick.dataset.action === 'update') {
+      const changeButton = document.getElementById('change');
+      changeButton!.dataset.carID = `c${idCar}`;
       GetOneCar(idCar!);
     } else if (elementClick.dataset.action === 'start') {
       const dataStart = await StartEngine(idCar, STATUS.started) as unknown as carTypes.IEngineResponse;

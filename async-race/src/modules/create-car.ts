@@ -17,6 +17,8 @@ export const STATUS = {
 }
 
 let carsCount: number;
+const carArray: carTypes.Cars = [];
+const WinnersArray: carTypes.Winners = [];
 
 export async function GetAllCars() {
   const parent = document.querySelector('[data-garage=garage]');
@@ -25,6 +27,7 @@ export async function GetAllCars() {
   carsCount = (await data).length;
   garage.changeTitle(carsCount);
   (await data).forEach((el) => {
+      carArray.push(el);
       const car = new Car(el.id, el.name, el.color);
       parent!.append(car.node);
   })
@@ -37,12 +40,16 @@ export async function CreateCar(name: string = '', color: string) {
   parent!.append(car.node)
   carsCount += 1;
   garage.changeTitle(carsCount);
+  carArray.push(data);
 }
 
-export async function DeleteCar(id: string) {
-  const data = await fetchCar.deleteCar(PATH.garage, id);
+export async function DeleteCar(idCar: string) {
+  const data = await fetchCar.deleteCar(PATH.garage, idCar);
   carsCount -= 1;
   garage.changeTitle(carsCount);
+  const ArrayIndexes = carArray.map(x => String(x.id));
+  const num = ArrayIndexes.indexOf(idCar);
+  carArray.splice(num, 1);
 }
 
 export async function GetOneCar(id: string) {
@@ -57,7 +64,11 @@ export async function GetOneCar(id: string) {
 }
 
 export async function ChangeCar(id: string, name: string = '', color: string) {
-  const data = fetchCar.updateCar(PATH.garage, id, {name: name, color: color});
+  const data = await fetchCar.updateCar(PATH.garage, id, {name: name, color: color});
+  const newData = await fetchCar.getCar(PATH.garage, id);
+  const ArrayIndexes = carArray.map(x => String(x.id));
+  const num = ArrayIndexes.indexOf(id);
+  carArray.splice(num, 1, newData);
 }
 
 export const StartEngine = async function StartEngine( id: string | number, status: string): Promise<carTypes.IEngineResponse> {
