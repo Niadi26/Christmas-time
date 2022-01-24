@@ -38,6 +38,8 @@ class Garage {
   public title: HTMLElement;
   public garage: HTMLElement;
   public race: HTMLElement;
+  public pagesChoose: HTMLElement;
+  public page: HTMLElement;
   constructor(createCarBlock: HTMLElement) {
     const main = new DomElement('main', '', '');
     const wrapper = new DomElement('div', '', '', '', main.node);
@@ -54,16 +56,27 @@ class Garage {
     garage.node.dataset.garage = 'garage';
     const buttonsPug = new DomElement('div', '', '', '', wrapper.node);
     const prevButton = new DomElement('button', '', 'Prev', '', buttonsPug.node);
-    const nexstButton = new DomElement('button', '', 'Next', '', buttonsPug.node);
+    //prevButton.node.setAttribute('disabled', 'true');
+    prevButton.node.setAttribute('id', 'prev');
+    const nextButton = new DomElement('button', '', 'Next', '', buttonsPug.node);
+    //nextButton.node.setAttribute('disabled', 'true');
+    nextButton.node.setAttribute('id', 'next');
 
     this.node = main.node;
     this.title = title.node;
     this.garage = garage.node;
     this.race = buttons.node;
+    this.pagesChoose = buttonsPug.node;
+    this.page = pageCount.node;
   }
 
   changeTitle(num: number) {
     this.title.innerHTML = `Garage (${num})`
+  }
+
+  changePage() {
+    const num = localStorage.getItem('garagePage');
+    this.page.innerHTML = `Page #${num}`
   }
 }
 

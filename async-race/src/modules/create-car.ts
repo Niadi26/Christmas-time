@@ -151,7 +151,6 @@ export async function GetAllWinners() {
   winnersCount = (await data).length;
   winners.changeTitle(winnersCount);
   (await data).forEach((el, index) => {
-      //winnersArray.push(el);
       const carsParams = carArray.find(x => +x.id === el.id);
       const num = index + 1;
       const winner = new TableLine(num, carIMG(carsParams!.color), carsParams!.name, el.wins, el.time);
@@ -161,23 +160,14 @@ export async function GetAllWinners() {
 
 export async function DeleteWinner(idCar: string) {
   const data = await fetchCar.deleteCar(PATH.winners, idCar);
-  // winnersCount -= 1;
-  // winners.changeTitle(winnersCount);
-  // const ArrayIndexes = winnersArray.map(x => String(x.id));
-  // const num = ArrayIndexes.indexOf(idCar);
-  // winnersArray.splice(num, 1);
 }
 
 export async function CreateWinner(id: string, wins: number, time: string) {
   const data = await fetchCar.createCar(PATH.winners, {id: id, wins: wins, time: time});
-  //winnersArray.push(data);
 }
 
 export async function ChangeWinner(id: string, wins: number, time: string) {
   const data = await fetchCar.updateCar(PATH.winners, id, {wins: wins, time: time});
-  // const ArrayIndexes = winnersArray.map(x => String(x.id));
-  // const num = ArrayIndexes.indexOf(id);
-  // winnersArray.splice(num, 1, data);
 }
 
 export async function makeChangeWinners (id: string, time: number) { 
@@ -186,4 +176,18 @@ export async function makeChangeWinners (id: string, time: number) {
   let currentTime; 
   (haveWinner.time > convertTime) ? currentTime = convertTime : currentTime = haveWinner.time;
   (isEmpty(haveWinner)) ?  CreateWinner(id , 1, currentTime) : ChangeWinner(id , haveWinner.wins + 1, currentTime);
+}
+
+export async function countMaxGaragePage() {
+  const allCars = await fetchCar.getCarsCount(PATH.garage, [{key: '_page', value: 1}, {key: '_limit', value:1}]);
+  if(!allCars) return;
+  const maxPage = Math.ceil(+allCars / PAGE_LIMIT.garage);
+  return maxPage;
+}
+
+export async function countMaxWinnersPage() {
+  const allCars = await fetchCar.getCarsCount(PATH.winners, [{key: '_page', value: 1}, {key: '_limit', value:1}]);
+  if(!allCars) return;
+  const maxPage = Math.ceil(+allCars / PAGE_LIMIT.winners);
+  return maxPage;
 }

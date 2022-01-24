@@ -3,7 +3,8 @@ import { footer } from "./DOM/footer";
 import { garage, createCars } from "./DOM/garage-page";
 import { winners } from "./DOM/winners-page";
 import { NAVITEMS } from "./DOM/navigation";
-import { CreateCar, DeleteCar, GetOneCar, ChangeCar, GetAllCars } from "./create-car";
+import { pageAttention } from "./DOM/car-wins";
+import { CreateCar, DeleteCar, GetOneCar, ChangeCar, GetAllCars, countMaxGaragePage, countMaxWinnersPage } from "./create-car";
 import {  DriveAllCars, StopAllCars, StopCar, DriveCar, GetAllWinners, makeChangeWinners } from './create-car';
 import { DisabledButtons, DisabledButton, StopPendingInputs, chooseOrder } from './additional-func';
 import * as carTypes from "./data-car/data-Icars";
@@ -117,3 +118,65 @@ winners.tableHeader.addEventListener('click', (e) => {
   }
 })
 
+//CHANGE GARAGE PAGE
+garage.pagesChoose.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement;
+  const parent = document.querySelector('[data-garage=garage]');
+  const pageCount = localStorage.getItem('garagePage');
+  if (elementClick.id === 'prev') {
+    const newPageCount = +pageCount! - 1;
+    if(newPageCount === 0) {
+      pageAttention('first');
+      return
+    }  
+    localStorage.setItem('garagePage', `${newPageCount}`);
+    parent!.innerHTML = '';
+    GetAllCars();
+    garage.changePage();
+  } else if (elementClick.id === 'next') {
+    const newPageCount = +pageCount! + 1;
+    const maxPage = countMaxGaragePage();
+    maxPage.then((maxPage) => {
+      if(maxPage! < newPageCount) {
+        pageAttention('last');
+        return
+      } else {
+        localStorage.setItem('garagePage', `${newPageCount}`);
+        parent!.innerHTML = '';
+        GetAllCars();
+        garage.changePage();
+      }
+    });
+  }
+})
+
+//CHANGE WINNERS PAGE  
+winners.pagesChoose.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement;
+  const pageCount = localStorage.getItem('winnersPage');
+  if (elementClick.id === 'prev') {
+    const newPageCount = +pageCount! - 1;
+    if(newPageCount === 0) {
+      pageAttention('first');
+      return
+    }  
+    localStorage.setItem('winnersPage', `${newPageCount}`);
+    winners.table.innerHTML = '';
+    GetAllWinners();
+    winners.changePage();
+  } else if (elementClick.id === 'next') {
+    const newPageCount = +pageCount! + 1;
+    const maxPage = countMaxWinnersPage();
+    maxPage.then((maxPage) => {
+      if(maxPage! < newPageCount) {
+        pageAttention('last');
+        return
+      } else {
+        localStorage.setItem('winnersPage', `${newPageCount}`);
+        winners.table.innerHTML = '';
+        GetAllWinners();
+        winners.changePage();
+      }
+    });
+  }
+})

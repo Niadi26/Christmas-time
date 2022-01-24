@@ -9,12 +9,23 @@ const queryParametrs = (parametrs: carTypes.queryParametrs = []): string => {
 export const getCars = async (path: string, parametrs: carTypes.queryParametrs = []) =>{
   try {
     const response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`);
+    const allCars = response.headers.get('X-Total-Count');
     const data = await response.json();
     return data;
   } catch(error) {
      console.log(error)
   }
 } 
+
+export const getCarsCount = async (path: string, parametrs: carTypes.queryParametrs = []) =>{
+  try {
+    const response = await fetch(`${homeURL}${path}${queryParametrs(parametrs)}`);
+    const allCars = response.headers.get('X-Total-Count');
+    return allCars;
+  } catch(error) {
+    console.log(error)
+  }
+}
 
 export const getCar = async (path: string, id: string) =>{
   try {
