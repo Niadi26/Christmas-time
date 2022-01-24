@@ -41,10 +41,8 @@ class Winners {
     tableBody.node.dataset.table = 'table';
     const buttonsPug = new DomElement('div', '', '', '', wrapper.node);
     const prevButton = new DomElement('button', '', 'Prev', '', buttonsPug.node);
-    prevButton.node.setAttribute('disabled', 'true');
     prevButton.node.setAttribute('id', 'prev');
     const nextButton = new DomElement('button', '', 'Next', '', buttonsPug.node);
-    nextButton.node.setAttribute('disabled', 'true');
     nextButton.node.setAttribute('id', 'next');
 
   

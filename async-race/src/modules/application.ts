@@ -4,8 +4,8 @@ import { garage, createCars } from "./DOM/garage-page";
 import { winners } from "./DOM/winners-page";
 import { NAVITEMS } from "./DOM/navigation";
 import { pageAttention } from "./DOM/car-wins";
-import { CreateCar, DeleteCar, GetOneCar, ChangeCar, GetAllCars, countMaxGaragePage, countMaxWinnersPage } from "./create-car";
-import {  DriveAllCars, StopAllCars, StopCar, DriveCar, GetAllWinners, makeChangeWinners } from './create-car';
+import { CreateCar, DeleteCar, GetOneCar, ChangeCar, GetAllCars, countMaxGaragePage, countMaxWinnersPage, countAllWinners } from "./create-car";
+import {  DriveAllCars, StopAllCars, StopCar, DriveCar, GetAllWinners, makeChangeWinners, generate100Cars, countAllCars } from './create-car';
 import { DisabledButtons, DisabledButton, StopPendingInputs, chooseOrder } from './additional-func';
 import * as carTypes from "./data-car/data-Icars";
 
@@ -22,10 +22,13 @@ header.node.addEventListener('click', (e) => {
     if(elementClick.id == NAVITEMS[0]) {
       parent!.innerHTML = '';
       createPage();
+      countAllCars();
       GetAllCars();
+      if(garage.raceButton.hasAttribute('disabled')) garage.raceButton.removeAttribute('disabled');
     } else if(elementClick.id == NAVITEMS[1]) {
       parent!.innerHTML = '';
       createPage(winners.node);
+      countAllWinners();
       GetAllWinners();
     }
 })
@@ -54,7 +57,7 @@ createCars.node.addEventListener('click', (e) => {
       }
       inputName.value = '';
     } else if (elementClick.id === 'create100') {
-      console.log('100')                                    //make this
+      generate100Cars();
     }
   }
 })

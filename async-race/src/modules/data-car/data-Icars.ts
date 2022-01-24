@@ -39,7 +39,7 @@ export type ResultRace = IRaceResult[]
 
 
 export interface IWinner {
-    "id": number | string,
+    "id": string,
     "wins": number,
     "time": number,
 }

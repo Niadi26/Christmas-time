@@ -4,7 +4,7 @@ import { Car } from "./data-car/data-classCar";
 import { carIMG } from "./data-car/data-svgCar";
 import { garage } from "./DOM/garage-page";
 import { winners, TableLine } from "./DOM/winners-page";
-import { PengingInputs, DrawResult, StartAnimation, StopAnimation, ResetAnimation, isEmpty } from "./additional-func";
+import { PengingInputs, DrawResult, StartAnimation, StopAnimation, ResetAnimation, isEmpty, getRandomColor, getRandomName } from "./additional-func";
 
 const PATH = {
     garage: '/garage',
@@ -24,11 +24,6 @@ const PAGE_LIMIT = {
 };
 
 export const carArray: carTypes.Cars = [];
-//export const winnersArray: carTypes.Winners = [];
-let allCars: number = 4;
-let allWinners: number = 1;
-let maxPageGarage = allCars / PAGE_LIMIT.garage;
-let maxPageWinners = allWinners / PAGE_LIMIT.winners;
 let carsCount: number;
 let winnersCount : number;
 
@@ -38,7 +33,6 @@ export async function GetAllCars() {
   const parent = document.querySelector('[data-garage=garage]');
   parent!.innerHTML = '';
   const data = await fetchCar.getCars(PATH.garage, [{key: '_page', value: page}, {key: '_limit', value: PAGE_LIMIT.garage}]) as Promise<carTypes.Cars>;
-  carsCount = (await data).length;
   garage.changeTitle(carsCount);
   carArray.length = 0;
   (await data).forEach((el) => {
@@ -50,12 +44,12 @@ export async function GetAllCars() {
 
 export async function CreateCar(name: string = '', color: string) {
   const data = await fetchCar.createCar(PATH.garage, {name: name, color: color});
+  carsCount += 1;
   if(carsCount < 7) {
   const parent = document.querySelector('[data-garage=garage]');
   carArray.push(data);
   const car = new Car(data.id, data.name, data.color);
   parent!.append(car.node);
-  carsCount += 1;
   garage.changeTitle(carsCount);
   }
 }
@@ -148,13 +142,14 @@ export async function GetAllWinners() {
   const parent = document.querySelector('[data-table=table]');
   parent!.innerHTML = '';
   const data = await fetchCar.getCars(PATH.winners, [{key: '_page', value: page}, {key: '_limit', value: PAGE_LIMIT.winners}, {key: '_sort', value: sortName}, {key: '_order', value: sortOrder}]) as Promise<carTypes.Winners>;
-  winnersCount = (await data).length;
   winners.changeTitle(winnersCount);
   (await data).forEach((el, index) => {
-      const carsParams = carArray.find(x => +x.id === el.id);
+      const data = fetchCar.getCar(PATH.garage, el.id);
       const num = index + 1;
-      const winner = new TableLine(num, carIMG(carsParams!.color), carsParams!.name, el.wins, el.time);
+      data.then((data) => {
+      const winner = new TableLine(num, carIMG(data!.color), data!.name, el.wins, el.time);
       parent!.append(winner.node);
+      })
   })
 }
 
@@ -175,7 +170,7 @@ export async function makeChangeWinners (id: string, time: number) {
   const convertTime = (time / 1000).toFixed(1);
   let currentTime; 
   (haveWinner.time > convertTime) ? currentTime = convertTime : currentTime = haveWinner.time;
-  (isEmpty(haveWinner)) ?  CreateWinner(id , 1, currentTime) : ChangeWinner(id , haveWinner.wins + 1, currentTime);
+  (isEmpty(haveWinner)) ?  CreateWinner(id , 1, convertTime) : ChangeWinner(id , haveWinner.wins + 1, currentTime);
 }
 
 export async function countMaxGaragePage() {
@@ -190,4 +185,23 @@ export async function countMaxWinnersPage() {
   if(!allCars) return;
   const maxPage = Math.ceil(+allCars / PAGE_LIMIT.winners);
   return maxPage;
+}
+
+export async function generate100Cars() {
+  const arr = new Array(100).fill(1).map((item) => item = {name: getRandomName(), color: getRandomColor()});
+  const promises = arr.map(async (item) => { await CreateCar(item.name, item.color)
+  });
+  const endResult = await Promise.all(promises);
+  countAllCars();
+  garage.changeTitle(carsCount);
+}
+
+export async function countAllCars() {
+  const allCars = await fetchCar.getCarsCount(PATH.garage, [{key: '_page', value: 1}, {key: '_limit', value:1}]);
+  carsCount = +allCars!;
+}
+
+export async function countAllWinners() {
+  const allCars = await fetchCar.getCarsCount(PATH.winners, [{key: '_page', value: 1}, {key: '_limit', value:1}]);
+  winnersCount = +allCars!;
 }

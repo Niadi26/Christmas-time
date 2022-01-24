@@ -2,6 +2,8 @@ import { carIMG } from "./data-car/data-svgCar";
 import * as carTypes from "./data-car/data-Icars";
 import { carArray } from "./create-car";
 import { Winner } from "./DOM/car-wins";
+import { modelsCars } from "./data-car/models-cars";
+import { brandsCars } from "./data-car/brands-cars";
 
 const CAR_WIDTH = 110;
 
@@ -94,4 +96,19 @@ export function chooseOrder(elementClick: HTMLElement) {
     elementClick.classList.add('upp');
     localStorage.setItem('sortOrder', 'ASC');
   }
+}
+
+export function getRandomName(): string {
+  const lastName = modelsCars[Math.floor(Math.random() * modelsCars.length)];
+  const firstName = brandsCars[Math.floor(Math.random() * brandsCars.length)];
+  return `${firstName} ${lastName}`
+}
+
+export function getRandomColor(): string {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)]
+  }
+  return color;
 }
