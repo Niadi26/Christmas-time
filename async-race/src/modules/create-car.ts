@@ -62,12 +62,12 @@ export async function createCar(name: string = "", color: string) {
     color: color,
   });
   carsCount += 1;
+  garage.changeTitle(carsCount);
   if (carsCount < 7) {
     const parent = document.querySelector("[data-garage=garage]");
     carArray.push(data);
     const car = new Car(data.id, data.name, data.color);
     parent!.append(car.node);
-    garage.changeTitle(carsCount);
   }
 }
 
