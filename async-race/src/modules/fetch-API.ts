@@ -26,7 +26,7 @@ export const getCar = async (path: string, id: string) =>{
   }
 } 
 
-export const createCar = async (path: string, body: carTypes.ICarCreate) =>{
+export const createCar = async (path: string, body: carTypes.ICarCreate | carTypes.IWinnerCreate) =>{
   try {
     const response = await fetch(`${homeURL}${path}`, {
       method: "POST",

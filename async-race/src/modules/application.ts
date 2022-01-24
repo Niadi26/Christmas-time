@@ -3,10 +3,10 @@ import { footer } from "./DOM/footer";
 import { garage, createCars } from "./DOM/garage-page";
 import { winners } from "./DOM/winners-page";
 import { NAVITEMS } from "./DOM/navigation";
-import { GetAllCars } from "./create-car";
+import { CreateCar, DeleteCar, GetOneCar, ChangeCar, GetAllCars } from "./create-car";
+import {  DriveAllCars, StopAllCars, StopCar, DriveCar, GetAllWinners, makeChangeWinners } from './create-car';
+import { DisabledButtons, DisabledButton, StopPendingInputs, chooseOrder } from './additional-func';
 import * as carTypes from "./data-car/data-Icars";
-import {CreateCar, DeleteCar, GetOneCar, ChangeCar,  DriveAllCars, StopAllCars, StopCar, DriveCar } from './create-car';
-import { DisabledButtons, DisabledButton } from './additional-func';
 
 export function createPage(page: HTMLElement = garage.node): void {
     document.body.append(header.node);
@@ -25,6 +25,7 @@ header.node.addEventListener('click', (e) => {
     } else if(elementClick.id == NAVITEMS[1]) {
       parent!.innerHTML = '';
       createPage(winners.node);
+      GetAllWinners();
     }
 })
 
@@ -45,10 +46,10 @@ createCars.node.addEventListener('click', (e) => {
           CreateCar(name, color);
         } 
       } else if (elementClick.id === 'change') {
-        const idCar = elementClick.dataset.carID?.slice(1);
+        const idCar = localStorage.getItem('changeCarId'); 
         ChangeCar(idCar!, name, color);
         elementClick.setAttribute('disabled', 'true');
-        //StopPendingInputs(idCar!, inputName, inputColor);   //how reset listener
+        StopPendingInputs(idCar!, inputName, inputColor);
       }
       inputName.value = '';
     } else if (elementClick.id === 'create100') {
@@ -65,11 +66,13 @@ garage.garage.addEventListener('click', async (e) => {
   if(idCar === null) return;
   else{
     if (elementClick.dataset.action === 'delete') {
-      parent?.remove();
       DeleteCar(idCar!);
+      const garage = document.querySelector('[data-garage=garage]');
+      garage!.innerHTML = '';
+      GetAllCars();
     } else if (elementClick.dataset.action === 'update') {
       const changeButton = document.getElementById('change');
-      changeButton!.dataset.carID = `c${idCar}`;
+      localStorage.setItem('changeCarId', idCar);
       GetOneCar(idCar!);
     } else if (elementClick.dataset.action === 'start') {
       DriveCar(idCar);
@@ -87,10 +90,30 @@ garage.garage.addEventListener('click', async (e) => {
 garage.race.addEventListener('click', (e) => {
   const elementClick = e.target as HTMLElement;
   if (elementClick.id === 'race') {
-    DriveAllCars();
     DisabledButtons(elementClick);
+    raceCar();
   } else if (elementClick.id === 'reset') {
     StopAllCars();
     DisabledButtons(elementClick);
   }
 })
+
+async function raceCar () {
+    const winner = await DriveAllCars();
+    makeChangeWinners(winner!.id, winner!.time);
+}
+
+//WINNERS SORT BUTTONS
+winners.tableHeader.addEventListener('click', (e) => {
+  const elementClick = e.target as HTMLElement;
+  if (elementClick.id === 'winsSort') {
+    localStorage.setItem('sortName', 'wins');
+    chooseOrder(elementClick);
+    GetAllWinners();
+  } else if (elementClick.id === 'timeSort') {
+    localStorage.setItem('sortName', 'time');
+    chooseOrder(elementClick);
+    GetAllWinners();
+  }
+})
+

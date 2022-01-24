@@ -3,12 +3,15 @@ export interface ICar {
     'color': string,
     'id': string,
 }
+
+export type Cars = ICar[];
+
 export interface ICarCreate {
     'name': string,
     'color': string
 }
 
-export type Cars = ICar[];
+
 
 export interface IEngine {
     "velocity": number,
@@ -20,6 +23,11 @@ export interface IEngineResponse {
     status: number | string | undefined
 }
 
+export interface IEngineDrive {
+    "success": boolean
+}
+
+
 export interface IRaceResult {
     id: string,
     time: number,
@@ -28,22 +36,23 @@ export interface IRaceResult {
 
 export type ResultRace = IRaceResult[]
 
-export interface IEngineDrive {
-    "success": boolean
-}
+
 
 export interface IWinner {
-    "id": number,
+    "id": number | string,
     "wins": number,
     "time": number,
 }
 
 export interface IWinnerCreate {
+    "id"?: string,
     "wins": number,
-    "time": number,
+    "time": string,
 }
 
 export type Winners = IWinner[]
+
+
 
 export type queryParametrs = IqueryParametr[] | [];
 
