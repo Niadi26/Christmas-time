@@ -1,14 +1,16 @@
-import { DomElement } from "../create-element";
-import { navigation } from "./navigation";
+import { DomElement } from '../create-element';
+import { navigation } from './navigation';
 
 class Header {
   public node: HTMLElement;
+
   public nav: HTMLElement;
+
   constructor() {
-    const header = new DomElement("header", "", "");
-    const navigation = new DomElement("nav", "", "", "", header.node);
+    const header = new DomElement('header', '', '');
+    const navigationBlock = new DomElement('nav', '', '', '', header.node);
     this.node = header.node;
-    this.nav = navigation.node;
+    this.nav = navigationBlock.node;
   }
 }
 

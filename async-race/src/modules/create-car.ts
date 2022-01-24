@@ -1,9 +1,14 @@
-import * as fetchCar from "./fetch-API";
-import * as carTypes from "./data-car/data-Icars";
-import { Car } from "./data-car/data-classCar";
-import { carIMG } from "./data-car/data-svgCar";
-import { garage } from "./DOM/garage-page";
-import { winners, TableLine } from "./DOM/winners-page";
+/* eslint-disable no-return-assign */
+/* eslint-disable default-param-last */
+/* eslint-disable no-unused-expressions */
+
+import * as fetchCar from './fetch-API';
+import * as carTypes from './data-car/data-Icars';
+import { Car } from './data-car/data-classCar';
+import { carIMG } from './data-car/data-svgCar';
+import { garage } from './DOM/garage-page';
+import { winners } from './DOM/winners-page';
+import { TableLine } from './DOM/table-line';
 import {
   pengingInputs,
   drawResult,
@@ -13,18 +18,18 @@ import {
   isEmpty,
   getRandomColor,
   getRandomName,
-} from "./additional-func";
+} from './additional-func';
 
 const PATH = {
-  garage: "/garage",
-  engine: "/engine",
-  winners: "/winners",
+  garage: '/garage',
+  engine: '/engine',
+  winners: '/winners',
 };
 
 export const STATUS = {
-  started: "started",
-  drive: "drive",
-  stopped: "stopped",
+  started: 'started',
+  drive: 'drive',
+  stopped: 'stopped',
 };
 
 const PAGE_LIMIT = {
@@ -38,14 +43,14 @@ let winnersCount: number;
 
 export async function getAllCars() {
   let page: string;
-  localStorage.getItem("garagePage")
-    ? (page = localStorage.getItem("garagePage") as string)
-    : (page = "1");
-  const parent = document.querySelector("[data-garage=garage]");
-  parent!.innerHTML = "";
+  localStorage.getItem('garagePage')
+    ? (page = localStorage.getItem('garagePage') as string)
+    : (page = '1');
+  const parent = document.querySelector('[data-garage=garage]');
+  parent!.innerHTML = '';
   const data = (await fetchCar.getCars(PATH.garage, [
-    { key: "_page", value: page },
-    { key: "_limit", value: PAGE_LIMIT.garage },
+    { key: '_page', value: page },
+    { key: '_limit', value: PAGE_LIMIT.garage },
   ])) as Promise<carTypes.Cars>;
   garage.changeTitle(carsCount);
   carArray.length = 0;
@@ -56,19 +61,23 @@ export async function getAllCars() {
   });
 }
 
-export async function createCar(name: string = "", color: string) {
+export async function createCar(name = '', color: string) {
   const data = await fetchCar.createCar(PATH.garage, {
-    name: name,
-    color: color,
+    name,
+    color,
   });
   carsCount += 1;
   garage.changeTitle(carsCount);
   if (carsCount < 7) {
-    const parent = document.querySelector("[data-garage=garage]");
+    const parent = document.querySelector('[data-garage=garage]');
     carArray.push(data);
     const car = new Car(data.id, data.name, data.color);
     parent!.append(car.node);
   }
+}
+
+export async function deleteWinner(idCar: string) {
+  const data = await fetchCar.deleteCar(PATH.winners, idCar);
 }
 
 export async function deleteCar(idCar: string) {
@@ -86,22 +95,22 @@ export async function deleteCar(idCar: string) {
 export async function getOneCar(id: string) {
   const data = await fetchCar.getCar(PATH.garage, id);
   const inputName = document.querySelector(
-    `[data-name=change]`
+    '[data-name=change]',
   ) as HTMLInputElement;
   const inputColor = document.querySelector(
-    `[data-color=change]`
+    '[data-color=change]',
   ) as HTMLInputElement;
-  const button = document.getElementById("change");
-  button!.removeAttribute("disabled");
+  const button = document.getElementById('change');
+  button!.removeAttribute('disabled');
   inputName.value = data.name;
   inputColor.value = data.color;
   pengingInputs(inputName, inputColor);
 }
 
-export async function changeCar(id: string, name: string = "", color: string) {
+export async function changeCar(id: string, name = '', color: string) {
   const data = await fetchCar.updateCar(PATH.garage, id, {
-    name: name,
-    color: color,
+    name,
+    color,
   });
   const newData = await fetchCar.getCar(PATH.garage, id);
   const ArrayIndexes = carArray.map((x) => String(x.id));
@@ -111,15 +120,15 @@ export async function changeCar(id: string, name: string = "", color: string) {
 
 export const engine = async function engine(
   id: string | number,
-  status: string
+  status: string,
 ): Promise<carTypes.IEngineResponse> {
   const parametrs = [
-    { key: "id", value: id },
-    { key: "status", value: status },
+    { key: 'id', value: id },
+    { key: 'status', value: status },
   ];
   const data = (await fetchCar.engineCar(
     PATH.engine,
-    parametrs
+    parametrs,
   )) as carTypes.IEngineResponse;
   return data;
 };
@@ -127,14 +136,14 @@ export const engine = async function engine(
 export async function driveCar(id: string): Promise<carTypes.IRaceResult> {
   const dataStart = (await engine(
     id,
-    STATUS.started
+    STATUS.started,
   )) as unknown as carTypes.IEngineResponse;
   const dataDrive = engine(id, STATUS.drive);
   const time = startAnimation(id, dataStart.data);
   if (!(await dataDrive).data) {
     stopAnimation(id);
   }
-  return { id: id, time: time, status: (await dataDrive).status };
+  return { id, time, status: (await dataDrive).status };
 }
 
 export async function stopCar(id: string) {
@@ -154,6 +163,7 @@ export const driveAllCars = async function () {
       drawResult(endResult[i].id);
       return endResult[i];
     }
+    // eslint-disable-next-line no-continue
     continue;
   }
 };
@@ -166,59 +176,55 @@ export const stopAllCars = function () {
 
 export async function getAllWinners() {
   let page: string;
-  localStorage.getItem("winnersPage")
-    ? (page = localStorage.getItem("winnersPage") as string)
-    : (page = "1");
+  localStorage.getItem('winnersPage')
+    ? (page = localStorage.getItem('winnersPage') as string)
+    : (page = '1');
   let sortName: string;
-  localStorage.getItem("sortName")
-    ? (sortName = localStorage.getItem("sortName") as string)
-    : (sortName = "id");
+  localStorage.getItem('sortName')
+    ? (sortName = localStorage.getItem('sortName') as string)
+    : (sortName = 'id');
   let sortOrder: string;
-  localStorage.getItem("sortOrder")
-    ? (sortOrder = localStorage.getItem("sortOrder") as string)
-    : (sortOrder = "ASD");
+  localStorage.getItem('sortOrder')
+    ? (sortOrder = localStorage.getItem('sortOrder') as string)
+    : (sortOrder = 'ASD');
 
-  const parent = document.querySelector("[data-table=table]");
-  parent!.innerHTML = "";
-  const data = (await fetchCar.getCars(PATH.winners, [
-    { key: "_page", value: page },
-    { key: "_limit", value: PAGE_LIMIT.winners },
-    { key: "_sort", value: sortName },
-    { key: "_order", value: sortOrder },
+  const parent = document.querySelector('[data-table=table]');
+  parent!.innerHTML = '';
+  const dataWinners = (await fetchCar.getCars(PATH.winners, [
+    { key: '_page', value: page },
+    { key: '_limit', value: PAGE_LIMIT.winners },
+    { key: '_sort', value: sortName },
+    { key: '_order', value: sortOrder },
   ])) as Promise<carTypes.Winners>;
   winners.changeTitle(winnersCount);
-  (await data).forEach((el, index) => {
-    const data = fetchCar.getCar(PATH.garage, el.id);
+  (await dataWinners).forEach((el, index) => {
+    const dataCar = fetchCar.getCar(PATH.garage, el.id);
     const num = index + 1;
-    data.then((data) => {
+    dataCar.then((data) => {
       const winner = new TableLine(
         num,
         carIMG(data!.color),
         data!.name,
         el.wins,
-        el.time
+        el.time,
       );
       parent!.append(winner.node);
     });
   });
 }
 
-export async function deleteWinner(idCar: string) {
-  const data = await fetchCar.deleteCar(PATH.winners, idCar);
-}
-
 export async function createWinner(id: string, wins: number, time: string) {
   const data = await fetchCar.createCar(PATH.winners, {
-    id: id,
-    wins: wins,
-    time: time,
+    id,
+    wins,
+    time,
   });
 }
 
 export async function changeWinner(id: string, wins: number, time: string) {
   const data = await fetchCar.updateCar(PATH.winners, id, {
-    wins: wins,
-    time: time,
+    wins,
+    time,
   });
 }
 
@@ -236,8 +242,8 @@ export async function makeChangeWinners(id: string, time: number) {
 
 export async function countMaxGaragePage() {
   const allCars = await fetchCar.getCarsCount(PATH.garage, [
-    { key: "_page", value: 1 },
-    { key: "_limit", value: 1 },
+    { key: '_page', value: 1 },
+    { key: '_limit', value: 1 },
   ]);
   if (!allCars) return;
   const maxPage = Math.ceil(+allCars / PAGE_LIMIT.garage);
@@ -246,17 +252,34 @@ export async function countMaxGaragePage() {
 
 export async function countMaxWinnersPage() {
   const allCars = await fetchCar.getCarsCount(PATH.winners, [
-    { key: "_page", value: 1 },
-    { key: "_limit", value: 1 },
+    { key: '_page', value: 1 },
+    { key: '_limit', value: 1 },
   ]);
   if (!allCars) return;
   const maxPage = Math.ceil(+allCars / PAGE_LIMIT.winners);
   return maxPage;
 }
 
+export async function countAllCars() {
+  const allCars = await fetchCar.getCarsCount(PATH.garage, [
+    { key: '_page', value: 1 },
+    { key: '_limit', value: 1 },
+  ]);
+  carsCount = +allCars!;
+}
+
+export async function countAllWinners() {
+  const allCars = await fetchCar.getCarsCount(PATH.winners, [
+    { key: '_page', value: 1 },
+    { key: '_limit', value: 1 },
+  ]);
+  winnersCount = +allCars!;
+}
+
 export async function generate100Cars() {
   const arr = new Array(100)
     .fill(1)
+    // eslint-disable-next-line no-param-reassign
     .map((item) => (item = { name: getRandomName(), color: getRandomColor() }));
   const promises = arr.map(async (item) => {
     await createCar(item.name, item.color);
@@ -264,20 +287,4 @@ export async function generate100Cars() {
   const endResult = await Promise.all(promises);
   countAllCars();
   garage.changeTitle(carsCount);
-}
-
-export async function countAllCars() {
-  const allCars = await fetchCar.getCarsCount(PATH.garage, [
-    { key: "_page", value: 1 },
-    { key: "_limit", value: 1 },
-  ]);
-  carsCount = +allCars!;
-}
-
-export async function countAllWinners() {
-  const allCars = await fetchCar.getCarsCount(PATH.winners, [
-    { key: "_page", value: 1 },
-    { key: "_limit", value: 1 },
-  ]);
-  winnersCount = +allCars!;
 }

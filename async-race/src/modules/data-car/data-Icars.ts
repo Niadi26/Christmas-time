@@ -47,9 +47,9 @@ export interface IWinnerCreate {
 
 export type Winners = IWinner[];
 
-export type queryParametrs = IqueryParametr[] | [];
-
 export interface IqueryParametr {
   key: string;
   value: string | number;
 }
+
+export type queryParametrs = IqueryParametr[] | []

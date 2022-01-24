@@ -1,11 +1,13 @@
+/* eslint-disable default-param-last */
 export class DomElement {
   public node: HTMLElement;
+
   constructor(
     tagName: string,
-    className = "",
-    innerText = "",
+    className = '',
+    innerText = '',
     parentClass?: string,
-    parentElement?: HTMLElement
+    parentElement?: HTMLElement,
   ) {
     const el = document.createElement(tagName);
     el.className = className;
