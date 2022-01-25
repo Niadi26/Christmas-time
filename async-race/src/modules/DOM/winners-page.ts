@@ -17,7 +17,7 @@ class Winners {
   constructor() {
     const main = new DomElement('main', 'main', '');
     const wrapper = new DomElement('div', '', '', '', main.node);
-    const title = new DomElement('h2', '', 'Winners (1)', '', wrapper.node);
+    const title = new DomElement('h2', '', 'Winners (0)', '', wrapper.node);
     const pageCount = new DomElement('h3', 'page-txt', 'Page #1', '', wrapper.node);
     const table = new DomElement('div', 'table', '', '', wrapper.node);
     const tableHeader = new TableLine(
