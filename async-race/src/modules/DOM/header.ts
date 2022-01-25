@@ -7,7 +7,7 @@ class Header {
   public nav: HTMLElement;
 
   constructor() {
-    const header = new DomElement('header', '', '');
+    const header = new DomElement('header', 'header', '');
     const navigationBlock = new DomElement('nav', '', '', '', header.node);
     this.node = header.node;
     this.nav = navigationBlock.node;

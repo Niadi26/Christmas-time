@@ -15,29 +15,29 @@ class Winners {
   public page: HTMLElement;
 
   constructor() {
-    const main = new DomElement('main', '', '');
+    const main = new DomElement('main', 'main', '');
     const wrapper = new DomElement('div', '', '', '', main.node);
     const title = new DomElement('h2', '', 'Winners (1)', '', wrapper.node);
-    const pageCount = new DomElement('h3', '', 'Page #1', '', wrapper.node);
-    const table = new DomElement('div', '', '', '', wrapper.node);
+    const pageCount = new DomElement('h3', 'page-txt', 'Page #1', '', wrapper.node);
+    const table = new DomElement('div', 'table', '', '', wrapper.node);
     const tableHeader = new TableLine(
       '№',
       'Car',
       'Name',
-      'Wins number',
+      'Wins',
       'Best time',
     );
-    const winsSort = new DomElement('button', '', '@', '', tableHeader.wins);
+    const winsSort = new DomElement('button', 'button-sort', '', '', tableHeader.wins);
     winsSort.node.setAttribute('id', 'winsSort');
-    const timeSort = new DomElement('button', '', '@', '', tableHeader.time);
+    const timeSort = new DomElement('button', 'button-sort', '', '', tableHeader.time);
     timeSort.node.setAttribute('id', 'timeSort');
     table.node.append(tableHeader.node);
     const tableBody = new DomElement('div', '', '', '', table.node);
     tableBody.node.dataset.table = 'table';
-    const buttonsPug = new DomElement('div', '', '', '', wrapper.node);
+    const buttonsPug = new DomElement('div', 'button-wrapper', '', '', wrapper.node);
     const prevButton = new DomElement(
       'button',
-      '',
+      'button_big',
       'Prev',
       '',
       buttonsPug.node,
@@ -45,7 +45,7 @@ class Winners {
     prevButton.node.setAttribute('id', 'prev');
     const nextButton = new DomElement(
       'button',
-      '',
+      'button_big',
       'Next',
       '',
       buttonsPug.node,

@@ -17,29 +17,29 @@ class Garage {
   public raceButton: HTMLElement;
 
   constructor(createCarBlock: HTMLElement) {
-    const main = new DomElement('main', '', '');
+    const main = new DomElement('main', 'main', '');
     const wrapper = new DomElement('div', '', '', '', main.node);
     wrapper.node.append(createCarBlock);
-    const buttons = new DomElement('div', '', '', '', wrapper.node);
-    const startButton = new DomElement('button', '', 'Race', '', buttons.node);
+    const buttons = new DomElement('div', 'button-wrapper', '', '', wrapper.node);
+    const startButton = new DomElement('button', 'button_big', 'Race', '', buttons.node);
     startButton.node.setAttribute('id', 'race');
     const resettButton = new DomElement(
       'button',
-      '',
+      'button_big',
       'Reset',
       '',
       buttons.node,
     );
     resettButton.node.setAttribute('id', 'reset');
     resettButton.node.setAttribute('disabled', 'true');
-    const title = new DomElement('h2', '', 'Garage (4)', '', wrapper.node);
+    const title = new DomElement('h2', '', 'Garage (0)', '', wrapper.node);
     const pageCount = new DomElement('h3', '', 'Page #1', '', wrapper.node);
-    const garage = new DomElement('div', '', '', '', wrapper.node);
+    const garage = new DomElement('div', 'page-txt', '', '', wrapper.node);
     garage.node.dataset.garage = 'garage';
-    const buttonsPug = new DomElement('div', '', '', '', wrapper.node);
+    const buttonsPug = new DomElement('div', 'button-wrapper', '', '', wrapper.node);
     const prevButton = new DomElement(
       'button',
-      '',
+      'button_big',
       'Prev',
       '',
       buttonsPug.node,
@@ -47,7 +47,7 @@ class Garage {
     prevButton.node.setAttribute('id', 'prev');
     const nextButton = new DomElement(
       'button',
-      '',
+      'button_big',
       'Next',
       '',
       buttonsPug.node,
