@@ -9,6 +9,7 @@ import { carIMG } from './data-car/data-svgCar';
 import { garage } from './DOM/garage-page';
 import { winners } from './DOM/winners-page';
 import { TableLine } from './DOM/table-line';
+import { showProblem } from './DOM/car-wins';
 import {
   pengingInputs,
   drawResult,
@@ -52,6 +53,11 @@ export async function getAllCars() {
     { key: '_page', value: page },
     { key: '_limit', value: PAGE_LIMIT.garage },
   ])) as Promise<carTypes.Cars>;
+  if (!data) {
+    garage.changeTitle(0);
+    showProblem();
+    return;
+  }
   garage.changeTitle(carsCount);
   carArray.length = 0;
   (await data).forEach((el) => {
@@ -66,6 +72,7 @@ export async function createCar(name = '', color: string) {
     name,
     color,
   });
+  if (!data) return;
   carsCount += 1;
   garage.changeTitle(carsCount);
   if (carsCount < 7) {
@@ -140,7 +147,8 @@ export async function driveCar(id: string): Promise<carTypes.IRaceResult> {
   )) as unknown as carTypes.IEngineResponse;
   const dataDrive = engine(id, STATUS.drive);
   const time = startAnimation(id, dataStart.data);
-  if (!(await dataDrive).data) {
+  if (!time) return { id, time, status: 500 };
+  if (!(await dataDrive)) {
     stopAnimation(id);
   }
   return { id, time, status: (await dataDrive).status };
@@ -196,6 +204,10 @@ export async function getAllWinners() {
     { key: '_sort', value: sortName },
     { key: '_order', value: sortOrder },
   ])) as Promise<carTypes.Winners>;
+  if (!dataWinners) {
+    winners.changeTitle(0);
+    return;
+  }
   winners.changeTitle(winnersCount);
   (await dataWinners).forEach((el, index) => {
     const dataCar = fetchCar.getCar(PATH.garage, el.id);

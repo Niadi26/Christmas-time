@@ -113,6 +113,7 @@ garage.garage.addEventListener('click', async (e) => {
 // RASE BUTTONS
 async function raceCar() {
   const winner = await driveAllCars();
+  if (!winner) return;
   makeChangeWinners(winner!.id, winner!.time);
 }
 

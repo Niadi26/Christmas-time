@@ -53,6 +53,7 @@ export function startAnimation(id: string, data: carTypes.IEngine) {
   const way = document.body.clientWidth - CAR_WIDTH;
   const time = Math.round(data.distance / data.velocity);
   const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  if (!car) return 0;
   car.classList.add('move');
   car.style.setProperty('--timeCar', `${time}ms`);
   car.style.setProperty('--wayCar', `${way}px`);
@@ -61,11 +62,13 @@ export function startAnimation(id: string, data: carTypes.IEngine) {
 
 export function stopAnimation(id: string) {
   const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  if (!car) return;
   car.classList.add('paused');
 }
 
 export function resetAnimation(id: string) {
   const car = document.querySelector(`[data-car=c${id}]`) as HTMLElement;
+  if (!car) return;
   car.classList.remove('paused');
   car.classList.remove('move');
 }
