@@ -2,6 +2,7 @@ import {DomElement} from './createElement';
 import { TreePage } from './tree-page';
 import { ToysPage } from './toys-page';
 import { makePage } from '..';
+import { timer } from './tree-settings';
 
 const NAVITEMS: Array<string> = [
   'Старт', 

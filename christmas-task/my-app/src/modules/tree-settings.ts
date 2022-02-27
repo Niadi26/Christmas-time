@@ -11,10 +11,8 @@ export const settingsTree = {
   tree: 1,
   bg: 1,
   garland: 1,
-  sound: false,
-  snow: false,
 }
-
+export let timer;
 class Setting {
   public node: HTMLElement;
   public imputsContainer: HTMLElement;
@@ -68,30 +66,21 @@ export class SettingsContainer {
     const audio = new Audio();
     audio.src = './assets/audio/audio.mp3';
     music.node.addEventListener('click', () => {
-      if(loadSettings.sound) {
+      if(audio.paused) {
+        music.node.classList.toggle('form__input-checks_checked');
+        audio.currentTime = 0;
+        audio.play();
+      } else {
         audio.pause();
         music.node.classList.toggle('form__input-checks_checked');
-        loadSettings.sound = false;
-        localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
-      } else {
-          music.node.classList.toggle('form__input-checks_checked');
-          audio.currentTime = 0;
-          audio.play();
-          loadSettings.sound = true;
-          localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
       }
     })
-
     snow.node.addEventListener('click', () => {
-      if(loadSettings.snow) {
-        snow.node.classList.toggle('form__input-checks_checked');
-        loadSettings.snow = false;
-        localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
-      } else {
       snow.node.classList.toggle('form__input-checks_checked');
-      const timer = setInterval(makeSnow, 300);
-      loadSettings.snow = true;
-      localStorage.setItem('settingsTree', JSON.stringify(loadSettings))
+      if(!timer) {
+        timer = setInterval(makeSnow, 300);
+      }  else {
+        timer = clearInterval(timer);
       }
     })
 
