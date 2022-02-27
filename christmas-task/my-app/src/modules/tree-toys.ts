@@ -10,7 +10,7 @@ export class FavoriteContainer {
       const getFavoriteToys = localStorage.getItem('favoriteToys');
       const favoriteToys = JSON.parse(getFavoriteToys!) as [];
       if(favoriteToys.length) {
-        favoriteToys.forEach((el) => {
+        favoriteToys.forEach((el, ind) => {
           const favoriteToy = new FavoriteToy(el, dataToys, parent.node)
         })
       } else {
@@ -26,10 +26,12 @@ export class FavoriteContainer {
 class FavoriteToy {
   constructor(number: number | string, dataToys: Toys, container: HTMLElement) {
     const parent = new DomElement('div', 'tree__toys', '', '', container);
+    parent.node.dataset.index = `${number}`;
     const toyData = dataToys.find(item => item.num == number) as toy;
     const count = new DomElement('div', 'tree-toy__count', `${toyData.count}`, '', parent.node);
     for(let i = 0; i < +toyData.count; i++) {
-      const toy = new DomElement('img', 'tree-toy__img', '', '', parent.node)
+      const toy = new DomElement('img', 'tree-toy__img', '', '', parent.node);
+      toy.node.dataset.index = `${number}`;
       const img = new Image();
       img.src = `./assets/toys/${number}.webp`;
       img.onload = () => {  
@@ -74,7 +76,13 @@ class FavoriteToy {
         toy.node.onmouseup = function() {
           if(!elemBelow || elemBelow != dropElement) {
             count.node.innerHTML = `${++countOfToys}`;
-            parentClick!.append(toy.node);               //
+            if(parentClick != document.body) {
+              parentClick!.append(toy.node);
+            } else {
+              const index = elementClick.dataset.index;
+              const toyContainer = document.querySelector(`[data-index='${index}']`);
+              toyContainer!.append(toy.node);
+            }
             toy.node.style.left = 5 + 'px';
             toy.node.style.top = 5 + 'px';
             toy.node.style.zIndex = '0';

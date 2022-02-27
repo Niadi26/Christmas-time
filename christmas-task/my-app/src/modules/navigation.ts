@@ -28,10 +28,18 @@ class Navigation {
         if(elementClick.id == 'Старт') {
           parent!.innerHTML = '';
           header!.innerHTML = '';
+          const toys = document.querySelectorAll('.tree-toy__img');
+          if(toys.length) {
+            toys.forEach(el => el.remove())
+          }
           makePage()
         } else if(elementClick.id == 'Игрушки') {
           parent!.innerHTML = '';
           header!.innerHTML = '';
+          const toys = document.querySelectorAll('.tree-toy__img');
+          if(toys.length) {
+            toys.forEach(el => el.remove())
+          }
           const pageToys = new ToysPage();
         } else if(elementClick.id == 'Ёлка') {
           parent!.innerHTML = '';
