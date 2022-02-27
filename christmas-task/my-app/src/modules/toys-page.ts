@@ -36,7 +36,7 @@ export class ToysPage {
         const searchResult = sortResult.filter(el => searchFilter.test(el.name));
         if(!searchResult.length) { 
         AlertNoCoincidence()
-        toys = new ToysContainer(sortResult); 
+        toys = new ToysContainer([]); 
         } else {
         toys = new ToysContainer(searchResult);
     }

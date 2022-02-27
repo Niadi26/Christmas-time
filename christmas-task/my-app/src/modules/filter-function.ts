@@ -32,7 +32,7 @@ export const filterShapeToys = function (filtersParametrs: IFilters, dataToys: T
   } else {return toysOnPage}
 }
 
-export const filterColorToys= function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
+export const filterColorToys= function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys | null {
   let rightToys: Toys = [];
   const toysOnPage: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -40,7 +40,8 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.color.white) {
     rightToys = allSerchingToys.filter(el => el.color === 'белый');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -48,7 +49,8 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.color.yellow) {
     rightToys = allSerchingToys.filter(el => el.color === 'желтый');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -56,7 +58,8 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.color.red) {
     rightToys = allSerchingToys.filter(el => el.color === 'красный');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -64,7 +67,8 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.color.green) {
     rightToys = allSerchingToys.filter(el => el.color === 'зелёный');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -72,7 +76,8 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.color.blue) {
     rightToys = allSerchingToys.filter(el => el.color === 'синий');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -82,7 +87,7 @@ export const filterColorToys= function (filtersParametrs: IFilters, filtredToys:
   } else {return toysOnPage}
 }
 
-export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
+export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys: Toys = []): Toys | null {
   const toysOnPage: Toys = [];
   let rightToys: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -92,7 +97,8 @@ export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.size.big) {
     rightToys = allSerchingToys.filter(el => el.size === 'большой');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -100,7 +106,8 @@ export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.size.medium) {
     rightToys = allSerchingToys.filter(el => el.size === 'средний');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -108,7 +115,8 @@ export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys:
   if(filtersParametrs.size.small) {
     rightToys = allSerchingToys.filter(el => el.size === 'малый');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -119,7 +127,7 @@ export const filterSizeToys = function (filtersParametrs: IFilters, filtredToys:
 }
 
 
-export const filterFavoriteToys = function(filtersParametrs: IFilters, filtredToys: Toys = []): Toys {
+export const filterFavoriteToys = function(filtersParametrs: IFilters, filtredToys: Toys = []): Toys | null {
   const toysOnPage: Toys = [];
   let rightToys: Toys = [];
   const allSerchingToys: Toys = filtredToys;
@@ -127,7 +135,8 @@ export const filterFavoriteToys = function(filtersParametrs: IFilters, filtredTo
   if(filtersParametrs.favorite.favorite) {
     rightToys = allSerchingToys.filter(el => el.favorite === 'Да');
     if (rightToys.length === 0) {
-      AlertNoCoincidence()
+      AlertNoCoincidence();
+      return null;
     } else {
       rightToys.forEach(el => toysOnPage.push(el));
     }
@@ -139,8 +148,10 @@ export const filterFavoriteToys = function(filtersParametrs: IFilters, filtredTo
 
 export function filterToys(toysFilters: IFilters, dataToys: Toys): Toys {
   const filterShapeToysResult: Toys = filterShapeToys(toysFilters, dataToys);
-  const filterPlusColorToysResult: Toys = filterColorToys(toysFilters, filterShapeToysResult);
-  const filterPlusSizeToysResult: Toys = filterSizeToys(toysFilters, filterPlusColorToysResult);
-  const filterPlusFavoriteToysResult: Toys = filterFavoriteToys(toysFilters, filterPlusSizeToysResult);
-  return filterPlusFavoriteToysResult
+  const filterPlusColorToysResult: Toys | null = filterColorToys(toysFilters, filterShapeToysResult);
+  if (!filterPlusColorToysResult) return [];
+  const filterPlusSizeToysResult: Toys | null = filterSizeToys(toysFilters, filterPlusColorToysResult);
+  if (!filterPlusSizeToysResult) return [];
+  const filterPlusFavoriteToysResult: Toys | null = filterFavoriteToys(toysFilters, filterPlusSizeToysResult);
+  return (filterPlusFavoriteToysResult) ? filterPlusFavoriteToysResult : [];
 }
